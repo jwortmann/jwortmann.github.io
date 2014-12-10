@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>      
+    <head>
         <meta charset="UTF-8">
         <title>TTR-Rechner</title>
-        <meta name="author" content="Janos Wortmann">      
+        <meta name="author" content="Janos Wortmann">
         <style type="text/css" media="all">
-            body {
-                font-family: "Titillium Web", sans-serif;                
-                color: #222222;
-                font-size: 16px;
-                background-color: #f9f9f9;
-                margin: 0;
-                padding: 0;
-            }
-
-            @font-face {
+            /*@font-face {
                 font-family: 'Titillium Web';
                 font-style: normal;
                 font-weight: 200;
                 src: local('Titillium WebThin'), local('TitilliumWeb-Thin'), url(http://fonts.gstatic.com/s/titilliumweb/v4/anMUvcNT0H1YN4FII8wpr3XqdloEk0Ij5qwGW4qO9RM.woff) format('woff');
-            }
+            }*/
             @font-face {
                 font-family: 'Titillium Web';
                 font-style: normal;
@@ -32,34 +23,45 @@
                 font-weight: 400;
                 src: local('Titillium Web'), local('TitilliumWeb-Regular'), url(http://fonts.gstatic.com/s/titilliumweb/v4/7XUFZ5tgS-tD6QamInJTcdGU7DQ8I6RFMlK0vgclk7w.woff) format('woff');
             }
-            @font-face {
+            /*@font-face {
                 font-family: 'Titillium Web';
                 font-style: normal;
                 font-weight: 600;
                 src: local('Titillium WebSemiBold'), local('TitilliumWeb-SemiBold'), url(http://fonts.gstatic.com/s/titilliumweb/v4/anMUvcNT0H1YN4FII8wprx7IBmrqA5IG9z8WNe77b9o.woff) format('woff');
+            }*/
+
+            body {
+                font-family: "Titillium Web", sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                color: #222;
+                background-color: #F9F9F9;
+                margin: 0;
+                padding: 0;
             }
-      
+
             header {
                 width: 100%;
-                height: 70px;                           
-                text-align: center;           
-                background-color: #272d35;
-                background-image: -webkit-linear-gradient(top, #313840, #1e252e);
-                background-image: -moz-linear-gradient(top, #313840, #1e252e);
-                background-image: -ms-linear-gradient(top, #313840, #1e252e);
-                background-image: -o-linear-gradient(top, #313840, #1e252e);
-                background-image: linear-gradient(to bottom, #313840,#1e252e);
-                border-bottom: 1px solid #000000;
+                height: 70px;
+                text-align: center;
+                background-color: #272D35;
+                background-image: -webkit-linear-gradient(top, #313840, #1E252E);
+                background-image: -moz-linear-gradient(top, #313840, #1E252E);
+                background-image: -ms-linear-gradient(top, #313840, #1E252E);
+                background-image: -o-linear-gradient(top, #313840, #1E252E);
+                background-image: linear-gradient(to bottom, #313840,#1E252E);
+                border-bottom: 1px solid #000;
             }
 
             h1 {
                 font-family: "Titillium Web", sans-serif;
                 font-style: normal;
-                font-weight: 300;               
+                font-weight: 300;
                 font-size: 28px;
-                color: #EEEEEE;
-                padding-top: 11px;
+                color: #EEE;
                 margin: 0;
+                padding-top: 11px;
             }
 
             form {
@@ -92,7 +94,7 @@
                 color: #3c3c3c;
                 font-size: 15px;
                 line-height: 18px;
-                background: #fff;
+                background-color: #FFF;
                 border: 1px solid #dadada;
                 border-radius: 4px
             }
@@ -111,7 +113,6 @@
                 outline: 0;
                 border: 1px solid #38414d
             }
-
         </style>
 
         <script type="text/javascript">
@@ -156,13 +157,13 @@
         </header>
 
         <form name="form1">
-            <fieldset style="padding-top:2px;">
+            <fieldset style="padding-top: 2px;">
                 <legend>Eingabedaten</legend>
 
                 <label for="input1">Dein aktueller TTR-Wert:</label>
                 <input name="input1" class="input" type="number" value="" onkeyup="Calculate()" />
 
-                <label for="input2">Deine Änderungskonstante:</label>            
+                <label for="input2">Deine Änderungskonstante:</label>
                 <input name="input2" class="input" list="aenderungskonstante" maxlength="2" value="16" onkeyup="Calculate()" />
                 <datalist id="aenderungskonstante">
                     <option value="16">
