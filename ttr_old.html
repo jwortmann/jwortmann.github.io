@@ -1,15 +1,10 @@
-<!doctype html>
-<html  ng-app="myApp">
+<!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8">
         <title>TTR-Rechner</title>
         <meta name="author" content="Janos Wortmann">
-        <meta name="description" content="Mit dem TTR-Rechner lassen sich Veränderungen des eigenen TTR-Wertes bei Meisterschaftsspielen und Turnieren berechnen.">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
-        <script src="js/app.js"></script>
-        
         <link href="css/shariff.min.css" rel="stylesheet">
         <style type="text/css" media="all">
             /*@font-face {
@@ -84,10 +79,6 @@
                 padding: 8px;
             }
 
-            fieldset.legend {
-                padding-top: 2px;
-            }
-
             label {
                 clear: both;
                 float: left;
@@ -107,8 +98,7 @@
                 line-height: 18px;
                 background-color: #FFF;
                 border: 1px solid #dadada;
-                border-radius: 4px;
-                transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+                border-radius: 4px
             }
 
             input[type='number'] {
@@ -123,50 +113,48 @@
 
             input.input:focus{
                 outline: 0;
-                border-color: #38414D;
-                box-shadow: 0 0 2px #5B6067;
-                -webkit-box-shadow: 0 0 2px #5B6067;
-                /*border-color: #66afe9;*/
-                /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);*/
-                /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);*/
-            }
-
-            a.button {
-                float: right;
-                text-align: center;
-                background-color: #5B6067;
-                background-image: -webkit-linear-gradient(top, #313840, #1E252E);
-                background-image: -moz-linear-gradient(top, #313840, #1E252E);
-                background-image: -ms-linear-gradient(top, #313840, #1E252E);
-                background-image: -o-linear-gradient(top, #313840, #1E252E);
-                background-image: linear-gradient(to bottom, #313840,#1E252E);
-                color: #FFF;
-                vertical-align: middle;
-                margin: 2px;
-                padding: 4px 2px;
-                width: 180px;
-                text-decoration: none;
-                font-size: 14px;
-                line-height: 18px;
-                border: 1px solid #474D54;
-                border-radius: 4px
-            }
-
-            a.button:hover {
-                background-color: #5B6067;
-                background-image: -webkit-linear-gradient(top, #5B6067, #323941);
-                background-image: -moz-linear-gradient(top, #5B6067, #323941);
-                background-image: -ms-linear-gradient(top, #5B6067, #323941);
-                background-image: -o-linear-gradient(top, #5B6067, #323941);
-                background-image: linear-gradient(to bottom, #5B6067, #323941);
-                box-shadow: 0 0 2px #5B6067;
-                -webkit-box-shadow: 0 0 2px #5B6067;
+                border: 1px solid #38414d
             }
 
             div.shariff {
                 text-align: center;
             }
         </style>
+
+        <script type="text/javascript">
+            function Calculate() {
+                window.document.form1.output1.value = "";
+                window.document.form1.output2.value = "";
+                window.document.form1.output3.value = "";
+                window.document.form1.output4.value = "";
+                window.document.form1.output5.value = "";
+                if (!isNaN(window.document.form1.input1.value) && (window.document.form1.input1.value > 0)) {
+                    var gegner = 0;
+                    var gw = 0;
+                    if (!isNaN(window.document.form1.input3.value) && (window.document.form1.input3.value > 0)) {
+                        gegner++;
+                        gw += WinProb(window.document.form1.input1.value, window.document.form1.input3.value);
+                        window.document.form1.output1.value = Math.round(WinProb(window.document.form1.input1.value, window.document.form1.input3.value)*1000)/1000;
+                    }
+                    if (!isNaN(window.document.form1.input4.value) && (window.document.form1.input4.value > 0)) {
+                        gegner++;
+                        gw += WinProb(window.document.form1.input1.value, window.document.form1.input4.value);
+                        window.document.form1.output2.value = Math.round(WinProb(window.document.form1.input1.value, window.document.form1.input4.value)*1000)/1000;
+                    }
+                    if ((gegner > 0) && !isNaN(window.document.form1.input2.value) && (window.document.form1.input2.value > 0)) {
+                        window.document.form1.output3.value = Math.round(eval(window.document.form1.input1.value - window.document.form1.input2.value * (gw - 0)));
+                        window.document.form1.output4.value = Math.round(eval(window.document.form1.input1.value - window.document.form1.input2.value * (gw - 1)));
+                        if (gegner == 2) {
+                            window.document.form1.output5.value = Math.round(eval(window.document.form1.input1.value - window.document.form1.input2.value * (gw - 2)));
+                        }
+                    }
+                }
+            }
+
+            function WinProb(a, b) {
+                return 1/(1+Math.pow(10, (b-a)/150))
+            }
+        </script>
     </head>
 
     <body>
@@ -174,15 +162,15 @@
             <h1>TTR-Rechner</h1>
         </header>
 
-        <form ng-controller="MyController">
-            <fieldset class="legend">
+        <form name="form1">
+            <fieldset style="padding-top: 2px;">
                 <legend>Eingabedaten</legend>
 
                 <label for="input1">Dein aktueller TTR-Wert:</label>
-                <input name="input1" class="input" type="number" value="" maxlength="4" ng-model="currentTTR" ng-keyup="calculate()" />
+                <input name="input1" class="input" type="number" value="" onkeyup="Calculate()" />
 
                 <label for="input2">Deine Änderungskonstante:</label>
-                <input name="input2" class="input" list="aenderungskonstante" maxlength="2" value="16" ng-model="konst" ng-keyup="calculate()" />
+                <input name="input2" class="input" list="aenderungskonstante" maxlength="2" value="16" onkeyup="Calculate()" />
                 <datalist id="aenderungskonstante">
                     <option value="16">
                     <option value="20">
@@ -191,28 +179,34 @@
                     <option value="32">
                 </datalist>
 
-                <label ng-repeat-start="opponent in opponents" for="opponent{{opponent.nr}}">TTR-Wert Gegner {{opponent.nr}}:</label>
-                <input ng-repeat-end name="opponent{{opponent.nr}}" class="input" type="number" maxlength="4" ng-model="opponent.ttr" ng-keyup="calculate()" />
+                <label for="input3">TTR-Wert Gegner 1:</label>
+                <input name="input3" class="input" type="number" value="" onkeyup="Calculate()" />
 
-                <label></label>
-                <a href="" class="button" ng-click="addOpponent()">weiteren Gegner hinzufügen</a>
+                <label for="input4">TTR-Wert Gegner 2:</label>
+                <input name="input4" class="input" type="number" value="" onkeyup="Calculate()" />
             </fieldset>    
 
             <fieldset>
-                <label ng-repeat-start="opponent in opponents" for="output{{opponent.nr}}">Gewinnwahrscheinlichkeit Gegner {{opponent.nr}}:</label>
-                <input ng-repeat-end name="output{{opponent.nr}}" type="text" value="{{opponent.gw_round}}" readonly />
+                <label for="output1">Gewinnwahrscheinlichkeit Gegner 1:</label>
+                <input name="output1" type="text" readonly />
 
-                <label for="siege0">Neuer TTR-Wert bei 0 Siegen:</label>
-                <input name="siege0" type="text" value="{{ttr0}}" readonly />
+                <label for="output2">Gewinnwahrscheinlichkeit Gegner 2:</label>
+                <input name="output2" type="text" readonly />
 
-                <label ng-repeat-start="opponent in opponents" for="siege{{opponent.nr}}">Neuer TTR-Wert bei {{opponent.nr}} <ng-pluralize count="opponent.nr" when="{'one': 'Sieg', 'other': 'Siegen'}"></ng-pluralize>:</label>
-                <input ng-repeat-end name="siege{{opponent.nr}}" type="text" value="{{opponent.newTTR}}" readonly />
+                <label for="output3">Neuer TTR-Wert bei 0 Siegen:</label>
+                <input name="output3" type="text" readonly />
+
+                <label for="output4">Neuer TTR-Wert bei 1 Sieg:</label>
+                <input name="output4" type="text" readonly />
+
+                <label for="output5">Neuer TTR-Wert bei 2 Siegen:</label>
+                <input name="output5" type="text" readonly />
             </fieldset>
         </form>
 
         <div class="shariff" data-theme="color" data-orientation="horizontal" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]"></div>
         <!-- <div class="shariff" data-theme="grey" data-orientation="horizontal" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]"></div> -->
-        <!-- <div class="shariff" data-theme="white" data-orientation="horizontal" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]"></div> -->    
+        <!-- <div class="shariff" data-theme="white" data-orientation="horizontal" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]"></div> -->
         <script src="js/shariff.min.js"></script>
     </body>
 </html>
