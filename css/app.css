@@ -1,0 +1,157 @@
+/*@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 200;
+    src: local('Titillium WebThin'), local('TitilliumWeb-Thin'), url(http://fonts.gstatic.com/s/titilliumweb/v4/anMUvcNT0H1YN4FII8wpr3XqdloEk0Ij5qwGW4qO9RM.woff) format('woff');
+}*/
+
+@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://fonts.gstatic.com/s/titilliumweb/v4/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Titillium Web'), local('TitilliumWeb-Regular'), url(http://fonts.gstatic.com/s/titilliumweb/v4/7XUFZ5tgS-tD6QamInJTcdGU7DQ8I6RFMlK0vgclk7w.woff) format('woff');
+}
+
+/*@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Titillium WebSemiBold'), local('TitilliumWeb-SemiBold'), url(http://fonts.gstatic.com/s/titilliumweb/v4/anMUvcNT0H1YN4FII8wprx7IBmrqA5IG9z8WNe77b9o.woff) format('woff');
+}*/
+
+body {
+    font-family: "Titillium Web", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: #222;
+    background-color: #F9F9F9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    background-color: #272D35;
+    background-image: -webkit-linear-gradient(top, #313840, #1E252E);
+    background-image: -moz-linear-gradient(top, #313840, #1E252E);
+    background-image: -ms-linear-gradient(top, #313840, #1E252E);
+    background-image: -o-linear-gradient(top, #313840, #1E252E);
+    background-image: linear-gradient(to bottom, #313840,#1E252E);
+    border-bottom: 1px solid #000;
+}
+
+h1 {
+    font-family: "Titillium Web", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 28px;
+    color: #EEE;
+    margin: 0;
+    padding-top: 11px;
+}
+
+form {
+    width: 600px;
+    margin: auto;
+}
+
+fieldset {
+    border: solid;
+    border-width: 1px;
+    border-radius: 4px;
+    margin: 40px;
+    padding: 8px;
+}
+
+fieldset.legend {
+    padding-top: 2px;
+}
+
+label {
+    clear: both;
+    float: left;
+    margin: 2px;
+    padding-top: 4px;
+    line-height: 18px;
+}
+
+input {
+    float: right;
+    text-align: center;
+    margin: 2px;
+    padding: 4px 2px;
+    width: 180px;
+    color: #3c3c3c;
+    font-size: 15px;
+    line-height: 18px;
+    background-color: #FFF;
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+input.input:focus{
+    outline: 0;
+    border-color: #38414D;
+    box-shadow: 0 0 2px #5B6067;
+    -webkit-box-shadow: 0 0 2px #5B6067;
+    /*border-color: #66afe9;*/
+    /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);*/
+    /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);*/
+}
+
+a.button {
+    float: right;
+    text-align: center;
+    background-color: #5B6067;
+    background-image: -webkit-linear-gradient(top, #313840, #1E252E);
+    background-image: -moz-linear-gradient(top, #313840, #1E252E);
+    background-image: -ms-linear-gradient(top, #313840, #1E252E);
+    background-image: -o-linear-gradient(top, #313840, #1E252E);
+    background-image: linear-gradient(to bottom, #313840,#1E252E);
+    color: #FFF;
+    vertical-align: middle;
+    margin: 2px;
+    padding: 4px 2px;
+    width: 180px;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 18px;
+    border: 1px solid #474D54;
+    border-radius: 4px
+}
+
+a.button:hover {
+    background-color: #5B6067;
+    background-image: -webkit-linear-gradient(top, #5B6067, #323941);
+    background-image: -moz-linear-gradient(top, #5B6067, #323941);
+    background-image: -ms-linear-gradient(top, #5B6067, #323941);
+    background-image: -o-linear-gradient(top, #5B6067, #323941);
+    background-image: linear-gradient(to bottom, #5B6067, #323941);
+    box-shadow: 0 0 2px #5B6067;
+    -webkit-box-shadow: 0 0 2px #5B6067;
+}
+
+div.shariff {
+    text-align: center;
+}

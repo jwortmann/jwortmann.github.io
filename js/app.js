@@ -1,53 +1,59 @@
-var count = 2;         // Zählvariable für die Gegner
-var anz_opponents = 0; // Anzahl eingetragener Gegner
-var sum_gw = 0;        // Summe der Gewinnwahrscheinlichkeiten
+var count = 2;                        // Zählvariable für die Gegner
+var aenderungskonstante_default = 16; // Default Wert für die Änderungskonstante
 
 // Funktion zur Berechnung der Gewinnwahrscheinlichkeiten bei zwei gegebenen TTR-Werten
-function Probability(ttr1, ttr2) {
+function gewinnwahrscheinlichkeit(ttr1, ttr2) {
     return 1/(1+Math.pow(10, (ttr2 - ttr1)/150));
 }
 
 angular.module('myApp', [])
-    .controller('MyController', ['$scope', function($scope) {
-        $scope.konst = 16;
-        $scope.ttr0 = "";
+    .controller('myController', ['$scope', function($scope) {
+        $scope.aenderungskonstante = aenderungskonstante_default;
+        $scope.new_ttr0 = "";
 
         $scope.opponents = [
-            {nr:1, ttr:"", gw:"", gw_round:"", newTTR:""},
-            {nr:2, ttr:"", gw:"", gw_round:"", newTTR:""}
+            {nr:1, ttr:"", gw:"", gw_display:"", new_ttr:""},
+            {nr:2, ttr:"", gw:"", gw_display:"", new_ttr:""}
         ];
  
         $scope.addOpponent = function() {
             count++;
-            $scope.opponents.push({nr:count, ttr:"", gw:"", gw_round:"", newTTR:""});
+            $scope.opponents.push({nr:count, ttr:"", gw:"", gw_display:"", new_ttr:""});
         };
 
         $scope.calculate = function() {
             // alle berechneten Ausgabewerte löschen
-            $scope.ttr0 = "";
+            $scope.new_ttr0 = "";
             for (var i = 0; i < $scope.opponents.length; i++) {
                 $scope.opponents[i].gw = "";
-                $scope.opponents[i].gw_round = "";
-                $scope.opponents[i].newTTR = "";
+                $scope.opponents[i].gw_display = "";
+                $scope.opponents[i].new_ttr = "";
             }
 
-            anz_opponents = 0;
-            sum_gw = 0;
+            if (!isNaN($scope.current_ttr) && $scope.current_ttr > 0) {
+                var anz_opponents = 0; // Anzahl eingetragener Gegner
+                var sum_gw = 0;        // Summe der Gewinnwahrscheinlichkeiten
 
-            if (!isNaN($scope.currentTTR) && $scope.currentTTR > 0) {
+                // Gewinnwahrscheinlichkeit berechnen
                 for (var i = 0; i < $scope.opponents.length; i++) {
                     if (!isNaN($scope.opponents[i].ttr) && $scope.opponents[i].ttr > 0) {
                         anz_opponents++;
-                        $scope.opponents[i].gw = Probability($scope.currentTTR, $scope.opponents[i].ttr);
+                        // exakte Gewinnwahrscheinlichkeit
+                        $scope.opponents[i].gw = gewinnwahrscheinlichkeit($scope.current_ttr, $scope.opponents[i].ttr);
+                        // Gewinnwahrscheinlichkeiten summieren
                         sum_gw += $scope.opponents[i].gw;
-                        $scope.opponents[i].gw_round = Math.round($scope.opponents[i].gw * 1000) / 1000;
+                        // gerundete Gewinnwahrscheinlichkeit
+                        $scope.opponents[i].gw_display = Math.round($scope.opponents[i].gw * 1000) / 1000;
                     }
                 }
 
-                if (anz_opponents > 0) {
-                    $scope.ttr0 = Math.round(eval($scope.currentTTR - $scope.konst * sum_gw));
+                // neue TTR-Werte berechnen
+                if (anz_opponents > 0 && !isNaN($scope.aenderungskonstante) && $scope.aenderungskonstante > 0) {
+                    // neuer TTR-Wert bei 0 Siegen
+                    $scope.new_ttr0 = Math.round(eval($scope.current_ttr - $scope.aenderungskonstante * sum_gw));
+                    // neuer TTR-Wert bei i>0 Siegen
                     for (var i = 1; i <= anz_opponents; i++) {
-                        $scope.opponents[i-1].newTTR = Math.round(eval($scope.currentTTR - $scope.konst * (sum_gw - i)));
+                        $scope.opponents[i-1].new_ttr = Math.round(eval($scope.current_ttr - $scope.aenderungskonstante * (sum_gw - i)));
                     }
                 }
             }
