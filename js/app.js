@@ -30,13 +30,13 @@ angular.module('myApp', [])
                 $scope.opponents[i].new_ttr = "";
             }
 
-            if (!isNaN($scope.current_ttr) && $scope.current_ttr > 0) {
+            if (!isNaN($scope.current_ttr) && $scope.current_ttr > 0 && $scope.current_ttr < 10000) {
                 var anz_opponents = 0; // Anzahl eingetragener Gegner
                 var sum_gw = 0;        // Summe der Gewinnwahrscheinlichkeiten
 
                 // Gewinnwahrscheinlichkeit berechnen
                 for (var i = 0; i < $scope.opponents.length; i++) {
-                    if (!isNaN($scope.opponents[i].ttr) && $scope.opponents[i].ttr > 0) {
+                    if (!isNaN($scope.opponents[i].ttr) && $scope.opponents[i].ttr > 0 && $scope.opponents[i].ttr < 10000) {
                         anz_opponents++;
                         // exakte Gewinnwahrscheinlichkeit
                         $scope.opponents[i].gw = gewinnwahrscheinlichkeit($scope.current_ttr, $scope.opponents[i].ttr);
