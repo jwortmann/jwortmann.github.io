@@ -85,9 +85,10 @@
                 cursor: pointer;
             }
 
-            div.shariff {
-                text-align: center;
+            .shariff ul {
+                justify-content: center;
             }
+            
         </style>
 
         <script>
@@ -109,7 +110,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="information" id="infobox">Tragen Sie Ihren TTR-Wert sowie den Ihrer Gegner in die dafür vorgesehenen Textfelder ein und scrollen Sie nach unten, um die berechneten Veränderungen zu betrachten<span class="fa fa-close" id="close"></span></div>
+                    <script>
+                        if (navigator.userAgent.match(/iPhone|Android/i)) {
+                            document.write('<div class="information" id="infobox">Tragen Sie Ihren TTR-Wert sowie die Werte Ihrer Gegner in die dafür vorgesehenen Textfelder ein und scrollen Sie nach unten, um die berechneten Veränderungen zu betrachten<span class="fa fa-close" id="close"></span></div>');
+                        } else {
+                            document.write('<div class="information" id="infobox">Tragen Sie Ihren TTR-Wert sowie die Werte Ihrer Gegner in die dafür vorgesehenen Textfelder ein<span class="fa fa-close" id="close"></span></div>');
+                        }
+                    </script>
                 </div>
             </div>
         </div>
@@ -179,12 +186,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="shariff" data-theme="color" data-orientation="horizontal" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]"></div>
-                    <!-- <div class="shariff" data-theme="grey" data-orientation="horizontal" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]"></div> -->
-                    <!-- <div class="shariff" data-theme="white" data-orientation="horizontal" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]"></div> -->
+                    <script>
+                        if (navigator.userAgent.match(/iPhone|Android/i)) {
+                            document.write('<div class="shariff" data-lang="de" data-orientation="horizontal" data-theme="standard" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;whatsapp&quot;]"></div>');
+                        } else {
+                            document.write('<div class="shariff" data-lang="de" data-orientation="horizontal" data-theme="standard" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]"></div>');
+                        }
+                    </script>
                 </div>
             </div>
-        </div>      
+        </div>
 
         <script src="js/shariff.min.js"></script>
     </body>
