@@ -30,6 +30,22 @@ angular.module('myApp', [])
                 $scope.opponents[i].new_ttr = "";
             }
 
+            // Eingabefelder überprüfen
+            if (isNaN($scope.current_ttr) || $scope.current_ttr < 0 || $scope.current_ttr > 9999) {
+                $("input[name='input1']").parent().parent().addClass("has-error");
+            } else {
+                $("input[name='input1']").parent().parent().removeClass("has-error");
+            }
+
+            for (var i = 0; i < $scope.opponents.length; i++) {
+                var j = i+1;
+                if (isNaN($scope.opponents[i].ttr) || $scope.opponents[i].ttr < 0 || $scope.opponents[i].ttr > 9999) {
+                    $("input[name='opponent" + j + "']").parent().parent().addClass("has-error");
+                } else {
+                    $("input[name='opponent" + j + "']").parent().parent().removeClass("has-error");
+                }
+            }
+
             if (!isNaN($scope.current_ttr) && $scope.current_ttr > 0 && $scope.current_ttr < 10000) {
                 var anz_opponents = 0; // Anzahl eingetragener Gegner
                 var sum_gw = 0;        // Summe der Gewinnwahrscheinlichkeiten
