@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/shariff.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="js/app.min.js"></script>
 
         <style type="text/css">
@@ -88,40 +88,32 @@
             .shariff ul {
                 justify-content: center;
             }
-            
         </style>
-
-        <script>
-            jQuery(document).ready(function($) { 
-                $(document).on('click', '#close', function() {
-                    $('#infobox').fadeOut();
-                });
-            });
-        </script>
     </head>
 
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <a href="#" class="navbar-brand">TTR-Rechner</a>
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">TTR-Rechner</a>
+                </div>
             </div>
         </nav>
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <script>
-                        if (navigator.userAgent.match(/iPhone|Android/i)) {
-                            document.write('<div class="information" id="infobox">Tragen Sie Ihren TTR-Wert sowie die Werte Ihrer Gegner in die dafür vorgesehenen Textfelder ein und scrollen Sie nach unten, um die berechneten Veränderungen zu betrachten<span class="fa fa-close" id="close"></span></div>');
-                        } else {
-                            document.write('<div class="information" id="infobox">Tragen Sie Ihren TTR-Wert sowie die Werte Ihrer Gegner in die dafür vorgesehenen Textfelder ein<span class="fa fa-close" id="close"></span></div>');
-                        }
-                    </script>
-                </div>
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <script>
+                    if (navigator.userAgent.match(/iPhone|Android/i)) {
+                        document.write('Tragen Sie Ihren TTR-Wert sowie die Werte Ihrer Gegner in die dafür vorgesehenen Textfelder ein und scrollen Sie nach unten, um die berechneten Veränderungen zu betrachten');
+                    } else {
+                        document.write('Tragen Sie Ihren TTR-Wert sowie die Werte Ihrer Gegner in die dafür vorgesehenen Textfelder ein');
+                    }
+                </script>
             </div>
-        </div>
 
-        <div class="container">
             <form class="form-horizontal" role="form" ng-controller="myController">
                 <fieldset>
                     <div class="form-group">
@@ -156,7 +148,7 @@
                             <a href="" class="btn btn-default" ng-click="addOpponent()">weiteren Gegner hinzufügen</a>
                         </div>
                     </div>
-                </fieldset>    
+                </fieldset>
 
                 <fieldset>
                     <div class="form-group" ng-repeat="opponent in opponents">
