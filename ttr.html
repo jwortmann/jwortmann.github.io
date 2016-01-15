@@ -76,15 +76,6 @@
                 width: 100%;
             }
 
-            div.information {
-                border: 1px solid #62A762;
-                border-radius: 4px;
-                background-color: #E6FFE6;
-                width: 100%;
-                padding: 10px 20px;
-                margin-bottom: 20px;
-            }
-
             #close {
                 float: right;
                 cursor: pointer;
@@ -181,17 +172,13 @@
         </div>
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <script>
-                        if (navigator.userAgent.match(/iPhone|Android/i)) {
-                            document.write('<div class="shariff" data-flattr-user="jwortmann" data-lang="de" data-orientation="horizontal" data-theme="standard" data-title="TTR-Rechner" data-services="[&quot;whatsapp&quot;,&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;flattr&quot;]"></div>');
-                        } else {
-                            document.write('<div class="shariff" data-flattr-user="jwortmann" data-lang="de" data-orientation="horizontal" data-theme="standard" data-title="TTR-Rechner" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;flattr&quot;]"></div>');
-                        }
-                    </script>
-                </div>
-            </div>
+            <script>
+                if (navigator.userAgent.match(/iPhone|Android/i)) {
+                    document.write('<div class="shariff" data-flattr-user="jwortmann" data-lang="de" data-orientation="horizontal" data-theme="standard" data-title="TTR-Rechner" data-services="[&quot;whatsapp&quot;,&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;flattr&quot;]"></div>');
+                } else {
+                    document.write('<div class="shariff" data-flattr-user="jwortmann" data-lang="de" data-orientation="horizontal" data-theme="standard" data-title="TTR-Rechner" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;flattr&quot;]"></div>');
+                }
+            </script>
         </div>
 
         <script src="js/shariff.min.js"></script>
