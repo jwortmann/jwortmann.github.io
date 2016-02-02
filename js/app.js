@@ -1,5 +1,4 @@
 var count = 2;                        // Zählvariable für die Gegner
-var aenderungskonstante_default = 16; // Default Wert für die Änderungskonstante
 
 // Funktion zur Berechnung der Gewinnwahrscheinlichkeiten bei zwei gegebenen TTR-Werten
 function gewinnwahrscheinlichkeit(ttr1, ttr2) {
@@ -8,26 +7,29 @@ function gewinnwahrscheinlichkeit(ttr1, ttr2) {
 
 angular.module('myApp', [])
     .controller('myController', ['$scope', function($scope) {
-        $scope.aenderungskonstante = aenderungskonstante_default;
+        $scope.aenderungskonstante = "16";
         $scope.new_ttr0 = "";
+        $scope.veraenderung0 = "";
 
         $scope.opponents = [
-            {nr:1, ttr:"", gw:"", gw_display:"", new_ttr:""},
-            {nr:2, ttr:"", gw:"", gw_display:"", new_ttr:""}
+            {nr:1, ttr:"", gw:"", gw_display:"", new_ttr:"", veraenderung:""},
+            {nr:2, ttr:"", gw:"", gw_display:"", new_ttr:"", veraenderung:""}
         ];
  
         $scope.addOpponent = function() {
             count++;
-            $scope.opponents.push({nr:count, ttr:"", gw:"", gw_display:"", new_ttr:""});
+            $scope.opponents.push({nr:count, ttr:"", gw:"", gw_display:"", new_ttr:"", veraenderung:""});
         };
 
         $scope.calculate = function() {
             // alle berechneten Ausgabewerte löschen
             $scope.new_ttr0 = "";
+            $scope.veraenderung0 = "";
             for (var i = 0; i < $scope.opponents.length; i++) {
                 $scope.opponents[i].gw = "";
                 $scope.opponents[i].gw_display = "";
                 $scope.opponents[i].new_ttr = "";
+                $scope.opponents[i].veraenderung = "";
             }
 
             // Eingabefelder überprüfen
@@ -67,9 +69,23 @@ angular.module('myApp', [])
                 if (anz_opponents > 0 && !isNaN($scope.aenderungskonstante) && $scope.aenderungskonstante > 0) {
                     // neuer TTR-Wert bei 0 Siegen
                     $scope.new_ttr0 = Math.round(eval($scope.current_ttr - $scope.aenderungskonstante * sum_gw));
+                    // Veränderung bei 0 Siegen
+                    $scope.veraenderung0 = $scope.new_ttr0 - $scope.current_ttr;
+                    if ($scope.veraenderung0 < 0) {
+                        $scope.veraenderung0 = "(".concat($scope.veraenderung0.toString()).concat(")");
+                    } else {
+                        $scope.veraenderung0 = "(+".concat($scope.veraenderung0.toString()).concat(")");
+                    }
+
                     // neuer TTR-Wert bei i>0 Siegen
                     for (var i = 1; i <= anz_opponents; i++) {
                         $scope.opponents[i-1].new_ttr = Math.round(eval($scope.current_ttr - $scope.aenderungskonstante * (sum_gw - i)));
+                        $scope.opponents[i-1].veraenderung = $scope.opponents[i-1].new_ttr - $scope.current_ttr;
+                        if ($scope.opponents[i-1].veraenderung < 0) {
+                            $scope.opponents[i-1].veraenderung = "(".concat($scope.opponents[i-1].veraenderung.toString()).concat(")");
+                        } else {
+                            $scope.opponents[i-1].veraenderung = "(+".concat($scope.opponents[i-1].veraenderung.toString()).concat(")");
+                        }
                     }
                 }
             }
