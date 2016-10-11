@@ -3,17 +3,22 @@
     <head>
         <title>TTR-Rechner</title>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="author" content="Janos Wortmann">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="favicon.png" type="image/png">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/shariff.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <script src="js/app.min.js"></script>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="icon" type="image/png" href="favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/shariff.min.css">
+        <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/angular-materialize.min.js"></script>
+        <script src="js/app.js"></script>
+
+        <script type="text/javascript">$(document).ready(function(){$('select').material_select();});</script>
+        <script type="text/javascript">$(document).ready(function(){$('.modal-trigger').leanModal();});</script>
 
         <style type="text/css">
             @font-face {
@@ -32,14 +37,47 @@
                 font-style: normal;
                 font-weight: 400;
                 font-size: 16px;
-                color: #222;
-                background-color: #F9F9F9;
-                margin: 0;
-                padding: 0;
+            }
+
+            #blue_bg {
+                background-color: #4CAF50;
+            }
+
+            a:hover {
+                color: rgb(52, 52, 52);
+            }
+
+            a.link, .tab>.title, #contact_card>.tab>.title {
+                color: #FF6E40;
+            }
+
+            a.link:hover {
+                color: #FF9E80;
+            }
+
+            #fab {
+                background-color: #FF6E40;
+            }
+
+            #fab:hover {
+                background-color: #FF9E80;
+            }
+
+            .btn {
+                background-color: #4CAF50;
+            }
+
+            .btn:hover {
+                background-color: #66BB6A;
+            }
+
+            span.badge.new {
+                background-color: #BDBDBD;
             }
 
             fieldset {
-                padding-bottom: 20px;
+                border: none;
+                margin-bottom: 20px;
             }
 
             label {
@@ -48,6 +86,11 @@
 
             input, select {
                 text-align: center;
+            }
+
+            .input-field input[type=number]:focus {
+                border-bottom: 1px solid #616161;
+                box-shadow: 0 1px 0 0 #616161;
             }
 
             input[type='number'] {
@@ -60,25 +103,29 @@
                 margin: 0; 
             }
 
-            .form-control:focus {
-                border-color: #38414D;
-                box-shadow: 0 0 2px #5B6067;
-                -webkit-box-shadow: 0 0 2px #5B6067;
+            .dropdown-content li > span {
+                color: #388E3C;
             }
 
-            .form-control[readonly]:focus {
-                border-color: #CCC;
-                box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
-                -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+            .input-field label, .output-label {
+                color: rgb(97, 97, 97);
             }
 
-            .btn-default {
+            .output-label {
+                text-align: right;
+            }
+
+            .output-data {
+                color: rgb(33, 33, 33);
+                text-align: center;
+            }
+
+            #btn-add {
                 width: 100%;
             }
 
-            #close {
-                float: right;
-                cursor: pointer;
+            a#btn-add:hover {
+                color: #FFFFFF;
             }
 
             .shariff ul {
@@ -88,100 +135,117 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="#" class="navbar-brand">TTR-Rechner</a>
+        <div id="blue_bg"></div>
+
+        <header>
+            <div id="quick_card" class="card">
+                <div><img id="photo" src="img/ttr.jpg" /></div>
+                <h1 id="name">TTR-Rechner</h1>
+                <h2 id="description">Mit dem TTR-Rechner lassen sich Veränderungen des eigenen TTR-Wertes nach einem gespielten Meisterschaftsspiel oder Turnier berechnen</h2>
+            </div>
+        </header>
+
+        <main>
+            <div id="about_card" class="card">
+                <form class="form-horizontal" role="form" ng-controller="myController">
+                    <section class="tab">
+                        <div class="title"><i class="fa fa-pencil"></i>Eingabedaten</div>
+                        <div class="content">
+                            <section class="element">
+                                <fieldset>
+                                    <div class="input-field">
+                                        <label for="input1">Dein aktueller TTR-Wert:</label>
+                                        <input name="input1" class="form-control validate" type="number" value="" ng-model="ttr0" ng-keyup="calc()" />
+                                    </div>
+
+                                    <div class="input-field">
+                                        <select name="input2" class="form-control" ng-model="ak" ng-change="calc()" convert-to-number>
+                                            <option selected>16</option>
+                                            <option>20</option>
+                                            <option>24</option>
+                                            <option>28</option>
+                                            <option>32</option>
+                                        </select>
+                                        <label for="input2">Deine Änderungskonstante:</label>
+                                    </div>
+
+                                    <div class="input-field" ng-repeat="o in opp">
+                                        <label for="input_gegner{{o.n}}">TTR-Wert Gegner {{o.n}}:</label>
+                                        <input name="input_gegner{{o.n}}" class="form-control validate" type="number" ng-model="o.ttr" ng-keyup="calc()" />
+                                    </div>
+
+                                    <div class="input-field">
+                                        <a id="btn-add" href="" class="btn waves-effect waves-light" ng-click="add()">weiteren Gegner hinzufügen</a>
+                                    </div>
+                                </fieldset>
+                            </section>
+                        </div>
+                    </section>
+
+                    <section class="tab">
+                        <div class="title" style="margin-bottom: 15px"><i class="fa fa-calculator"></i>Berechnete Werte</div>
+                        <div class="content">
+                            <section class="element" ng-repeat="w in wins">
+                                <div class="row">
+                                    <div class="output-label col s9 l7">Neuer TTR-Wert bei <ng-pluralize count="w.n" when="{'one': '{} Sieg:', 'other': '{} Siegen:'}"></ng-pluralize></div>
+                                    <div class="output-data col s3 l5" ng-if="w.dttr < 0">{{w.ttr}}<span class="new badge red" data-badge-caption="">{{w.dttr}}</span></div>
+                                    <div class="output-data col s3 l5" ng-if="w.dttr == 0">{{w.ttr}}<span class="new badge gray" data-badge-caption="">{{w.dttr}}</span></div>
+                                    <div class="output-data col s3 l5" ng-if="w.dttr > 0">{{w.ttr}}<span class="new badge green" data-badge-caption="">{{w.dttr}}</span></div>
+                                </div>
+                            </section>
+
+                            <hr>
+
+                            <section class="element" ng-repeat="o in opp">
+                                <div class="row">
+                                    <div class="output-label col s9 l7">Gewinnwahrscheinlichkeit Gegner {{o.n}}:</div>
+                                    <div class="output-data col s3 l5">{{o.gwr}}</div>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                </form>
+            </div>
+
+            <div id="contact_card" class="card">
+                <section class="tab">
+                    <div class="title"><i class="fa fa-share-alt"></i>Diese Seite teilen</div>
+                    <div class="content">
+                        <section class="element">
+                            <div style="width: 150px; margin: 0 auto;">
+                                <div class="shariff" data-lang="de" data-orientation="horizontal" data-theme="circle-grey" data-title="TTR-Rechner" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;]"></div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <!-- <section class="tab">
+                    <div class="title"><i class="fa fa-paypal"></i>Spenden</div>
+                    <div class="content">
+                        <section class="element">
+                            <a class="btn-flat waves-effect waves-green" href="https://www.paypal.me/jwortmann">Mit PayPal spenden</a>
+                        </section>
+                    </div>
+                </section> -->
+            </div>
+
+            <a class="modal-trigger" href="#info">
+                <div id="fab">&nbsp;<i class="fa fa-info"></i>&nbsp;</div>
+            </a>
+
+            <div id="info" class="modal" tabindex="-1">
+                <div class="modal-content">
+                    <h4>Info</h4>
+                    <p>Tragen Sie Ihren TTR-Wert sowie die Werte Ihrer Gegner in die dafür vorgesehenen Textfelder ein.
+                    Die Veränderung Ihres Wertes wird automatisch berechnet und unten angezeigt. Bei Bedarf können beliebig
+                    viele weitere Gegner hinzugefügt werden.</p>
+                    <p>Zur Grundlage der Berechnung siehe <a class="link" href="http://www.mytischtennis.de/public/imagedata/20150801-Beschreibung-der-JOOLA-Rangliste.pdf">Beschreibung der JOOLA-Rangliste</a> (PDF, Stand 01.08.2015) auf myTischtennis.de.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn-flat modal-action modal-close waves-effect waves-green">Schließen</a>
                 </div>
             </div>
-        </nav>
-
-        <div class="container">
-            <div class="alert alert-info alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <script>
-                    if (navigator.userAgent.match(/iPhone|Android/i)) {
-                        document.write('Tragen Sie Ihren TTR-Wert sowie die Werte Ihrer Gegner in die dafür vorgesehenen Textfelder ein und scrollen Sie nach unten, um die berechneten Veränderungen zu betrachten');
-                    } else {
-                        document.write('Tragen Sie Ihren TTR-Wert sowie die Werte Ihrer Gegner in die dafür vorgesehenen Textfelder ein');
-                    }
-                </script>
-            </div>
-
-            <form class="form-horizontal" role="form" ng-controller="myController">
-                <fieldset>
-                    <div class="form-group">
-                        <label for="input1" class="control-label col-sm-4">Dein aktueller TTR-Wert:</label>
-                        <div class="col-sm-8">
-                            <input name="input1" class="form-control" type="number" value="" ng-model="current_ttr" ng-keyup="calculate()" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="input2" class="control-label col-sm-4">Deine Änderungskonstante:</label>
-                        <div class="col-sm-8">
-                            <select name="input2" class="form-control" ng-model="aenderungskonstante" ng-change="calculate()" convert-to-number>
-                                <option selected>16</option>
-                                <option>20</option>
-                                <option>24</option>
-                                <option>28</option>
-                                <option>32</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group" ng-repeat="opponent in opponents">
-                        <label for="opponent{{opponent.nr}}" class="control-label col-sm-4">TTR-Wert Gegner {{opponent.nr}}:</label>
-                        <div class="col-sm-8">
-                            <input name="opponent{{opponent.nr}}" class="form-control" type="number" ng-model="opponent.ttr" ng-keyup="calculate()" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8">
-                            <a href="" class="btn btn-default" ng-click="addOpponent()">weiteren Gegner hinzufügen</a>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <div class="form-group" ng-repeat="opponent in opponents">
-                        <label for="output{{opponent.nr}}" class="control-label col-sm-4">Gewinnwahrscheinlichkeit Gegner {{opponent.nr}}:</label>
-                        <div class="col-sm-8">    
-                            <input name="output{{opponent.nr}}" class="form-control" type="text" value="{{opponent.gw_display}}" readonly />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="siege0" class="control-label col-sm-4">Neuer TTR-Wert bei 0 Siegen:</label>
-                        <div class="col-sm-8">
-                            <input name="siege0" class="form-control" type="text" value="{{new_ttr0}}     {{veraenderung0}}" readonly />
-                        </div>
-                    </div>
-
-                    <div class="form-group" ng-repeat="opponent in opponents">
-                        <label for="siege{{opponent.nr}}" class="control-label col-sm-4">Neuer TTR-Wert bei <ng-pluralize count="opponent.nr" when="{'one': '{} Sieg:', 'other': '{} Siegen:'}"></ng-pluralize></label>
-                        <div class="col-sm-8">
-                            <input name="siege{{opponent.nr}}" class="form-control" type="text" value="{{opponent.new_ttr}}     {{opponent.veraenderung}}" readonly />
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="container">
-            <div style="width: 250px; margin: 0 auto;">
-                <script>
-                    if (navigator.userAgent.match(/iPhone|Android/i)) {
-                        document.write('<div class="shariff" data-FlattrID="jwortmann" data-FlattrURL="https://jwortmann.github.io/ttr.html" data-lang="de" data-orientation="horizontal" data-theme="circle-grey" data-title="TTR-Rechner" data-services="[&quot;whatsapp&quot;,&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;flattr&quot;]"></div>');
-                    } else {
-                        document.write('<div class="shariff" data-FlattrID="jwortmann" data-FlattrURL="https://jwortmann.github.io/ttr.html" data-lang="de" data-orientation="horizontal" data-theme="circle-grey" data-title="TTR-Rechner" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;flattr&quot;]"></div>');
-                    }
-                </script>
-            </div>
-        </div>
+        </main>
 
         <script src="js/shariff.min.js"></script>
     </body>
