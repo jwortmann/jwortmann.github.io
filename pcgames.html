@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Computerspiele</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="author" content="Janos Wortmann">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://bootswatch.com/united/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/theme.default.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.tablesorter.min.js"></script>
+        <script src="js/jquery.tablesorter.widgets.min.js"></script>
+        <script>$(function(){$("table").tablesorter({theme : "default", widthFixed : true, headerTemplate : "{content}{icon}", widgets : ["uitheme", "zebra"], sortList : [[0,1]]});});</script>
+        <script>$(function(){$('[data-toggle="tooltip"]').tooltip()})</script>
+
+        <style>
+            body {
+                font-family: "Ubuntu";
+            }
+
+            a {
+                color: #673AB7;
+            }
+
+            a:hover {
+                color: #9575CD;
+            }
+
+            #blue_bg {
+                background-color: #673AB7;
+            }
+
+            #about_card {
+                margin-bottom: 40px;
+            }
+
+            .tablesorter-header {
+                cursor: pointer;
+            }
+
+            table.tablesorter tbody tr.even td {
+                background-color: #fff;
+            }
+            table.tablesorter tbody tr.odd td {
+                background-color: #f9f9f9;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="blue_bg"></div>
+
+        <header>
+            <div id="quick_card" class="card">
+                <div><img id="photo" src="img/pcgames.jpg" /></div>
+                <h1 id="name">Computerspiele</h1>
+                <h2 id="description">Eine Liste aller meiner Computerspiele mit Bewertung</h2>
+            </div>
+        </header>
+
+        <main>
+            <div id="about_card" class="card">
+                <table class="table table-condensed tablesorter">
+                    <thead>
+                        <tr><th class="dateFormat-ddmmyyyy">Release</th><th>Titel</th><th class="sorter-digit string-bottom">Bewertung</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>13.05.2016</td><td>Doom</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>03.05.2016</td><td>Battleborn</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>21.04.2016</td><td>Don't Starve Together</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td><span style="border-bottom: 1px dotted #777" data-toggle="tooltip" data-placement="top" data-html="true" title="Episode 1: 02.12.2014<br>Episode 2: 03.02.2015<br>Episode 3: 24.03.2015<br>Episode 4: 26.05.2015<br>Episode 5: 21.07.2015<br>Episode 6: 17.11.2015">17.11.2015</span></td><td>Game of Thrones - A Telltale Games Series</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td><span style="border-bottom: 1px dotted #777" data-toggle="tooltip" data-placement="top" data-html="true" title="Episode 1: 30.01.2015<br>Episode 2: 24.03.2015<br>Episode 3: 19.05.2015<br>Episode 4: 28.07.2015<br>Episode 5: 20.10.2015">20.10.2015</span></td><td>Life Is Strange</td><td><span class="hidden">5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td></tr>
+                        <tr><td><span style="border-bottom: 1px dotted #777" data-toggle="tooltip" data-placement="top" data-html="true" title="Episode 1: 25.11.2014<br>Episode 2: 17.03.2015<br>Episode 3: 23.06.2015<br>Episode 4: 18.08.2015<br>Episode 5: 20.10.2015">20.10.2015</span></td><td>Tales from the Borderlands</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>29.09.2015</td><td>NBA 2K16</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>09.06.2015</td><td>KHOLAT</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>09.03.2015</td><td>Shelter 2</td><td><span class="hidden">1</span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>25.02.2015</td><td>Resident Evil: Revelations 2 - Episode 1: Penal Colony</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>18.11.2014</td><td>Never Alone (Kisima Ingitchuna)</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>12.11.2014</td><td>Randal's Monday</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>17.10.2014</td><td>Borderlands: The Pre-Sequel</td><td>noch nicht gespielt</td></tr>
+                        <tr><td><span style="border-bottom: 1px dotted #777" data-toggle="tooltip" data-placement="top" data-html="true" title="Episode 1: 17.12.2013<br>Episode 2: 04.03.2014<br>Episode 3: 13.05.2014<br>Episode 4: 22.07.2014<br>Episode 5: 16.08.2014">16.08.2014</span></td><td>The Walking Dead: Season 2</td><td><span class="hidden">5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td></tr>
+                        <tr><td>01.08.2014</td><td>Sacred 3</td><td>noch nicht gespielt</td></tr>
+                        <tr><td><span style="border-bottom: 1px dotted #777" data-toggle="tooltip" data-placement="top" data-html="true" title="Episode 1: 11.10.2013<br>Episode 2: 04.02.2014<br>Episode 3: 08.04.2014<br>Episode 4: 27.05.2014<br>Episode 5: 08.07.2014">08.07.2014</span></td><td>The Wolf Among Us</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>27.06.2014</td><td>GRID Autosport</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>03.06.2014</td><td>Murdered: Soul Suspect</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>21.05.2014</td><td>Q.U.B.E.: Director's Cut</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>22.04.2014</td><td>Tesla Effect: A Tex Murphy Adventure</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>28.02.2014</td><td>Thief</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>18.02.2014</td><td>Banished</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>11.12.2013</td><td>Rust</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>23.10.2013</td><td>Space Engineers</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>10.09.2013</td><td>Amnesia: A Machine for Pigs</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>04.09.2013</td><td>Outlast</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>03.09.2013</td><td>Brothers: A Tale of Two Sons</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>30.08.2013</td><td>Killer is Dead</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>23.08.2013</td><td>The Bureau: XCOM Declassified</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>31.05.2013</td><td>GRID 2</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>29.05.2013</td><td>The Night of the Rabbit</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>21.05.2013</td><td>Call of Juarez: Gunslinger</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>01.05.2013</td><td>Far Cry 3: Blood Dragon</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>23.04.2013</td><td>Don't Starve</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>05.03.2013</td><td>Tomb Raider (2013)</td><td><span class="hidden">5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td></tr>
+                        <tr><td>31.01.2013</td><td>Antichamber</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>20.11.2012</td><td>Hitman: Absolution</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td><span style="border-bottom: 1px dotted #777" data-toggle="tooltip" data-placement="top" data-html="true" title="Episode 1: 24.04.2012<br>Episode 2: 27.06.2012<br>Episode 3: 28.08.2012<br>Episode 4: 09.10.2012<br>Episode 5: 20.11.2012<br>400 Days: 03.07.2013">20.11.2012</span></td><td>The Walking Dead: Season 1</td><td><span class="hidden">5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td></tr>
+                        <tr><td>25.10.2012</td><td>Deadlight</td><td><span class="hidden">1.5</span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>23.10.2012</td><td>Giana Sisters: Twisted Dreams & Rise of the Owlverlord</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>16.10.2012</td><td>Chivalry: Medieval Warfare</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>12.10.2012</td><td>Chaos auf Deponia</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>29.06.2012</td><td>Alan Wake's American Nightmare</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>26.06.2012</td><td>Spec Ops: The Line</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>19.06.2012</td><td>Tiny and Big: Grandpa's Leftovers</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>24.05.2012</td><td>DiRT Showdown</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>27.04.2012</td><td>Risen 2: Dark Waters</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>16.02.2012</td><td>Alan Wake</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>10.02.2012</td><td>The Darkness II</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>27.01.2012</td><td>Deponia</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>15.11.2011</td><td>Jurassic Park: The Game</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>15.11.2011</td><td>Saints Row: The Third</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>11.11.2011</td><td>The Elder Scrolls V: Skyrim</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>02.11.2011</td><td>PAYDAY: The Heist</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>08.09.2011</td><td>Dead Island</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>26.08.2011</td><td>Edna & Harvey: Harvey's New Eyes</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>26.08.2011</td><td>Deus Ex: Human Revolution - Director's Cut</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>26.08.2011</td><td>Tropico 4</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>02.08.2011</td><td>Limbo</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>30.06.2011</td><td>Puzzle Agent 2</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td><span style="border-bottom: 1px dotted #777" data-toggle="tooltip" data-placement="top" data-html="true" title="Episode 1: 22.12.2010<br>Episode 2: 16.02.2011<br>Episode 3: 29.03.2011<br>Episode 4: 29.04.2011<br>Episode 5: 23.06.2011">23.06.2011</span></td><td>Back to the Future: The Game</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>14.06.2011</td><td>Duke Nukem Forever</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>21.04.2011</td><td>Portal 2</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>24.03.2011</td><td>Crysis 2</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>24.02.2011</td><td>Dead Space 2</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>01.01.2011</td><td>SpaceChem</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>29.10.2010</td><td>Star Wars: The Force Unleashed II</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>26.10.2010</td><td>The Ball</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>12.10.2010</td><td>Arcania - Gothic 4</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>08.10.2010</td><td>A New Beginning</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>24.09.2010</td><td>Sid Meier's Civilization V</td><td><span class="hidden">2</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>08.09.2010</td><td>Amnesia: The Dark Descent</td><td>noch nicht gespielt</td></tr>
+                        <tr><td><span style="border-bottom: 1px dotted #777" data-toggle="tooltip" data-placement="top" data-html="true" title="Episode 1: 15.04.2010<br>Episode 2: 18.05.2010<br>Episode 3: 22.06.2010<br>Episode 4: 20.07.2010<br>Episode 5: 30.08.2010">30.08.2010</span></td><td>Sam & Max: The Devil's Playhouse</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>27.08.2010</td><td>Mafia II</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>20.08.2010</td><td>Kane & Lynch 2: Dog Days</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>18.08.2010</td><td>Lara Croft and the Guardian of Light</td><td><span class="hidden">1.5</span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>30.06.2010</td><td>Puzzle Agent</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>19.03.2010</td><td>Metro 2033</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>09.02.2010</td><td>BioShock 2</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>28.01.2010</td><td>Mass Effect 2</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>11.01.2010</td><td>VVVVVV</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>17.11.2009</td><td>Left 4 Dead 2</td><td><span class="hidden">1.5</span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>13.11.2009</td><td>Tropico 3</td><td><span class="hidden">1.5</span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>06.11.2009</td><td>Dragon Age: Origins</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>30.10.2009</td><td>Borderlands</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>02.10.2009</td><td>Risen</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>26.06.2009</td><td>Overlord II</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>02.04.2009</td><td>The Book of Unwritten Tales</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>20.03.2009</td><td>The Last Remnant</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>23.01.2009</td><td>Saints Row 2</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>12.12.2008</td><td>Rise of the Argonauts</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>03.12.2008</td><td>Grand Theft Auto IV</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>21.11.2008</td><td>Tomb Raider: Underworld</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>06.11.2008</td><td>Dead Space</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>19.09.2008</td><td>Crysis Warhead</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>19.09.2008</td><td>Star Wars: The Force Unleashed</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>06.06.2008</td><td>Edna bricht aus</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>05.06.2008</td><td>Mass Effect</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>30.05.2008</td><td>GRID</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>23.11.2007</td><td>Kane & Lynch: Dead Man</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>23.11.2007</td><td>Unreal Tournament 3</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>16.11.2007</td><td>Crysis</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>26.10.2007</td><td>The Witcher: Enhanced Edition</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>18.10.2007</td><td>Portal</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>21.08.2007</td><td>BioShock</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>29.06.2007</td><td>Overlord & Overlord: Raising Hell</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>26.06.2007</td><td>Driver: Parallel Lines</td><td><span class="hidden">2</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>15.06.2007</td><td>Colin McRae: Dirt</td><td><span class="hidden">2</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>17.02.2006</td><td>Star Wars: Empire at War</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>31.10.2005</td><td>Star Wars: Battlefront II</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>18.10.2005</td><td>F.E.A.R.</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>18.10.2005</td><td>Quake 4</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>07.06.2005</td><td>Grand Theft Auto: San Andreas</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>04.03.2005</td><td>Star Wars: Republic Commando</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>10.02.2005</td><td>Star Wars: Knights of the Old Republic II: The Sith Lords</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>16.11.2004</td><td>Half-Life 2</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>13.08.2004</td><td>Doom 3</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>19.03.2004</td><td>Battlefield Vietnam</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>18.03.2004</td><td>Unreal Tournament 2004</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>27.02.2004</td><td>Sacred</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>04.12.2003</td><td>Star Wars: Knights of the Old Republic</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>28.11.2003</td><td>Need for Speed: Underground</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>06.11.2003</td><td>Call of Duty</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>27.10.2003</td><td>Railroad Tycoon 3</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>10.10.2003</td><td>Halo</td><td><span class="hidden">2</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>17.09.2003</td><td>Star Wars: Jedi Knight: Jedi Academy</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>11.07.2003</td><td>Midnight Club II</td><td><span class="hidden">2</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>01.07.2003</td><td>Tomb Raider: The Angel of Darkness</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>20.06.2003</td><td>Star Trek: Elite Force 2</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>15.05.2003</td><td>Grand Theft Auto: Vice City</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>13.04.2003</td><td>Postal 2</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>28.03.2003</td><td>Metal Gear Solid 2: Substance</td><td><span class="hidden">5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td></tr>
+                        <tr><td>21.02.2003</td><td>Rayman 3: Hoodlum Havoc (PlayStation 2)</td><td><span class="hidden">1.5</span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>06.02.2003</td><td>Unreal 2: The Awakening</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>18.10.2002</td><td>TimeSplitters 2 (PlayStation 2)</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>30.09.2002</td><td>Unreal Tournament 2003</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>19.09.2002</td><td>Battlefield 1942</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>06.09.2002</td><td>Mafia</td><td><span class="hidden">4.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span></td></tr>
+                        <tr><td>05.07.2002</td><td>Warcraft III: Reign of Chaos</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>21.05.2002</td><td>Grand Theft Auto III</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>26.03.2002</td><td>Star Wars: Jedi Knight 2: Jedi Outcast</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>07.12.2001</td><td>Jak and Daxter: The Precursor Legacy (PlayStation 2)</td><td><span class="hidden">2.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>20.11.2001</td><td>Rally Trophy</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>20.07.2001</td><td>Gran Turismo 3: A-Spec (PlayStation 2)</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>16.04.2001</td><td>Evil Islands: Curse of the Lost Soul</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>14.02.2001</td><td>Colin McRae Rally 2.0</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>17.11.2000</td><td>Tony Hawk's Pro Skater 2</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>13.11.2000</td><td>Driver 2: Back on the Streets (PlayStation)</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>03.11.2000</td><td>Frontschweine</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>11.02.2000</td><td>Unreal Tournament</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>30.09.1999</td><td>Grand Theft Auto 2</td><td><span class="hidden">3.5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-half-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>26.02.1999</td><td>Metal Gear Solid</td><td><span class="hidden">5</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td></tr>
+                        <tr><td>30.11.1998</td><td>Populous: The Beginning</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>21.11.1998</td><td>Tomb Raider III: Adventures of Lara Croft</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>31.03.1998</td><td>StarCraft & StarCraft: Brood War</td><td><span class="hidden">4</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>01.11.1997</td><td>Tomb Raider II</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>09.10.1997</td><td>Star Wars: Jedi Knight: Dark Forces II</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>19.09.1997</td><td>Oddworld: Abe's Oddysee</td><td><span class="hidden">3</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>13.05.1997</td><td>Shadow Warrior Classic Redux</td><td><span class="hidden">2</span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span><span class="fa fa-star-o"></span></td></tr>
+                        <tr><td>22.11.1996</td><td>Tomb Raider I</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>29.01.1996</td><td>Duke Nukem 3D</td><td>noch nicht gespielt</td></tr>
+                        <tr><td>28.02.1995</td><td>Star Wars: Dark Forces</td><td>noch nicht gespielt</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer>
+            <small><a href="movies.html">Filme</a>&emsp;&bull;&emsp;<a href="ttr.html">TTR-Rechner</a></small>
+        </footer>
+    </body>
+</html>
