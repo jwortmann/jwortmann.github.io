@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FEAP</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="author" content="Janos Wortmann">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://bootswatch.com/united/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/theme.default.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <style>
+            #blue_bg {
+                background-color: #424242;
+            }
+
+            .card {
+                position:relative;
+                padding:15px 32px 8px 32px;
+                margin-top:22px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="blue_bg"></div>
+
+        <header>
+            <div id="quick_card" class="card">
+                <div><img id="photo" src="img/feap.jpg" /></div>
+                <h1 id="name">FEAP</h1>
+                <h2 id="description">FEAP-Befehle und Input Files</h2>
+            </div>
+        </header>
+
+        <main>
+            <div class="card">
+                <h3>Installation und Grundlagen</h3>
+
+                <p>FEAP benötigt das Package <tt>xfonts-75dpi</tt>, welches bei aktuellen Linux Distributionen nicht
+                mehr standardmäßig installiert ist. Um das Package zu installieren, muss folgender Befehl im Terminal
+                ausgeführt werden:
+                <pre>sudo apt-get install xfonts-75dpi</pre></p>
+                <p>FEAP kann nun aus einem Terminal gestartet werden:
+                <pre>./feap</pre></p>
+                <p>Mit dem Parameter <tt>-i</tt> kann direkt beim Programmaufruf eine Eingabedatei übergeben werden.
+                Dazu muss der Dateiname ohne Leerzeichen angehängt werden. Um beispielsweise eine Datei <tt>Ipatch</tt>
+                zu öffnen, wird folgender Befehl verwendet:
+                <pre>./feap -iIpatch</pre></p>
+            </div>
+
+            <div class="card">
+                <h3>FEAP-Befehle</h3>
+                
+                <dl class="dl-horizontal">
+                    <dt>TANG</dt><dd>Tangentiale Steifigkeitsmatrix berechnen</dd>
+                    <dt>FORM</dt><dd>Residuum berechnen</dd>
+                    <dt>SOLVE</dt><dd>LGS lösen, Verschiebungen berechnen</dd>
+                    <dt>TANG,,1</dt><dd>entspricht der Befehlsfolge TANG FORM SOLVE</dd>
+                    <dt>DISP,all</dt><dd>Verschiebungen für alle Knoten</dd>
+                    <dt>DISP,,nfirst,nlast,delta</dt><dd>Verschiebungen für einzelne Knoten</dd>
+                    <dt>REAC,all</dt><dd>Reaktionskräfte für alle Knoten</dd>
+                    <dt>REAC,,nfirst,nlast,delta</dt><dd>Reaktionskräfte für einzelne Knoten</dd>
+                    <dt>STRE,all</dt><dd>Spannungen für alle Elemente</dd>
+                    <dt>STRE,,nfirst,nlast,delta</dt><dd>Spannungen für einzelne Elemente</dd>
+                    <dt>PLOT</dt><dd>in den Plot-Modus wechseln</dd>
+                    <dt>QUIT</dt><dd>FEAP verlassen</dd>
+                </dl>
+            </div>
+
+            <div class="card">
+                <h3>FEAP-Befehle im Plot-Modus</h3>
+                
+                <dl class="dl-horizontal">
+                    <dt>WIPE</dt><dd>Plot löschen</dd>
+                    <dt>POST</dt><dd>Ausgabe in ein Postscript-File <tt>feapX.eps</tt> (Achtung: dieser Befehl muss vor allen anderen Plot-Befehlen ausgeführt werden)</dd>
+                    <dt>COLO,i</dt><dd>Farbskalierung des Postscript-Files</dd>
+                    <dt>MESH</dt><dd>deformiertes/undeformiertes Elementnetz</dd>
+                    <dt>NODE</dt><dd>Knoten mit Nummern anzeigen</dd>
+                    <dt>ELEM</dt><dd>Elemente mit Nummern anzeigen</dd>
+                    <dt>BOUN</dt><dd>Randbedingungen anzeigen</dd>
+                    <dt>LOAD</dt><dd>Lasten anzeigen</dd>
+                    <dt>DEFO,,faktor</dt><dd>Wechsel zu deformierter Lage</dd>
+                    <dt>UNDE</dt><dd>Wechsel zu Ausgangslage</dd>
+                    <dt>STRE,i</dt><dd>i-te Spannung zeichnen</dd>
+                    <dt>Stre,1</dt><dd>&sigma;<sub>xx</sub> zeichnen</dd>
+                    <dt>Stre,2</dt><dd>&sigma;<sub>yy</sub> zeichnen</dd>
+                    <dt>Stre,3</dt><dd>&sigma;<sub>zz</sub> zeichnen</dd>
+                    <dt>Stre,4</dt><dd>&sigma;<sub>xy</sub> zeichnen</dd>
+                    <dt>SPLO</dt><dd>Spannungsverlauf in Schnitt zeichnen</dd>
+                    <dt>PERS</dt><dd>perspektivische Darstellung</dd>
+                    <dt>AXIS</dt><dd>Koordinatensystem anzeigen</dd>
+                    <dt>END</dt><dd>Plot-Modus verlassen</dd>
+                </dl>
+            </div>
+
+            <div class="card" style="margin-bottom: 40px">
+                <h3>FEAP Input Files</h3>
+                
+                <pre>
+FEAP * * 4-Element Patch Test
+  9,4,1,2,2,4
+! number of nodes (NUMNP),
+! number of elements (NUMEL),
+! number of material sets (NUMMAT),
+! spatial dimension for the mesh (NDM),
+! number of degrees of freedom for each node (NDF),
+! maximum number of nodes on any element (NEN)
+
+MATErial,1
+  SOLId
+    PLANe STRAin
+    ELAStic ISOTropic 1000.0 0.25
+
+COORdinates
+  1 0  0.0  0.0
+  2 0  4.0  0.0
+  3 0 10.0  0.0
+  4 0  0.0  4.5
+  5 0  5.5  5.5
+  6 0 10.0  5.0
+  7 0  0.0 10.0
+  8 0  4.2 10.0
+  9 0 10.0 10.0
+! node number, generation parameter, x coordinate value, y coordinate value
+
+ELEMents
+  1 1 1 1 2 5 4
+  2 1 1 2 3 6 5
+  3 1 1 4 5 8 7
+  4 1 1 5 6 9 8
+! element number, generation parameter, material data set, list of nodes
+
+BOUNdary restraints
+  1 0 1 1
+  4 0 1 0
+  7 0 1 0
+! node number, generation parameter, restraint codes for each degree of freedom
+! a non-zero value for the restraint code indicates that the associated degree
+! of freedom must satisfy a specified nodal displacement value (default is zero)
+
+FORCes
+  3 0 2.5 0.0
+  6 0 5.0 0.0
+  9 0 2.5 0.0
+! node number, generation parameter, force value for each degree of freedom
+
+END
+
+BATCh
+  FORM residual
+! form residual R(u) = F - P(u), where F is the vector of applied nodal forces,
+! u is the vector of nodal displacements, and for a static linear elastic
+! problem P is defined as P = K*u in which K is the stiffnes matrix
+  TANGent
+! form tangent matrix K_tang = -dR/du
+  SOLVe
+! solve the incremental (Newton) equations K_tang * Delta_u = R and update the
+! solution u <- u + Delta_u
+  DISPlacement ALL
+  STREss ALL
+END
+
+INTEractive
+
+STOP
+                </pre>
+            </div>
+        </main>
+    </body>
+</html>
