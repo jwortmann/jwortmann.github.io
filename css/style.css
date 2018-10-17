@@ -1,192 +1,336 @@
-/*  
-	* Personal Cards 1.0 by Luca Cassani *
-	
-	You can copy, modify, publish, use, sell, 
-	or distribute this template for any purpose,
-	commercial or non-commercial, and by any means. 
-	It requires no special copyright notes nor attribution.	
-*/
-
-*{
-	box-sizing: border-box;
-}
-body{
-	margin:0;
-	padding:0;
-	color:#212121;
-	background-color:#EEEEEE;
-	/*font-family: 'Open Sans', sans-serif;*/
-}
-a{
-	color:#2196F3; /*Change link color */
-	text-decoration:none;
-}
-a:hover{
-	color:#64B5F6; /*Change link color (on mouse over)*/
-}
-#blue_bg{
-	z-index:-1;
-	position:fixed;
-	width:100%;
-	height:25%;
-	top:0;
-	background-color:#2196F3; /* Change top background color */
-}
-.card{
-	width:700px;
-	margin:0 auto;
-	color:#212121;
-	background-color:#fff;
-	border-radius: 3px;
-	box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.19), 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-	overflow:auto;
-}
-#quick_card{
-	padding:25px;
-	margin-top:10vh;
-	text-align:center;
-}
-#quick_card #photo{
-	height:80px;
-	width:80px;
-	border-radius:99px;
-}
-#quick_card #name{
-	font-weight:normal;
-	margin-top:20px;
-	font-size:19px;
-	color:#212121;
-}
-#quick_card #description{
-	font-weight:normal;
-	margin-top:15px;
-	font-size:15px;
-	color:#616161;
-}
-#about_card{
-	position:relative;
-	padding:15px 32px 8px 32px;
-	margin-top:22px;
-}
-#about_card>.tab{
-	margin-top:10px;
-	margin-bottom:10px;
-}
-#about_card>.tab>.title{
-	font-size:16px;
-	color:#2196F3; /*Change title and title icon color (About Card)*/
-}
-.title i{
-	position:relative;
-	left:-10px;
-}
-#about_card>.tab>.content{
-	padding:5px 20px 5px 20px;
-	position:relative;
-}
-#about_card .element{
-	margin-bottom:5px;
-	margin-top:5px;
-}
-#about_card .element .name{
-	color:#212121;
-	font-size:15px;
-	margin-bottom:3px;
-}
-#about_card .element .info{
-	color:#616161;
-	font-size:14px;
-}
-hr{
-	width:60%;
-	color: #E0E0E0;
-	background-color: #E0E0E0;
-	height:1px;
-	border:0;
-}
-#contact_card{
-	position:relative;
-	padding:15px 30px 15px 30px;
-	margin-top:22px;
-	margin-bottom:40px;
-}
-#contact_card>.tab{
-	margin-top:3px;
-	margin-bottom:8px;
-}
-#contact_card>.tab>.title{
-	font-size:16px;
-	color:#2196F3; /*Change title and title icon color (Contact Card)*/
-}
-#contact_card>.tab>.content{
-	padding-top:10px;
-	text-align:center;
-}
-#contact_card>.tab>.content>.contacts{
-	margin:0 20px 0 20px;
-	display:inline-block;
-	font-size:14px;
-	color:#212121;
-}
-#contact_card a{
-	color:#616161;
-	text-decoration:none; /*Change link color (ONLY Contact Card)*/
-}
-#contact_card a:hover{
-	color:#9E9E9E; /*Change link color (on mouse over, ONLY Contact Card) */
-}
-#fab{
-	position:fixed;
-	width:60px;
-	height:60px;
-	line-height: 60px;
-	text-align:center;
-	background-color:#FFC107; /*Change FAB background color */
-	border-radius:99px;
-	box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.19), 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-}
-#fab i{
-	color:#fff;
-	font-size:22px;
-}
-#fab:hover{
-	background-color:#FFD54F; /*Change FAB background color (on mouse over) */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+        local('MaterialIcons-Regular'),
+        url(../fonts/material-icons/MaterialIcons-Regular.woff2) format('woff2'),
+        url(../fonts/material-icons/MaterialIcons-Regular.woff) format('woff'),
+        url(../fonts/material-icons/MaterialIcons-Regular.ttf) format('truetype');
 }
 
-footer{
-	z-index:-1;
-	position:fixed;
-	bottom:0;
-	width:100%;
-	text-align:center;
-	text-align:center;
-	font-size:15px;
-	color:#757575;
-	padding-bottom:10px;
-	/*font-weight: bold;*/
+:root {
+    --text-color:            #dddddd;
+    --background-color:      #303339;
+    /*--primary-color:         #607d8b;*/
+    --primary-color:         #6d8600;
+    --light-primary-color:   #cfd8dc;
+    /*--light-primary-color:   #6d8600;*/
+    --secondary-color:       #ff9933;
+    --light-secondary-color: #ffcc99;
+
+    /* material colors */
+    --red:           #f44336;
+    --pink:          #e91e63;
+    --purple:        #9c27b0;
+    --deep-purple:   #673ab7;
+    --indigo:        #3f51b5;
+    --blue:          #2196f3;
+    --light-blue:    #03a9f4;
+    --cyan:          #00bcd4;
+    --teal:          #009688;
+    --green:         #4caf50;
+    --light-green:   #8bc34a;
+    --lime:          #cddc39;
+    --yellow:        #ffeb3b;
+    --amber:         #ffc107;
+    --orange:        #ff9800;
+    --deep-orange:   #ff5722;
+    --brown:         #795548;
+    --grey:          #9e9e9e;
+    --blue-grey:     #607d8b;
+
+    /* flat colors */
+    --turquoise:     #1abc9c;
+    --emerald:       #2ecc71;
+    --peter-river:   #3498db;
+    --amethyst:      #9b59b6;
+    --wet-asphalt:   #34495e;
+    --green-sea:     #16a085;
+    --nephritis:     #27ae60;
+    --belize-hole:   #2980b9;
+    --wisteria:      #8e44ad;
+    --midnight-blue: #2c3e50;
+    --sun-flower:    #f1c40f;
+    --carrot:        #e67e22;
+    --alizarin:      #e74c3c;
+    --clouds:        #ecf0f1;
+    --concrete:      #95a5a6;
+    --orange:        #f39c12;
+    --pumpkin:       #d35400;
+    --pomegranate:   #c0392b;
+    --silver:        #bdc3c7;
+    --asbestos:      #7f8c8d;
 }
-/* MEDIA */
-@media (min-width: 961px){
-	#fab{
-		top:calc(25% - 30px);
-		right:calc((100% - 550px)/4 - 30px);
-	}
+
+body {
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 3rem;
+    padding: 0;
+    background-color: var(--background-color);
+    font-family: "Ubuntu";
+    color: var(--text-color);
 }
-@media (min-width: 481px) and (max-width: 960px) {
-	.card{
-		width:80%;
-	}
-	#fab{
-		bottom:2%;
-		right:2%;
-	}
+
+h3 {
+    color: #aaa !important;
 }
-@media (max-width: 480px){
-	.card{
-		width:90%;
-	}
-	#fab{
-		bottom:2%;
-		right:2%;
-	}
+
+a {
+    color: #8db2e5;
+}
+
+kbd {
+    padding: 0.2rem 0.4rem;
+    font-size: 87.5%;
+    font-family: Consolas;
+    color: #fff;
+    background-color: #212529;
+    border-radius: 0.2rem;
+}
+
+pre {
+    display: block;
+    overflow: auto;
+    padding: 9px;
+    margin: 0 0 10px;
+    color: #333;
+    background-color: #fbfbfb;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+dl {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 10px;
+}
+
+dt {
+    float: left;
+    width: 20%;
+    padding: 0;
+    margin: 0;
+}
+
+dd {
+    float: left;
+    width: 80%;
+    padding: 0;
+    margin: 0;
+}
+
+dl.compact > dt {
+    width: 5%;
+}
+
+dl.compact > dd {
+    width: 95%;
+}
+
+nav {
+    /*background: linear-gradient(#05161d, #0b3042);*/
+    background-color: var(--background-color);
+}
+
+.brand-logo {
+    margin-left: 20px;
+}
+
+/* switch checked main color */
+.switch label input[type="checkbox"]:checked + .lever:after {
+    background-color: var(--primary-color);
+}
+
+/* switch checked lighten color */
+.switch label input[type="checkbox"]:checked + .lever {
+    background-color: var(--light-primary-color);
+}
+
+.input-field label {
+    color: #ddd;
+}
+
+.input-field input[type="search"] {
+    color: var(--text-color);
+    font-size: 15px;
+    font-family: "Ubuntu";
+}
+
+/* label focus color */
+.input-field input[type="search"]:focus + label {
+    color: var(--primary-color) !important;
+}
+
+/* label underline focus color */
+.input-field input[type="search"]:focus {
+    background-color: #1d2024 !important;
+    border-bottom: 1px solid var(--primary-color) !important;
+    box-shadow: 0 0 0 0 !important;
+    color: var(--text-color) !important;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: var(--primary-color);
+}
+
+.input-field input[type="search"]:focus ~ .material-icons {
+    color: var(--text-color);
+}
+
+/* fix vertical alignment of prefix and discard icons */
+.input-field i {
+    line-height: 48px;
+}
+
+nav .input-field label i {
+    line-height: 44px;
+}
+
+.card, .card-reveal {
+    background-color: #1d2024 !important;
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    position: relative;
+    height: 0;
+    padding-top: 67.1875%;
+}
+
+.card-image img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.card-image img.active {
+    max-width: initial;
+    max-height: initial;
+    margin: inherit;
+}
+
+.card .card-title {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.btn-floating {
+    cursor: default;
+    opacity: 0.8;
+}
+
+.btn-floating i {
+    letter-spacing: 0;
+}
+
+#scroll-top .btn-floating {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 99999;
+    opacity: 0.5;
+    background-color: #000;
+    cursor: pointer;
+}
+
+#scroll-top .btn-floating i {
+    font-size: 2rem;
+    letter-spacing: 0;
+}
+
+.csstab {
+    width: 5em;
+    display: block;
+    float: left;
+}
+
+.tooltip {
+    border-bottom: 1px dotted #777;
+}
+
+.tablesorter-header {
+    cursor: pointer;
+}
+
+.tablesorter-default, .tablesorter-default th {
+    color: var(--text-color);
+}
+
+.tablesorter-default thead .tablesorter-headerDesc, .tablesorter-default thead .tablesorter-headerAsc {
+    border-bottom: var(--primary-color) 2px solid;
+}
+
+.tablesorter-headerUnSorted {
+    background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAAP///////yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==) !important;
+}
+
+.tablesorter-headerAsc {
+    background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7) !important;
+}
+
+.tablesorter-headerDesc {
+    background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7) !important;
+}
+
+
+
+table th, table td {
+    padding: 0px 5px;
+    background-color: var(--background-color) !important;
+}
+
+table.dark th, table.dark td {
+    background-color: #1d2024 !important;
+    border-radius: 0;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 3px;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: -3px;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.imdbRatingPlugin {
+    color: var(--text-color) !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.imdbRatingPlugin img {
+    vertical-align: text-top !important;
+    margin-right: 4px;
+}
+
+.imdbRatingPlugin span.ofTen {
+    color: #aaa !important;
 }
