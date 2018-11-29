@@ -14,201 +14,220 @@
         <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="js/tippy.all.min.js"></script>
         <script type="text/javascript" src="js/Chart.min.js"></script>
-        <script type="text/javascript">$(function(){$("table").tablesorter({theme : "default", widthFixed : true, headerTemplate : "{content}{icon}", widgets : ["uitheme"], sortList : [[0,1]]});});</script>
-        <script type="text/javascript">$(function(){tippy("[title]", {placement : "top-start", arrow : true, arrowType : "round", animation : "scale", theme : "translucent"})})</script>
 
-        <!-- Switches und Suchfeld initialisieren -->
         <script type="text/javascript">
             $(document).ready(function() {
-                $('#switch1').change(function() {
-                    searchfilter();
-                });
-                $('#switch2').change(function() {
-                    searchfilter();
-                });
-                $('#search').keyup(function() {
-                    searchfilter();
-                });
-                $('#clear').click(function() {
-                    document.getElementById('search').value = "";
-                    searchfilter();
-                });
-                $('#switch1').prop('checked', true);
-                $('#switch2').prop('checked', true);
-                document.getElementById('search').value = "";
-            });
+                var request = new XMLHttpRequest();
+                request.open('GET', 'pcgames.json', true);
+                request.responseType = 'text';
+                request.send(null);
+                request.onload = function() {
+                    if (request.readyState == 4 && request.status == 200) {
+                        var json_obj = JSON.parse(request.responseText);
+                        var pcgames = json_obj['pcgames'];
+                        for (var i = 0; i < pcgames.length; i++) {
+                            var release = pcgames[i]['release'];
+                            var release_html = '';
+                            if (Array.isArray(release)) {
+                                release_html = '<span class="tooltip" title="';
+                                for (var j = 0; j < release.length-1; j++) {
+                                    release_html += Object.keys(release[j]) + ': ' + Object.values(release[j]) + '<br>';
+                                }
+                                release_html += Object.keys(release[release.length-1]) + ': ' + Object.values(release[release.length-1]) + '">' + Object.values(release[release.length-1]) + '</span>';
+                            } else {
+                                release_html = release;
+                            }
+                            var title = pcgames[i]['title'];
+                            var genre = pcgames[i]['genre'];
+                            var rating = 'noch nicht gespielt';
+                            if (pcgames[i].hasOwnProperty('rating')) {
+                                rating = pcgames[i]['rating'].toString();
+                            }
+                            $('table#pcgames > tbody').append("<tr><td>" + release_html + "</td><td>" + title + "</td><td>" + genre + "</td><td>" + rating + "</td></tr>");
+                        }
+                        $("table").tablesorter({theme : "default", widthFixed : true, headerTemplate : "{content}{icon}", widgets : ["uitheme"], sortList : [[0,1]]});
+                        $(function(){tippy("[title]", {placement : "top-start", arrow : true, arrowType : "round", animation : "scale", theme : "translucent"})})
 
-            function searchfilter() {
-                $('tbody').children().hide();
-                $('tbody').children().each(function() {
-                    if ($(this).children(':nth-child(4)').text() != "noch nicht gespielt") {
-                        if ($('#switch1').is(':checked') && $(this).children().text().toLowerCase().indexOf($('#search').val().toLowerCase()) >= 0) {
-                            $(this).show();
+                        // Switches und Suchfeld initialisieren
+                        $('#switch1').change(function() {
+                            searchfilter();
+                        });
+                        $('#switch2').change(function() {
+                            searchfilter();
+                        });
+                        $('#search').keyup(function() {
+                            searchfilter();
+                        });
+                        $('#clear').click(function() {
+                            document.getElementById('search').value = "";
+                            searchfilter();
+                        });
+                        $('#switch1').prop('checked', true);
+                        $('#switch2').prop('checked', true);
+                        document.getElementById('search').value = "";
+
+                        function searchfilter() {
+                            $('tbody').children().hide();
+                            $('tbody').children().each(function() {
+                                if ($(this).children(':nth-child(4)').text() != "noch nicht gespielt") {
+                                    if ($('#switch1').is(':checked') && $(this).children().text().toLowerCase().indexOf($('#search').val().toLowerCase()) >= 0) {
+                                        $(this).show();
+                                    }
+                                } else {
+                                    if ($('#switch2').is(':checked') && $(this).children().text().toLowerCase().indexOf($('#search').val().toLowerCase()) >= 0) {
+                                        $(this).show();
+                                    }
+                                }
+                            });
                         }
-                    } else {
-                        if ($('#switch2').is(':checked') && $(this).children().text().toLowerCase().indexOf($('#search').val().toLowerCase()) >= 0) {
-                            $(this).show();
+
+                        // Bewertung durch Sterne ersetzen
+                        $('tbody').children().children(':nth-child(1)').addClass('center');
+                        $('tbody').children().children(':nth-child(4)').addClass('center');
+                        $('tbody').children().each(function() {
+                            if ($(this).children(':nth-child(4)').text() != "noch nicht gespielt") {
+                                var rating = $(this).children(':nth-child(4)').text();
+                                $(this).children(':nth-child(4)').empty();
+                                $(this).children(':nth-child(4)').append('<span class="hide">' + rating + '</span>');
+                                if (rating == "1") {
+                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                } else if (rating == "1.5") {
+                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                } else if (rating == "2") {
+                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                } else if (rating == "2.5") {
+                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                } else if (rating == "3") {
+                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                } else if (rating == "3.5") {
+                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i>');
+                                } else if (rating == "4") {
+                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i>');
+                                } else if (rating == "4.5") {
+                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i>');
+                                } else if (rating == "5") {
+                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i>');
+                                }
+                            }
+                        });
+
+                        // Statistiken berechnen und darstellen
+                        Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
+                        Chart.defaults.global.defaultFontFamily = "Ubuntu";
+                        Chart.defaults.global.defaultFontSize = 13;
+
+                        $('#main').append('<h1>Statistiken</h1>');
+                        $('#main').append('<h3>Spiele nach Jahr</h3><canvas id="chart1" />');
+                        $('#main').append('<h3>Spiele nach Bewertung</h3><canvas id="chart2" />');
+
+                        var chart1_labels = [];
+                        var chart1_data1 = [];
+                        var chart1_data2 = [];
+                        var chart2_data = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+                        var year_min = Number.MAX_SAFE_INTEGER;
+                        var year_max = Number.MIN_SAFE_INTEGER;
+
+                        $('tbody').children().each(function() {
+                            var year = parseInt($(this).children(':nth-child(1)').text().slice(-4));
+                            if (year < year_min) year_min = year;
+                            if (year > year_max) year_max = year;
+                        });
+
+                        for (i = year_min; i <= year_max; i++) {
+                            chart1_labels.push(i.toString());
+                            chart1_data1.push(0);
+                            chart1_data2.push(0);
                         }
+
+                        $('tbody').children().each(function() {
+                            var year = $(this).children(':nth-child(1)').text().slice(-4) - year_min;
+                            var rating = $(this).children(':nth-child(4)').text()
+                            if (rating == "noch nicht gespielt") {
+                                chart1_data2[year]++;
+                            } else {
+                                chart1_data1[year]++;
+                                chart2_data[10 - 2*parseFloat(rating)]++;
+                            }
+                        });
+
+                        var chart1 = new Chart(
+                            document.getElementById("chart1").getContext("2d"),
+                            {
+                                type: 'bar',
+                                data: {
+                                    labels: chart1_labels,
+                                    datasets: [{
+                                        label: 'Bereits gespielt',
+                                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-primary-color').trim(),
+                                        borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
+                                        borderWidth: 1,
+                                        data: chart1_data1
+                                    }, {
+                                        label: 'Noch nicht gespielt',
+                                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-secondary-color').trim(),
+                                        borderColor: getComputedStyle(document.body).getPropertyValue('--secondary-color').trim(),
+                                        borderWidth: 1,
+                                        data: chart1_data2
+                                    }],
+                                },
+                                options: {
+                                    legend: {
+                                        position: 'top'
+                                    },
+                                    tooltips: {
+                                        mode: 'index',
+                                        intersect: false
+                                    },
+                                    scales: {
+                                        xAxes: [{
+                                            stacked: true
+                                        }],
+                                        yAxes: [{
+                                            stacked: true
+                                        }]
+                                    }
+                                }
+                            }
+                        );
+
+                        var chart2 = new Chart(
+                            document.getElementById("chart2").getContext("2d"),
+                            {
+                                type: 'horizontalBar',
+                                data: {
+                                    labels: ["\ue838\ue838\ue838\ue838\ue838", "\ue838\ue838\ue838\ue838\ue839", "\ue838\ue838\ue838\ue838\ue83a", "\ue838\ue838\ue838\ue839\ue83a", "\ue838\ue838\ue838\ue83a\ue83a", "\ue838\ue838\ue839\ue83a\ue83a", "\ue838\ue838\ue83a\ue83a\ue83a", "\ue838\ue839\ue83a\ue83a\ue83a", "\ue838\ue83a\ue83a\ue83a\ue83a"],
+                                    datasets: [{
+                                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-primary-color').trim(),
+                                        borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
+                                        borderWidth: 1,
+                                        data: chart2_data
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                fontFamily: 'Material Icons',
+                                                fontSize: 20
+                                            }
+                                        }]
+                                    },
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltips: {
+                                        titleFontFamily: 'Material Icons',
+                                        titleFontSize: 16,
+                                        titleFontStyle: 'lighter'
+                                    }
+                                }
+                            }
+                        );
                     }
-                });
-            }
-        </script>
-
-        <!-- Statistiken berechnen und darstellen -->
-        <script type="text/javascript">
-            $(document).ready(function() {
-                Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
-                Chart.defaults.global.defaultFontFamily = "Ubuntu";
-                Chart.defaults.global.defaultFontSize = 13;
-
-                $('#main').append('<h1>Statistiken</h1>');
-                $('#main').append('<h3>Spiele nach Jahr</h3><canvas id="chart1" />');
-                $('#main').append('<h3>Spiele nach Bewertung</h3><canvas id="chart2" />');
-
-                var chart1_labels = [];
-                var chart1_data1 = [];
-                var chart1_data2 = [];
-                var chart2_data = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-                var year_min = Number.MAX_SAFE_INTEGER;
-                var year_max = Number.MIN_SAFE_INTEGER;
-
-                $('tbody').children().each(function() {
-                    var year = parseInt($(this).children(':nth-child(1)').text().slice(-4));
-                    if (year < year_min) year_min = year;
-                    if (year > year_max) year_max = year;
-                });
-
-                for (i = year_min; i <= year_max; i++) {
-                    chart1_labels.push(i.toString());
-                    chart1_data1.push(0);
-                    chart1_data2.push(0);
                 }
 
-                $('tbody').children().each(function() {
-                    var year = $(this).children(':nth-child(1)').text().slice(-4) - year_min;
-                    var rating = $(this).children(':nth-child(4)').text()
-                    if (rating == "noch nicht gespielt") {
-                        chart1_data2[year]++;
-                    } else {
-                        chart1_data1[year]++;
-                        chart2_data[10 - 2*parseFloat(rating)]++;
-                    }
-                });
-
-                var chart1 = new Chart(
-                    document.getElementById("chart1").getContext("2d"),
-                    {
-                        type: 'bar',
-                        data: {
-                            labels: chart1_labels,
-                            datasets: [{
-                                label: 'Bereits gespielt',
-                                backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-primary-color').trim(),
-                                borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
-                                borderWidth: 1,
-                                data: chart1_data1
-                            }, {
-                                label: 'Noch nicht gespielt',
-                                backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-secondary-color').trim(),
-                                borderColor: getComputedStyle(document.body).getPropertyValue('--secondary-color').trim(),
-                                borderWidth: 1,
-                                data: chart1_data2
-                            }],
-                        },
-                        options: {
-                            legend: {
-                                position: 'top'
-                            },
-                            tooltips: {
-                                mode: 'index',
-                                intersect: false
-                            },
-                            scales: {
-                                xAxes: [{
-                                    stacked: true
-                                }],
-                                yAxes: [{
-                                    stacked: true
-                                }]
-                            }
-                        }
-                    }
-                );
-
-                var chart2 = new Chart(
-                    document.getElementById("chart2").getContext("2d"),
-                    {
-                        type: 'horizontalBar',
-                        data: {
-                            labels: ["\ue838\ue838\ue838\ue838\ue838", "\ue838\ue838\ue838\ue838\ue839", "\ue838\ue838\ue838\ue838\ue83a", "\ue838\ue838\ue838\ue839\ue83a", "\ue838\ue838\ue838\ue83a\ue83a", "\ue838\ue838\ue839\ue83a\ue83a", "\ue838\ue838\ue83a\ue83a\ue83a", "\ue838\ue839\ue83a\ue83a\ue83a", "\ue838\ue83a\ue83a\ue83a\ue83a"],
-                            datasets: [{
-                                backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-primary-color').trim(),
-                                borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
-                                borderWidth: 1,
-                                data: chart2_data
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        fontFamily: 'Material Icons',
-                                        fontSize: 20
-                                    }
-                                }]
-                            },
-                            legend: {
-                                display: false
-                            },
-                            tooltips: {
-                                titleFontFamily: 'Material Icons',
-                                titleFontSize: 16,
-                                titleFontStyle: 'lighter'
-                            }
-                        }
-                    }
-                );
-            });
-        </script>
-
-        <!-- Bewertung durch Sterne ersetzen -->
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('tbody').children().children(':nth-child(1)').addClass('center');
-                $('tbody').children().children(':nth-child(4)').addClass('center');
-                $('tbody').children().each(function() {
-                    if ($(this).children(':nth-child(4)').text() != "noch nicht gespielt") {
-                        var rating = $(this).children(':nth-child(4)').text();
-                        $(this).children(':nth-child(4)').empty();
-                        $(this).children(':nth-child(4)').append('<span class="hide">' + rating + '</span>');
-                        if (rating == "1") {
-                            $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                        } else if (rating == "1.5") {
-                            $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                        } else if (rating == "2") {
-                            $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                        } else if (rating == "2.5") {
-                            $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                        } else if (rating == "3") {
-                            $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                        } else if (rating == "3.5") {
-                            $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i>');
-                        } else if (rating == "4") {
-                            $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i>');
-                        } else if (rating == "4.5") {
-                            $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i>');
-                        } else if (rating == "5") {
-                            $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i>');
-                        }
-                    }
-                });
-            });
-        </script>
-
-        <!-- Scroll-Button -->
-        <script type="text/javascript">
-            $(document).ready(function() {
+                // Scroll-Button
                 $('body').append('<a href="#top" id="scroll-top"><span class="btn-floating"><i class="material-icons">keyboard_arrow_up</i></span></a>');
                 $('#scroll-top').hide();
                 $(function() {
@@ -253,7 +272,7 @@
                                             <span class="lever"></span>
                                             An
                                         </label>
-                                        <span style="margin-left: 2em">Bereits gespielte Titel anzeigen</span>
+                                        <span style="margin-left: 2em">Bereits gespielte Spiele anzeigen</span>
                                     </div>
                                     <div class="switch">
                                         <label>
@@ -262,7 +281,7 @@
                                             <span class="lever"></span>
                                             An
                                         </label>
-                                        <span style="margin-left: 2em">Noch nicht gespielte Titel anzeigen</span>
+                                        <span style="margin-left: 2em">Noch nicht gespielte Spiele anzeigen</span>
                                     </div>
                                 </div>
                                 <div class="input-field col l6 m12" style="margin-top: 0">
@@ -273,260 +292,11 @@
                                 </div>
                             </div>
 
-                            <table class="bordered tablesorter dark">
+                            <table class="bordered tablesorter dark" id="pcgames">
                                 <thead>
                                     <tr><th class="dateFormat-ddmmyyyy center">Release</th><th class="center">Titel</th><th class="center">Genre</th><th class="sorter-digit string-bottom center">Bewertung</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td>09.08.2018</td><td>EXAPUNKS</td><td>Puzzle</td><td>3.5</td></tr>
-                                    <tr><td>25.06.2018</td><td>The Awesome Adventures of Captain Spirit</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 31.08.2017<br>Episode 2: 19.10.2017<br>Episode 3: 19.12.2017">19.12.2017</span></td><td>Life is Strange: Before the Storm</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>29.09.2017</td><td>Cuphead</td><td>Shoot 'em up</td><td>4</td></tr>
-                                    <tr><td><span class="tooltip" title="Chapter One: 18.05.2012<br>Chapter Two: 25.08.2014<br>Chapter Three: 21.09.2017">21.09.2017</span></td><td>The Journey Down</td><td>Point & Click Adventure</td><td>3.5</td></tr>
-                                    <tr><td>01.08.2017</td><td>The Long Dark</td><td>Survival</td><td>2.5</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 02.08.2016<br>Episode 2: 20.09.2016<br>Episode 3: 25.10.2016<br>Episode 4: 22.11.2016<br>Episode 5: 13.12.2016">13.12.2016</span></td><td>Batman: The Telltale Series</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>17.11.2016</td><td>Shenzhen I/O</td><td>Puzzle</td><td>4.5</td></tr>
-                                    <tr><td>09.11.2016</td><td>Beholder</td><td>Casual</td><td>2</td></tr>
-                                    <tr><td>07.10.2016</td><td>Five Nights at Freddy's: Sister Location</td><td>Horror-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>04.10.2016</td><td>Aragami</td><td>Casual</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 13.10.2015<br>Episode 2: 27.10.2015<br>Episode 3: 24.11.2015<br>Episode 4: 22.12.2015<br>Episode 5: 29.03.2016<br>Episode 6: 07.06.2016<br>Episode 7: 26.07.2016<br>Episode 8: 13.09.2016">13.09.2016</span></td><td>Minecraft: Story Mode</td><td>Adventure</td><td>2.5</td></tr>
-                                    <tr><td>14.06.2016</td><td>Dead by Daylight</td><td>Multiplayer</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>13.05.2016</td><td>Doom</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>03.05.2016</td><td>Battleborn</td><td>Multiplayer-Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 23.02.2016<br>Episode 2: 29.03.2016<br>Episode 3: 26.04.2016">26.04.2016</span></td><td>The Walking Dead: Michonne</td><td>Adventure</td><td>4.5</td></tr>
-                                    <tr><td>21.04.2016</td><td>Don't Starve Together</td><td>Multiplayer</td><td>4.5</td></tr>
-                                    <tr><td>08.12.2015</td><td>Ben and Ed</td><td>Jump 'n' Run</td><td>3</td></tr>
-                                    <tr><td>07.12.2015</td><td>Dirt Rally</td><td>Racing</td><td>5</td></tr>
-                                    <tr><td>02.12.2015</td><td>Valhalla Hills</td><td>Aufbaustrategie</td><td>2.5</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 02.12.2014<br>Episode 2: 03.02.2015<br>Episode 3: 24.03.2015<br>Episode 4: 26.05.2015<br>Episode 5: 21.07.2015<br>Episode 6: 17.11.2015">17.11.2015</span></td><td>Game of Thrones - A Telltale Games Series</td><td>Adventure</td><td>4.5</td></tr>
-                                    <tr><td>06.11.2015</td><td>Mini Metro</td><td>Casual</td><td>2.5</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 30.01.2015<br>Episode 2: 24.03.2015<br>Episode 3: 19.05.2015<br>Episode 4: 28.07.2015<br>Episode 5: 20.10.2015">20.10.2015</span></td><td>Life Is Strange</td><td>Adventure</td><td>5</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 25.11.2014<br>Episode 2: 17.03.2015<br>Episode 3: 23.06.2015<br>Episode 4: 18.08.2015<br>Episode 5: 20.10.2015">20.10.2015</span></td><td>Tales from the Borderlands</td><td>Adventure</td><td>4</td></tr>
-                                    <tr><td>08.10.2015</td><td>Keep Talking and Nobody Explodes</td><td>Multiplayer</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>29.09.2015</td><td>NBA 2K16</td><td>Sport</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>24.09.2015</td><td>Else Heart.Break()</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>21.09.2015</td><td>SOMA</td><td>Horror-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>02.07.2015</td><td>Anna's Quest</td><td>Point & Click Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>30.06.2015</td><td>Infinifactory</td><td>Puzzle</td><td>3.5</td></tr>
-                                    <tr><td>25.06.2015</td><td>Portal Stories: Mel</td><td>Puzzle</td><td>4.5</td></tr>
-                                    <tr><td>20.06.2015</td><td>TIS-100</td><td>Puzzle</td><td>3</td></tr>
-                                    <tr><td>09.06.2015</td><td>KHOLAT</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>09.03.2015</td><td>Shelter 2</td><td>Adventure</td><td>1</td></tr>
-                                    <tr><td>25.02.2015</td><td>Resident Evil: Revelations 2 - Episode 1: Penal Colony</td><td>Horror-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>28.01.2015</td><td>Fahrenheit: Indigo Prophecy Remastered</td><td>Adventure</td><td>3.5</td></tr>
-                                    <tr><td>27.01.2015</td><td>Grim Fandango Remastered</td><td>Point & Click Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>23.01.2015</td><td>Grey Goo</td><td>Echtzeitstrategie</td><td>3.5</td></tr>
-                                    <tr><td>02.12.2014</td><td>The Crew</td><td>Racing</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>24.11.2014</td><td>Craft the World</td><td>Casual</td><td>3</td></tr>
-                                    <tr><td>18.11.2014</td><td>Never Alone (Kisima Ingitchuna)</td><td>Jump 'n' Run</td><td>3</td></tr>
-                                    <tr><td>12.11.2014</td><td>Randal's Monday</td><td>Point & Click Adventure</td><td>3</td></tr>
-                                    <tr><td>17.10.2014</td><td>Borderlands: The Pre-Sequel</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>07.10.2014</td><td>Alien: Isolation</td><td>Horror-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>02.10.2014</td><td>Mittelerde: Mordors Schatten</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>17.09.2014</td><td>Quake Live</td><td>Multiplayer-Shooter</td><td>3</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 17.12.2013<br>Episode 2: 04.03.2014<br>Episode 3: 13.05.2014<br>Episode 4: 22.07.2014<br>Episode 5: 16.08.2014">16.08.2014</span></td><td>The Walking Dead: Season 2</td><td>Adventure</td><td>5</td></tr>
-                                    <tr><td>14.08.2014</td><td>Risen 3: Titan Lords</td><td>RPG</td><td>3.5</td></tr>
-                                    <tr><td>01.08.2014</td><td>Sacred 3</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 11.10.2013<br>Episode 2: 04.02.2014<br>Episode 3: 08.04.2014<br>Episode 4: 27.05.2014<br>Episode 5: 08.07.2014">08.07.2014</span></td><td>The Wolf Among Us</td><td>Adventure</td><td>4.5</td></tr>
-                                    <tr><td>27.06.2014</td><td>GRID Autosport</td><td>Racing</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>03.06.2014</td><td>Murdered: Soul Suspect</td><td>Adventure</td><td>3.5</td></tr>
-                                    <tr><td>21.05.2014</td><td>Q.U.B.E.: Director's Cut</td><td>Puzzle</td><td>3.5</td></tr>
-                                    <tr><td>22.04.2014</td><td>Tesla Effect: A Tex Murphy Adventure</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 04.12.2013<br>Episode 2: 16.04.2014">16.04.2014</span></td><td>Baphomets Fluch 5: Der Sündenfall</td><td>Point & Click Adventure</td><td>3.5</td></tr>
-                                    <tr><td>28.02.2014</td><td>Thief</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>18.02.2014</td><td>Banished</td><td>Aufbaustrategie</td><td>3.5</td></tr>
-                                    <tr><td>22.01.2014</td><td>Insurgency</td><td>Multiplayer-Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>11.12.2013</td><td>Rust</td><td>Multiplayer</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>26.10.2013</td><td>Shadow Warrior (2013)</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>23.10.2013</td><td>Space Engineers</td><td>Multiplayer</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>17.10.2013</td><td>The Stanley Parable</td><td>Adventure</td><td>2.5</td></tr>
-                                    <tr><td>15.10.2013</td><td>Goodbye Deponia</td><td>Point & Click Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>10.09.2013</td><td>Amnesia: A Machine for Pigs</td><td>Horror-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>04.09.2013</td><td>Outlast</td><td>Horror-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>03.09.2013</td><td>Brothers: A Tale of Two Sons</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>30.08.2013</td><td>Killer is Dead</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>23.08.2013</td><td>The Bureau: XCOM Declassified</td><td>Rundenstrategie</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>13.08.2013</td><td>Payday 2</td><td>Multiplayer-Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>25.06.2013</td><td>Company of Heroes 2</td><td>Echtzeitstrategie</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>31.05.2013</td><td>GRID 2</td><td>Racing</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>29.05.2013</td><td>The Night of the Rabbit</td><td>Point & Click Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>21.05.2013</td><td>Call of Juarez: Gunslinger</td><td>Shooter</td><td>4.5</td></tr>
-                                    <tr><td>15.05.2013</td><td>Sanctum 2</td><td>Casual</td><td>2</td></tr>
-                                    <tr><td>01.05.2013</td><td>Far Cry 3: Blood Dragon</td><td>Shooter</td><td>3.5</td></tr>
-                                    <tr><td>23.04.2013</td><td>Don't Starve</td><td>Survival</td><td>4</td></tr>
-                                    <tr><td>26.03.2013</td><td>BioShock Infinite</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>05.03.2013</td><td>Tomb Raider (2013)</td><td>Action-Adventure</td><td>5</td></tr>
-                                    <tr><td>26.02.2013</td><td>Brütal Legend</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>31.01.2013</td><td>Antichamber</td><td>Puzzle</td><td>4.5</td></tr>
-                                    <tr><td>22.11.2012</td><td>Assassin's Creed III</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>20.11.2012</td><td>Hitman: Absolution</td><td>Action</td><td>3.5</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 24.04.2012<br>Episode 2: 27.06.2012<br>Episode 3: 28.08.2012<br>Episode 4: 09.10.2012<br>Episode 5: 20.11.2012<br>400 Days: 03.07.2013">20.11.2012</span></td><td>The Walking Dead: Season 1</td><td>Adventure</td><td>5</td></tr>
-                                    <tr><td>25.10.2012</td><td>Deadlight</td><td>Jump 'n' Run</td><td>1.5</td></tr>
-                                    <tr><td>23.10.2012</td><td>Giana Sisters: Twisted Dreams & Rise of the Owlverlord</td><td>Jump 'n' Run</td><td>3.5</td></tr>
-                                    <tr><td>16.10.2012</td><td>Chivalry: Medieval Warfare</td><td>Multiplayer</td><td>2.5</td></tr>
-                                    <tr><td>12.10.2012</td><td>Chaos auf Deponia</td><td>Point & Click Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>09.10.2012</td><td>Dishonored: Die Maske des Zorns</td><td>Shooter</td><td>4</td>
-                                    <tr><td>26.06.2012</td><td>Spec Ops: The Line</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>19.06.2012</td><td>Tiny and Big: Grandpa's Leftovers</td><td>Jump 'n' Run</td><td>2.5</td></tr>
-                                    <tr><td>01.06.2012</td><td>Max Payne 3</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>24.05.2012</td><td>DiRT Showdown</td><td>Racing</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>27.04.2012</td><td>Risen 2: Dark Waters</td><td>RPG</td><td>4</td></tr>
-                                    <tr><td><span class="tooltip" title="Alan Wake: 16.02.2012<br>Alan Wake's American Nightmare: 29.06.2012">16.02.2012</span></td><td>Alan Wake</td><td>Action-Adventure</td><td>4.5</td></tr>
-                                    <tr><td>14.02.2012</td><td>Crusader Kings II</td><td>Globalstrategie</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>10.02.2012</td><td>The Darkness II</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>27.01.2012</td><td>Deponia</td><td>Point & Click Adventure</td><td>3.5</td></tr>
-                                    <tr><td>15.11.2011</td><td>Jurassic Park: The Game</td><td>Point & Click Adventure</td><td>3</td></tr>
-                                    <tr><td>15.11.2011</td><td>Rayman Origins</td><td>Jump 'n' Run</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>15.11.2011</td><td>Saints Row: The Third</td><td>Action</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>11.11.2011</td><td>L.A. Noire</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>11.11.2011</td><td>The Elder Scrolls V: Skyrim</td><td>RPG</td><td>4.5</td></tr>
-                                    <tr><td>02.11.2011</td><td>Payday: The Heist</td><td>Multiplayer-Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>07.10.2011</td><td>Rage</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>08.09.2011</td><td>Dead Island</td><td>Shooter</td><td>3.5</td></tr>
-                                    <tr><td>26.08.2011</td><td>Edna & Harvey: Harvey's New Eyes</td><td>Point & Click Adventure</td><td>4</td></tr>
-                                    <tr><td>26.08.2011</td><td>Deus Ex: Human Revolution - Director's Cut</td><td>Shooter</td><td>4.5</td></tr>
-                                    <tr><td>25.08.2011</td><td>Tropico 4</td><td>Aufbaustrategie</td><td>2</td></tr>
-                                    <tr><td>02.08.2011</td><td>Limbo</td><td>Jump 'n' Run</td><td>3</td></tr>
-                                    <tr><td>30.06.2011</td><td>Puzzle Agent 2</td><td>Casual</td><td>2</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 22.12.2010<br>Episode 2: 16.02.2011<br>Episode 3: 29.03.2011<br>Episode 4: 29.04.2011<br>Episode 5: 23.06.2011">23.06.2011</span></td><td>Back to the Future: The Game</td><td>Point & Click Adventure</td><td>3</td></tr>
-                                    <tr><td>14.06.2011</td><td>Duke Nukem Forever</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>24.05.2011</td><td>DiRT 3</td><td>Racing</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>21.04.2011</td><td>Operation Flashpoint: Red River</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>21.04.2011</td><td>Portal 2</td><td>Puzzle</td><td>4.5</td></tr>
-                                    <tr><td>24.03.2011</td><td>Crysis 2</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>18.03.2011</td><td>Homefront</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>24.02.2011</td><td>Dead Space 2</td><td>Horror-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>01.01.2011</td><td>SpaceChem</td><td>Puzzle</td><td>4.5</td></tr>
-                                    <tr><td>29.10.2010</td><td>Star Wars: The Force Unleashed II</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>26.10.2010</td><td>The Ball</td><td>Puzzle</td><td>2.5</td></tr>
-                                    <tr><td>12.10.2010</td><td>Arcania - Gothic 4</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>08.10.2010</td><td>A New Beginning</td><td>Point & Click Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>24.09.2010</td><td>Sid Meier's Civilization V</td><td>Rundenstrategie</td><td>2</td></tr>
-                                    <tr><td>08.09.2010</td><td>Amnesia: The Dark Descent</td><td>Horror-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td><span class="tooltip" title="Episode 1: 15.04.2010<br>Episode 2: 18.05.2010<br>Episode 3: 22.06.2010<br>Episode 4: 20.07.2010<br>Episode 5: 30.08.2010">30.08.2010</span></td><td>Sam & Max: Im Theater des Teufels</td><td>Point & Click Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>27.08.2010</td><td>Mafia II</td><td>Action</td><td>4.5</td></tr>
-                                    <tr><td>20.08.2010</td><td>Kane & Lynch 2: Dog Days</td><td>Shooter</td><td>2.5</td></tr>
-                                    <tr><td>18.08.2010</td><td>Lara Croft and the Guardian of Light</td><td>Casual</td><td>1.5</td></tr>
-                                    <tr><td><span class="tooltip" title="Wings of Liberty: 27.07.2010<br>Heart of the Swarm: 12.03.2013<br>Legacy of the Void: 10.11.2015">27.07.2010</span></td><td>StarCraft II</td><td>Echtzeitstrategie</td><td>4.5</td></tr>
-                                    <tr><td>30.06.2010</td><td>Puzzle Agent</td><td>Casual</td><td>2</td></tr>
-                                    <tr><td>25.06.2010</td><td>Singularity</td><td>Shooter</td><td>4.5</td></tr>
-                                    <tr><td>19.03.2010</td><td>Metro 2033</td><td>Shooter</td><td>4.5</td></tr>
-                                    <tr><td>09.02.2010</td><td>BioShock 2</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>28.01.2010</td><td>Mass Effect 2</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>11.01.2010</td><td>VVVVVV</td><td>Jump 'n' Run</td><td>2.5</td></tr>
-                                    <tr><td>17.11.2009</td><td>Left 4 Dead 2</td><td>Shooter</td><td>1.5</td></tr>
-                                    <tr><td>13.11.2009</td><td>Tropico 3</td><td>Aufbaustrategie</td><td>2</td></tr>
-                                    <tr><td>06.11.2009</td><td>Dragon Age: Origins</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>05.11.2009</td><td>S.T.A.L.K.E.R.: Call of Pripyat</td><td>Shooter</td><td>3.5</td></tr>
-                                    <tr><td>30.10.2009</td><td>Borderlands</td><td>Shooter</td><td>3</td></tr>
-                                    <tr><td>08.10.2009</td><td>Operation Flashpoint: Dragon Rising</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>02.10.2009</td><td>Risen</td><td>RPG</td><td>4</td></tr>
-                                    <tr><td>18.09.2009</td><td>Batman: Arkham Asylum</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>26.06.2009</td><td>Overlord II</td><td>Action-Adventure</td><td>3.5</td></tr>
-                                    <tr><td>02.04.2009</td><td>The Book of Unwritten Tales</td><td>Point & Click Adventure</td><td>3.5</td></tr>
-                                    <tr><td>20.03.2009</td><td>The Last Remnant</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>23.01.2009</td><td>Saints Row 2</td><td>Action</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>15.01.2009</td><td>Mirror's Edge</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>12.12.2008</td><td>Rise of the Argonauts</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>03.12.2008</td><td>Grand Theft Auto IV</td><td>Action</td><td>4.5</td></tr>
-                                    <tr><td>21.11.2008</td><td>Tomb Raider: Underworld</td><td>Action-Adventure</td><td>3.5</td></tr>
-                                    <tr><td>06.11.2008</td><td>Dead Space</td><td>Horror-Adventure</td><td>4.5</td></tr>
-                                    <tr><td>24.10.2008</td><td>Bully: Die Ehrenrunde</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>19.09.2008</td><td>Crysis Warhead</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>19.09.2008</td><td>Star Wars: The Force Unleashed</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>05.09.2008</td><td>S.T.A.L.K.E.R.: Clear Sky</td><td>Shooter</td><td>3</td></tr>
-                                    <tr><td>06.06.2008</td><td>Edna bricht aus</td><td>Point & Click Adventure</td><td>2</td></tr>
-                                    <tr><td>05.06.2008</td><td>Mass Effect</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>30.05.2008</td><td>GRID</td><td>Racing</td><td>3</td></tr>
-                                    <tr><td>16.05.2008</td><td>Sam & Max: Season Two</td><td>Point & Click Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>23.11.2007</td><td>Kane & Lynch: Dead Man</td><td>Shooter</td><td>3.5</td></tr>
-                                    <tr><td>23.11.2007</td><td>Unreal Tournament 3</td><td>Multiplayer-Shooter</td><td>4</td></tr>
-                                    <tr><td>16.11.2007</td><td>Crysis</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>26.10.2007</td><td>The Witcher: Enhanced Edition</td><td>RPG</td><td>2.5</td></tr>
-                                    <tr><td>18.10.2007</td><td>Portal</td><td>Puzzle</td><td>3</td></tr>
-                                    <tr><td>21.08.2007</td><td>BioShock</td><td>Shooter</td><td>4.5</td></tr>
-                                    <tr><td>29.06.2007</td><td>Overlord & Overlord: Raising Hell</td><td>Action-Adventure</td><td>4</td></tr>
-                                    <tr><td>26.06.2007</td><td>Driver: Parallel Lines</td><td>Action-Rennspiel</td><td>2</td></tr>
-                                    <tr><td>15.06.2007</td><td>Colin McRae: Dirt</td><td>Racing</td><td>2</td></tr>
-                                    <tr><td>01.06.2007</td><td>Tomb Raider: Anniversary</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>18.05.2007</td><td>Sam & Max: Season One</td><td>Point & Click Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>23.03.2007</td><td>S.T.A.L.K.E.R.: Shadow of Chernobyl</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td><span class="tooltip" title="Out from Boneville: 15.09.2005<br>The Great Cow Race: 12.04.2006">12.04.2006</span></td><td>Bone</td><td>Point & Click Adventure</td><td>2</td></tr>
-                                    <tr><td>07.04.2006</td><td>Tomb Raider: Legend</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>17.02.2006</td><td>Star Wars: Empire at War</td><td>Echtzeitstrategie</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>31.10.2005</td><td>Star Wars: Battlefront II</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>18.10.2005</td><td>F.E.A.R.</td><td>Shooter</td><td>2.5</td></tr>
-                                    <tr><td>18.10.2005</td><td>Quake 4</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>07.06.2005</td><td>Grand Theft Auto: San Andreas</td><td>Action</td><td>4</td></tr>
-                                    <tr><td>04.03.2005</td><td>Star Wars: Republic Commando</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>10.02.2005</td><td>Star Wars: Knights of the Old Republic II: The Sith Lords</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>19.11.2004</td><td>Need for Speed: Underground 2</td><td>Racing</td><td>2</td></tr>
-                                    <tr><td><span class="tooltip" title="Half-Life 2: 16.11.2004<br>Episode 1: 01.06.2006<br>Episode 2: 10.10.2007">16.11.2004</span></td><td>Half-Life 2</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>04.11.2004</td><td>RollerCoaster Tycoon 3</td><td>Aufbaustrategie</td><td>2.5</td></tr>
-                                    <tr><td>13.08.2004</td><td>Doom 3</td><td>Shooter</td><td>4.5</td></tr>
-                                    <tr><td>19.03.2004</td><td>Battlefield Vietnam</td><td>Multiplayer-Shooter</td><td>3</td></tr>
-                                    <tr><td>18.03.2004</td><td>Unreal Tournament 2004</td><td>Multiplayer-Shooter</td><td>4.5</td></tr>
-                                    <tr><td>27.02.2004</td><td>Sacred</td><td>RPG</td><td>3.5</td></tr>
-                                    <tr><td>04.12.2003</td><td>Star Wars: Knights of the Old Republic</td><td>RPG</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>02.12.2003</td><td>Prince of Persia: The Sands of Time</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>28.11.2003</td><td>Need for Speed: Underground</td><td>Racing</td><td>3.5</td></tr>
-                                    <tr><td>14.11.2003</td><td>Beyond Good & Evil</td><td>Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>06.11.2003</td><td>Call of Duty</td><td>Shooter</td><td>3.5</td></tr>
-                                    <tr><td>27.10.2003</td><td>Railroad Tycoon 3</td><td>Aufbaustrategie</td><td>3</td></tr>
-                                    <tr><td>24.10.2003</td><td>Max Payne 2</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>10.10.2003</td><td>Halo</td><td>Shooter</td><td>2</td></tr>
-                                    <tr><td>17.09.2003</td><td>Star Wars Jedi Knight: Jedi Academy</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>29.08.2003</td><td>Space Colony</td><td>Aufbaustrategie</td><td>2</td></tr>
-                                    <tr><td>11.07.2003</td><td>Midnight Club II</td><td>Racing</td><td>2.5</td></tr>
-                                    <tr><td>01.07.2003</td><td>Tomb Raider: The Angel of Darkness</td><td>Action-Adventure</td><td>3</td></tr>
-                                    <tr><td>15.05.2003</td><td>Grand Theft Auto: Vice City</td><td>Action</td><td>4.5</td></tr>
-                                    <tr><td>13.04.2003</td><td>Postal 2</td><td>Shooter</td><td>3</td></tr>
-                                    <tr><td>28.03.2003</td><td>Metal Gear Solid 2: Substance</td><td>Action-Adventure</td><td>5</td></tr>
-                                    <tr><td>21.03.2003</td><td>Rayman 3: Hoodlum Havoc (PlayStation 2)</td><td>Jump 'n' Run</td><td>1.5</td></tr>
-                                    <tr><td>06.02.2003</td><td>Unreal 2: The Awakening</td><td>Shooter</td><td>2.5</td></tr>
-                                    <tr><td>18.10.2002</td><td>TimeSplitters 2 (PlayStation 2)</td><td>Shooter</td><td>4</td></tr>
-                                    <tr><td>16.10.2002</td><td>RollerCoaster Tycoon 2</td><td>Aufbaustrategie</td><td>2.5</td></tr>
-                                    <tr><td>30.09.2002</td><td>Unreal Tournament 2003</td><td>Multiplayer-Shooter</td><td>4</td></tr>
-                                    <tr><td>29.09.2002</td><td>Tom Clancy's Splinter Cell</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>19.09.2002</td><td>Battlefield 1942</td><td>Multiplayer-Shooter</td><td>3</td></tr>
-                                    <tr><td>09.09.2002</td><td>Der erste Kaiser: Aufstieg des Reichs der Mitte</td><td>Aufbaustrategie</td><td>2.5</td></tr>
-                                    <tr><td>06.09.2002</td><td>Mafia</td><td>Action</td><td>4</td></tr>
-                                    <tr><td>05.07.2002</td><td>Warcraft III: Reign of Chaos</td><td>Echtzeitstrategie</td><td>3</td></tr>
-                                    <tr><td>21.05.2002</td><td>Grand Theft Auto III</td><td>Action</td><td>4</td></tr>
-                                    <tr><td>26.03.2002</td><td>Star Wars Jedi Knight 2: Jedi Outcast</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>07.12.2001</td><td>Jak and Daxter: The Precursor Legacy (PlayStation 2)</td><td>Jump 'n' Run</td><td>2.5</td></tr>
-                                    <tr><td>20.11.2001</td><td>Rally Trophy</td><td>Racing</td><td>3</td></tr>
-                                    <tr><td>28.10.2001</td><td>Tony Hawk's Pro Skater 3 (PlayStation 2)</td><td>Sport</td><td>3.5</td></tr>
-                                    <tr><td>27.07.2001</td><td>Max Payne</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>20.07.2001</td><td>Gran Turismo 3: A-Spec (PlayStation 2)</td><td>Racing</td><td>4</td></tr>
-                                    <tr><td>16.04.2001</td><td>Evil Islands: Curse of the Lost Soul</td><td>RPG</td><td>3</td></tr>
-                                    <tr><td>14.02.2001</td><td>Colin McRae Rally 2.0 (PlayStation & PC)</td><td>Racing</td><td>3.5</td></tr>
-                                    <tr><td>17.11.2000</td><td>Tony Hawk's Pro Skater 2 (PlayStation & PC)</td><td>Sport</td><td>3.5</td></tr>
-                                    <tr><td>13.11.2000</td><td>Driver 2: Back on the Streets (PlayStation)</td><td>Action-Rennspiel</td><td>4</td></tr>
-                                    <tr><td>03.11.2000</td><td>Frontschweine (PlayStation & PC)</td><td>Rundenstrategie</td><td>4</td></tr>
-                                    <tr><td>01.10.2000</td><td>Herrscher des Olymp - Zeus</td><td>Aufbaustrategie</td><td>2.5</td></tr>
-                                    <tr><td>25.08.2000</td><td>TOCA World Touring Cars (PlayStation)</td><td>Racing</td><td>3</td></tr>
-                                    <tr><td>11.02.2000</td><td>Unreal Tournament</td><td>Multiplayer-Shooter</td><td>3.5</td></tr>
-                                    <tr><td>28.01.2000</td><td>Gran Turismo 2 (PlayStation)</td><td>Racing</td><td>3</td></tr>
-                                    <tr><td>31.10.1999</td><td>Pharao</td><td>Aufbaustrategie</td><td>2.5</td></tr>
-                                    <tr><td>30.09.1999</td><td>Grand Theft Auto 2</td><td>Action</td><td>3.5</td></tr>
-                                    <tr><td>26.02.1999</td><td>Metal Gear Solid (PlayStation)</td><td>Action-Adventure</td><td>5</td></tr>
-                                    <tr><td>30.11.1998</td><td>Populous: The Beginning (PlayStation & PC)</td><td>Echtzeitstrategie</td><td>3</td></tr>
-                                    <tr><td>21.11.1998</td><td>Tomb Raider III: Adventures of Lara Croft</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>01.10.1998</td><td>Caesar III</td><td>Aufbaustrategie</td><td>2.5</td></tr>
-                                    <tr><td>20.08.1998</td><td>Die Siedler III</td><td>Aufbaustrategie</td><td>2</td></tr>
-                                    <tr><td><span class="tooltip" title="StarCraft: 31.03.1998<br>Brood War: 17.12.1998">31.03.1998</span></td><td>StarCraft: Brood War</td><td>Echtzeitstrategie</td><td>4.5</td></tr>
-                                    <tr><td>01.11.1997</td><td>Tomb Raider II</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>09.10.1997</td><td>Star Wars: Jedi Knight: Dark Forces II</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>19.09.1997</td><td>Oddworld: Abe's Oddysee</td><td>Jump 'n' Run</td><td>3</td></tr>
-                                    <tr><td>13.05.1997</td><td>Shadow Warrior Classic Redux</td><td>Shooter</td><td>2</td></tr>
-                                    <tr><td>22.11.1996</td><td>Tomb Raider</td><td>Action-Adventure</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>17.04.1996</td><td>Die Siedler II</td><td>Aufbaustrategie</td><td>2</td></tr>
-                                    <tr><td>29.01.1996</td><td>Duke Nukem 3D</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>28.02.1995</td><td>Star Wars: Dark Forces</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>01.11.1994</td><td>Lode Runner: The Legend Returns</td><td>Arcade</td><td>2.5</td></tr>
-                                    <tr><td>30.09.1994</td><td>Doom 2: Hell on Earth</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
-                                    <tr><td>10.12.1993</td><td>Doom</td><td>Shooter</td><td>noch nicht gespielt</td></tr>
                                 </tbody>
                             </table>
                         </div>
