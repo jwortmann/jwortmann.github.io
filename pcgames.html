@@ -7,6 +7,8 @@
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu">
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="css/theme.default.min.css">
+        <link rel="stylesheet" type="text/css" href="css/brands.min.css">
+        <link rel="stylesheet" type="text/css" href="css/fontawesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/tippy.themes.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -39,13 +41,27 @@
                             }
                             var title = pcgames[i]['title'];
                             var genre = pcgames[i]['genre'];
-                            var rating = 'noch nicht gespielt';
+                            var platform = '';
+                            if (pcgames[i]['platform'] == "Windows") {
+                                platform = '<span class="fab fa-windows" title="Windows"></span>';
+                            } else if (pcgames[i]['platform'] == "Steam") {
+                                platform = '<span class="fab fa-steam" title="Steam"></span>';
+                            } else if (pcgames[i]['platform'] == "Origin") {
+                                platform = '<span class="fab fa-windows" title="Origin"></span>';
+                            } else if (pcgames[i]['platform'] == "Uplay") {
+                                platform = '<span class="fab fa-windows" title="Uplay"></span>';
+                            } else if (pcgames[i]['platform'] == "PlayStation") {
+                                platform = '<span class="fab fa-playstation" title="PlayStation"></span>';
+                            } else if (pcgames[i]['platform'] == "PlayStation 2") {
+                                platform = '<span class="fab fa-playstation" title="PlayStation 2"></span>';
+                            }
+                            var rating = "noch nicht gespielt";
                             if (pcgames[i].hasOwnProperty('rating')) {
                                 rating = pcgames[i]['rating'].toString();
                             }
-                            $('table#pcgames > tbody').append("<tr><td>" + release_html + "</td><td>" + title + "</td><td>" + genre + "</td><td>" + rating + "</td></tr>");
+                            $('table#pcgames > tbody').append("<tr><td>" + release_html + "</td><td>" + title + "</td><td>" + genre + "</td><td>" + platform + "</td><td>" + rating + "</td></tr>");
                         }
-                        $("table").tablesorter({theme : "default", widthFixed : true, headerTemplate : "{content}{icon}", widgets : ["uitheme"], sortList : [[0,1]]});
+                        $('table').tablesorter({theme : "default", widthFixed : true, headerTemplate : "{content}{icon}", widgets : ["uitheme"], sortList : [[0,1]]});
                         $(function(){tippy("[title]", {placement : "top-start", arrow : true, arrowType : "round", animation : "scale", theme : "translucent"})})
 
                         // Switches und Suchfeld initialisieren
@@ -69,7 +85,7 @@
                         function searchfilter() {
                             $('tbody').children().hide();
                             $('tbody').children().each(function() {
-                                if ($(this).children(':nth-child(4)').text() != "noch nicht gespielt") {
+                                if ($(this).children(':last-child').text() != "noch nicht gespielt") {
                                     if ($('#switch1').is(':checked') && $(this).children().text().toLowerCase().indexOf($('#search').val().toLowerCase()) >= 0) {
                                         $(this).show();
                                     }
@@ -84,29 +100,30 @@
                         // Bewertung durch Sterne ersetzen
                         $('tbody').children().children(':nth-child(1)').addClass('center');
                         $('tbody').children().children(':nth-child(4)').addClass('center');
+                        $('tbody').children().children(':last-child').addClass('center');
                         $('tbody').children().each(function() {
-                            if ($(this).children(':nth-child(4)').text() != "noch nicht gespielt") {
-                                var rating = $(this).children(':nth-child(4)').text();
-                                $(this).children(':nth-child(4)').empty();
-                                $(this).children(':nth-child(4)').append('<span class="hide">' + rating + '</span>');
+                            if ($(this).children(':last-child').text() != "noch nicht gespielt") {
+                                var rating = $(this).children(':last-child').text();
+                                $(this).children(':last-child').empty();
+                                $(this).children(':last-child').append('<span class="hide">' + rating + '</span>');
                                 if (rating == "1") {
-                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                    $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
                                 } else if (rating == "1.5") {
-                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                    $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
                                 } else if (rating == "2") {
-                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                    $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
                                 } else if (rating == "2.5") {
-                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                    $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
                                 } else if (rating == "3") {
-                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
+                                    $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
                                 } else if (rating == "3.5") {
-                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i>');
+                                    $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i>');
                                 } else if (rating == "4") {
-                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i>');
+                                    $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i>');
                                 } else if (rating == "4.5") {
-                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i>');
+                                    $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i>');
                                 } else if (rating == "5") {
-                                    $(this).children(':nth-child(4)').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i>');
+                                    $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i>');
                                 }
                             }
                         });
@@ -142,7 +159,7 @@
 
                         $('tbody').children().each(function() {
                             var year = $(this).children(':nth-child(1)').text().slice(-4) - year_min;
-                            var rating = $(this).children(':nth-child(4)').text()
+                            var rating = $(this).children(':last-child').text()
                             if (rating == "noch nicht gespielt") {
                                 chart1_data2[year]++;
                             } else {
@@ -256,7 +273,7 @@
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" style="width: 80%">
             <div class="row">
                 <div class="col s12">
                     <div class="card">
@@ -294,7 +311,7 @@
 
                             <table class="bordered tablesorter dark" id="pcgames">
                                 <thead>
-                                    <tr><th class="dateFormat-ddmmyyyy center">Release</th><th class="center">Titel</th><th class="center">Genre</th><th class="sorter-digit string-bottom center">Bewertung</th></tr>
+                                    <tr><th class="dateFormat-ddmmyyyy center">Release</th><th class="center">Titel</th><th class="center">Genre</th><th class="center sorter-false">Plattform</th><th class="sorter-digit string-bottom center">Bewertung</th></tr>
                                 </thead>
                                 <tbody>
                                 </tbody>

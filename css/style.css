@@ -283,7 +283,9 @@ nav .input-field label i {
     background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7) !important;
 }
 
-
+.sorter-false {
+    background-image: none !important;
+}
 
 table th, table td {
     padding: 0px 5px;
