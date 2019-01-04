@@ -35,7 +35,7 @@
                                 for (var j = 0; j < release.length-1; j++) {
                                     release_html += Object.keys(release[j]) + ': ' + Object.values(release[j]) + '<br>';
                                 }
-                                release_html += Object.keys(release[release.length-1]) + ': ' + Object.values(release[release.length-1]) + '">' + Object.values(release[release.length-1]) + '</span>';
+                                release_html += Object.keys(release[release.length-1]) + ': ' + Object.values(release[release.length-1]) + '">' + Object.values(release[0]) + '</span>';
                             } else {
                                 release_html = release;
                             }
@@ -269,6 +269,9 @@
             h3 {
                 color: #666;
             }
+            th {
+                text-align: center;
+            }
         </style>
     </head>
 
@@ -311,7 +314,7 @@
 
                             <table class="bordered tablesorter dark" id="pcgames">
                                 <thead>
-                                    <tr><th class="dateFormat-ddmmyyyy center">Release</th><th class="center">Titel</th><th class="center">Genre</th><th class="center sorter-false">Plattform</th><th class="sorter-digit string-bottom center">Bewertung</th></tr>
+                                    <tr><th class="dateFormat-ddmmyyyy">Release</th><th>Titel</th><th>Genre</th><th class="sorter-false">Plattform</th><th class="sorter-digit string-bottom">Bewertung</th></tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
