@@ -4,7 +4,7 @@
         <title>Computerspiele</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu">
+        <!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu"> -->
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="css/theme.default.min.css">
         <link rel="stylesheet" type="text/css" href="css/brands.min.css">
@@ -16,7 +16,7 @@
         <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="js/tippy.all.min.js"></script>
         <script type="text/javascript" src="js/Chart.min.js"></script>
-
+        <script type="text/javascript">$(document).ready(function(){$('.tabs').tabs();});</script>
         <script type="text/javascript">
             $(document).ready(function() {
                 var request = new XMLHttpRequest();
@@ -84,13 +84,14 @@
 
                         function searchfilter() {
                             $('tbody').children().hide();
+                            var filter_string = $('#search').val().toLowerCase();
                             $('tbody').children().each(function() {
                                 if ($(this).children(':last-child').text() != "noch nicht gespielt") {
-                                    if ($('#switch1').is(':checked') && $(this).children().text().toLowerCase().indexOf($('#search').val().toLowerCase()) >= 0) {
+                                    if ($('#switch1').is(':checked') && $(this).children().text().toLowerCase().indexOf(filter_string) >= 0) {
                                         $(this).show();
                                     }
                                 } else {
-                                    if ($('#switch2').is(':checked') && $(this).children().text().toLowerCase().indexOf($('#search').val().toLowerCase()) >= 0) {
+                                    if ($('#switch2').is(':checked') && $(this).children().text().toLowerCase().indexOf(filter_string) >= 0) {
                                         $(this).show();
                                     }
                                 }
@@ -133,14 +134,11 @@
                         Chart.defaults.global.defaultFontFamily = "Ubuntu";
                         Chart.defaults.global.defaultFontSize = 13;
 
-                        $('#main').append('<h1>Statistiken</h1>');
-                        $('#main').append('<h3>Spiele nach Jahr</h3><canvas id="chart1" />');
-                        $('#main').append('<h3>Spiele nach Bewertung</h3><canvas id="chart2" />');
-
                         var chart1_labels = [];
                         var chart1_data1 = [];
                         var chart1_data2 = [];
-                        var chart2_data = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        var chart2_data = [0, 0];
+                        var chart3_data = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
                         var year_min = Number.MAX_SAFE_INTEGER;
                         var year_max = Number.MIN_SAFE_INTEGER;
@@ -162,9 +160,11 @@
                             var rating = $(this).children(':last-child').text()
                             if (rating == "noch nicht gespielt") {
                                 chart1_data2[year]++;
+                                chart2_data[1]++;
                             } else {
                                 chart1_data1[year]++;
-                                chart2_data[10 - 2*parseFloat(rating)]++;
+                                chart2_data[0]++;
+                                chart3_data[10 - 2*parseFloat(rating)]++;
                             }
                         });
 
@@ -211,6 +211,36 @@
                         var chart2 = new Chart(
                             document.getElementById("chart2").getContext("2d"),
                             {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [
+                                        'Bereits gespielt',
+                                        'Noch nicht gespielt'
+                                    ],
+                                    datasets: [{
+                                        backgroundColor: [
+                                            getComputedStyle(document.body).getPropertyValue('--light-primary-color').trim(),
+                                            getComputedStyle(document.body).getPropertyValue('--light-secondary-color').trim()
+                                        ],
+                                        borderColor: [
+                                            getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
+                                            getComputedStyle(document.body).getPropertyValue('--secondary-color').trim()
+                                        ],
+                                        borderWidth: [1, 1],
+                                        data: chart2_data
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        position: 'top'
+                                    }
+                                }
+                            }
+                        );
+
+                        var chart3 = new Chart(
+                            document.getElementById("chart3").getContext("2d"),
+                            {
                                 type: 'horizontalBar',
                                 data: {
                                     labels: ["\ue838\ue838\ue838\ue838\ue838", "\ue838\ue838\ue838\ue838\ue839", "\ue838\ue838\ue838\ue838\ue83a", "\ue838\ue838\ue838\ue839\ue83a", "\ue838\ue838\ue838\ue83a\ue83a", "\ue838\ue838\ue839\ue83a\ue83a", "\ue838\ue838\ue83a\ue83a\ue83a", "\ue838\ue839\ue83a\ue83a\ue83a", "\ue838\ue83a\ue83a\ue83a\ue83a"],
@@ -218,7 +248,7 @@
                                         backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-primary-color').trim(),
                                         borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
                                         borderWidth: 1,
-                                        data: chart2_data
+                                        data: chart3_data
                                     }]
                                 },
                                 options: {
@@ -245,7 +275,6 @@
                 }
 
                 // Scroll-Button
-                $('body').append('<a href="#top" id="scroll-top"><span class="btn-floating"><i class="material-icons">keyboard_arrow_up</i></span></a>');
                 $('#scroll-top').hide();
                 $(function() {
                     $(window).scroll(function() {
@@ -264,65 +293,86 @@
                 });
             });
         </script>
-
-        <style type="text/css">
-            h3 {
-                color: #666;
-            }
-            th {
-                text-align: center;
-            }
-        </style>
     </head>
 
     <body>
-        <div class="container" style="width: 80%">
+        <nav class="nav-extended">
+            <div class="nav-wrapper">
+                <span class="brand-logo">Computerspiele</span>
+            </div>
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab col s12"><a href="#games">Spiele</a></li>
+                    <li class="tab col s12"><a href="#stats">Statistiken</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="games" class="container">
             <div class="row">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content" id="main">
-                            <h1 style="margin-top: -0.1em">Computerspiele</h1>
-
-                            <div class="row">
-                                <div class="col l6 m12">
-                                    <div class="switch">
-                                        <label>
-                                            Aus
-                                            <input type="checkbox" id="switch1">
-                                            <span class="lever"></span>
-                                            An
-                                        </label>
-                                        <span style="margin-left: 2em">Bereits gespielte Spiele anzeigen</span>
-                                    </div>
-                                    <div class="switch">
-                                        <label>
-                                            Aus
-                                            <input type="checkbox" id="switch2">
-                                            <span class="lever"></span>
-                                            An
-                                        </label>
-                                        <span style="margin-left: 2em">Noch nicht gespielte Spiele anzeigen</span>
-                                    </div>
-                                </div>
-                                <div class="input-field col l6 m12" style="margin-top: 0">
-                                    <i class="material-icons prefix">search</i>
-                                    <input id="search" type="search">
-                                    <label for="search">Suchfilter</label>
-                                    <i class="material-icons" id="clear">close</i>
-                                </div>
-                            </div>
-
-                            <table class="bordered tablesorter dark" id="pcgames">
-                                <thead>
-                                    <tr><th class="dateFormat-ddmmyyyy">Release</th><th>Titel</th><th>Genre</th><th class="sorter-false">Plattform</th><th class="sorter-digit string-bottom">Bewertung</th></tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="col s12 l6">
+                    <div class="switch">
+                        <label>Aus<input type="checkbox" id="switch1"><span class="lever"></span>An</label>
+                        <span class="switch-description">Bereits gespielte Spiele anzeigen</span>
+                    </div>
+                    <div class="switch">
+                        <label>Aus<input type="checkbox" id="switch2"><span class="lever"></span>An</label>
+                        <span class="switch-description">Noch nicht gespielte Spiele anzeigen</span>
+                    </div>
+                </div>
+                <div class="col s12 l6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">search</i>
+                        <input id="search" type="search">
+                        <label for="search">Suchfilter</label>
+                        <i class="material-icons" id="clear">close</i>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col s12">
+                    <table class="bordered tablesorter" id="pcgames">
+                        <thead>
+                            <tr>
+                                <th class="dateFormat-ddmmyyyy">Release</th>
+                                <th>Titel</th>
+                                <th>Genre</th>
+                                <th class="sorter-false">Plattform</th>
+                                <th class="sorter-digit string-bottom">Bewertung</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
+        <div id="stats" class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h2>Spiele nach Jahr</h2>
+                    <canvas id="chart1" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <h2>Anteil bereits gespielter Spiele</h2>
+                    <canvas id="chart2" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <h2>Spiele nach Bewertung</h2>
+                    <canvas id="chart3" />
+                </div>
+            </div>  
+        </div>
+
+        <a href="#top" id="scroll-top">
+            <span class="btn-floating">
+                <i class="material-icons">keyboard_arrow_up</i>
+            </span>
+        </a>
     </body>
 </html>
