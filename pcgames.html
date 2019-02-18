@@ -4,7 +4,6 @@
         <title>Computerspiele</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
-        <!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu"> -->
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="css/theme.default.min.css">
         <link rel="stylesheet" type="text/css" href="css/brands.min.css">
@@ -39,7 +38,18 @@
                             } else {
                                 release_html = release;
                             }
-                            var title = pcgames[i]['title'];
+                            var title = '';
+                            if (pcgames[i].hasOwnProperty('link')) {
+                                title = '<a href="' + pcgames[i]['link'] + '">' + pcgames[i]['title'] + '</a>'
+                            } else {
+                                title = pcgames[i]['title'];
+                            }
+                            if (pcgames[i].hasOwnProperty('mod')) {
+                                title += '<div class="chip mod">' + pcgames[i]['mod'] + ' Mod</div>';
+                            }
+                            if (pcgames[i].hasOwnProperty('patch')) {
+                                title += '<a href="' + pcgames[i]['patch'] + '"<div class="chip patch">Patch</div></a>';
+                            }
                             var genre = pcgames[i]['genre'];
                             var platform = '';
                             if (pcgames[i]['platform'] == "Windows") {
@@ -352,19 +362,19 @@
             <div class="row">
                 <div class="col s12">
                     <h2>Spiele nach Jahr</h2>
-                    <canvas id="chart1" />
+                    <canvas id="chart1"></canvas>
                 </div>
             </div>
             <div class="row">
                 <div class="col s12">
                     <h2>Anteil bereits gespielter Spiele</h2>
-                    <canvas id="chart2" />
+                    <canvas id="chart2"></canvas>
                 </div>
             </div>
             <div class="row">
                 <div class="col s12">
                     <h2>Spiele nach Bewertung</h2>
-                    <canvas id="chart3" />
+                    <canvas id="chart3"></canvas>
                 </div>
             </div>  
         </div>

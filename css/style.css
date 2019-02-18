@@ -43,12 +43,23 @@ nav {
     background-color: var(--background-color-variant);
 }
 
+pre {
+    display: block;
+    overflow: auto;
+    padding: 6px;
+    margin: 0;
+    color: #333;
+    background-color: #fbfbfb;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+}
+
 .brand-logo {
     margin-left: 23px;
 }
 
 a {
-    color: var(--primary-color);
+    color: #8db2e5;
 }
 
 div#games {
@@ -176,6 +187,23 @@ span.switch-description {
     float: left;
 }
 
+.chip {
+    display: inline;
+    line-height: 1.5;
+    padding: 0 5px;
+    margin: 0 0 0 10px;
+}
+
+.chip.patch, .chip.patch:focus {
+    color: rgba(0,0,0,0.6);
+    background-color: var(--light-primary-color);
+}
+
+.chip.mod, .chip.mod:focus {
+    color: rgba(0,0,0,0.6);
+    background-color: var(--light-secondary-color);
+}
+
 .tooltip {
     border-bottom: 1px dotted #777;
 }
@@ -209,17 +237,37 @@ span.switch-description {
 }
 
 th, td {
-    padding: 0px 5px;
+    padding: 4px !important;
     background-color: var(--background-color) !important;
     border-radius: 0;
 }
 
+td {
+    border-bottom: #cccccc 1px solid;
+}
+
 th {
+    border-bottom: #cccccc 2px solid;
     text-align: center;
 }
 
 div.switch {
     line-height: 28px;
+}
+
+.imdbRatingPlugin {
+    color: var(--text-color) !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.imdbRatingPlugin img {
+    vertical-align: text-top !important;
+    margin-right: 4px;
+}
+
+.imdbRatingPlugin span.ofTen {
+    color: rgba(255,255,255,0.7) !important;
 }
 
 .material-icons {
