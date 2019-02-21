@@ -20,6 +20,14 @@
         url(../fonts/material-icons/MaterialIcons-Regular.ttf) format('truetype');
 }
 
+@font-face {
+    font-family: "Game Platforms";
+    src: url(../fonts/game-platforms/GamePlatforms-Regular.woff) format('woff'),
+        url(../fonts/game-platforms/GamePlatforms-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --text-color:               #dddddd;
     --background-color:         #1c1c1c;
@@ -28,6 +36,13 @@
     --light-primary-color:      #ffbfba;
     --secondary-color:          #ff9933;
     --light-secondary-color:    #ffcc99;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        /*--text-color: black;*/
+        /*--background-color: white;*/
+    }
 }
 
 body {
@@ -39,8 +54,32 @@ body {
     color: var(--text-color);
 }
 
+body.light-theme {
+    background-color: white;
+    color: black;
+}
+
 nav {
     background-color: var(--background-color-variant);
+}
+
+a {
+    color: #8db2e5;
+}
+
+th, td {
+    padding: 4px !important;
+    background-color: var(--background-color) !important;
+    border-radius: 0;
+}
+
+th {
+    border-bottom: #cccccc 2px solid;
+    text-align: center;
+}
+
+td {
+    border-bottom: #cccccc 1px solid;
 }
 
 pre {
@@ -54,16 +93,16 @@ pre {
     border-radius: 3px;
 }
 
+div#games {
+    margin-top: 2.37333rem;
+}
+
 .brand-logo {
     margin-left: 23px;
 }
 
-a {
-    color: #8db2e5;
-}
-
-div#games {
-    margin-top: 2.37333rem;
+.switch {
+    line-height: 28px;
 }
 
 /* switch checked main color */
@@ -76,7 +115,7 @@ div#games {
     background-color: var(--light-primary-color);
 }
 
-span.switch-description {
+.switch-description {
     margin-left: 2em;
     margin-right: 4em;
 }
@@ -236,25 +275,6 @@ span.switch-description {
     background-image: none !important;
 }
 
-th, td {
-    padding: 4px !important;
-    background-color: var(--background-color) !important;
-    border-radius: 0;
-}
-
-td {
-    border-bottom: #cccccc 1px solid;
-}
-
-th {
-    border-bottom: #cccccc 2px solid;
-    text-align: center;
-}
-
-div.switch {
-    line-height: 28px;
-}
-
 .imdbRatingPlugin {
     color: var(--text-color) !important;
     margin-top: 0px !important;
@@ -293,4 +313,26 @@ div.switch {
     -moz-osx-font-smoothing: grayscale;
     /* Support for IE. */
     font-feature-settings: 'liga';
+}
+
+.game-platforms:before {
+  font-family: "Game Platforms";
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  vertical-align: middle;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.uplay:before {
+  content: "\61";
+}
+.origin:before {
+  content: "\62";
+}
+.battle-net:before {
+  content: "\63";
 }

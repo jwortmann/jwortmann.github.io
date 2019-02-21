@@ -1,3 +1,4 @@
+fonts/game-platforms/GamePlatforms-Regular.svg
 fonts/ubuntu/Ubuntu-Bold.ttf
 fonts/ubuntu/Ubuntu-BoldItalic.ttf
 fonts/ubuntu/Ubuntu-Italic.ttf
@@ -5,7 +6,6 @@ fonts/ubuntu/Ubuntu-Light.ttf
 fonts/ubuntu/Ubuntu-LightItalic.ttf
 fonts/ubuntu/Ubuntu-Medium.ttf
 fonts/ubuntu/Ubuntu-MediumItalic.ttf
-# fonts/ubuntu/UFL.txt
 movies.html
 software.html
 audioencoding.html
