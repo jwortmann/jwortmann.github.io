@@ -325,17 +325,26 @@
                         return false;
                     });
                 });
+
+                // Dark/Light Theme
+                $('#switch-theme').click(function() {
+                    if ($('body').hasClass('light-theme')) {
+                        $('body').removeClass('light-theme');
+                    } else {
+                        $('body').addClass('light-theme');
+                    }
+                });
             });
         </script>
     </head>
 
-    <body>
+    <body class="light-theme">
         <nav class="nav-extended">
             <div class="nav-wrapper">
                 <span class="brand-logo">Computerspiele</span>
-                <!-- <ul class="right">
+                <ul class="right">
                     <li><a href="#" id="switch-theme"><i class="material-icons">palette</i></a></li>
-                </ul> -->
+                </ul>
             </div>
             <div class="nav-content">
                 <ul class="tabs tabs-transparent">
@@ -371,7 +380,6 @@
                     <table class="bordered tablesorter" id="pcgames">
                         <thead>
                             <tr>
-                                <!-- <th class="dateFormat-ddmmyyyy">Release</th> -->
                                 <th class="sorter-sugar">Release</th>
                                 <th>Titel</th>
                                 <th>Genre</th>

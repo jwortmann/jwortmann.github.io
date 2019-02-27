@@ -29,20 +29,15 @@
 }
 
 :root {
-    --text-color:               #dddddd;
-    --background-color:         #1c1c1c;
-    --background-color-variant: #161616;
-    --primary-color:            #ff5252;
-    --light-primary-color:      #ffbfba;
-    --secondary-color:          #ff9933;
-    --light-secondary-color:    #ffcc99;
-}
-
-@media (prefers-color-scheme: light) {
-    :root {
-        /*--text-color: black;*/
-        /*--background-color: white;*/
-    }
+    --text-color:                           #dddddd;
+    --background-color:                     #1c1c1c;
+    --background-color-variant:             #161616;
+    --primary-color:                        #ff5252;
+    --light-primary-color:                  #ffbfba;
+    --secondary-color:                      #ff9933;
+    --light-secondary-color:                #ffcc99;
+    --text-color-light-theme:               #333333;
+    --background-color-light-theme:         #f6f6f6;
 }
 
 body {
@@ -54,17 +49,49 @@ body {
     color: var(--text-color);
 }
 
-body.light-theme {
-    background-color: white;
-    color: black;
+.light-theme {
+    background-color: var(--background-color-light-theme);
+    color: var(--text-color-light-theme);
+}
+
+.light-theme nav .brand-logo {
+    color: var(--text-color-light-theme);
+}
+
+.light-theme nav ul a {
+    color: var(--text-color-light-theme);
+}
+
+.light-theme .tabs.tabs-transparent .tab a {
+    color: #666666;
+}
+
+.light-theme .tabs.tabs-transparent .tab a.active {
+    color: var(--text-color-light-theme);
+}
+
+.light-theme .tabs.tabs-transparent .tab a:hover {
+    color: var(--text-color-light-theme);
+}
+
+.light-theme .tabs.tabs-transparent .indicator {
+    background-color: var(--text-color-light-theme);
 }
 
 nav {
     background-color: var(--background-color-variant);
 }
 
+.light-theme nav {
+    background-color: var(--background-color-light-theme);
+}
+
 a {
     color: #8db2e5;
+}
+
+.light-theme a {
+    color: #2d4b7f;
 }
 
 th, td {
@@ -80,6 +107,16 @@ th {
 
 td {
     border-bottom: #cccccc 1px solid;
+}
+
+.light-theme th {
+    background-color: var(--background-color-light-theme) !important;
+    border-bottom: #666666 2px solid;
+}
+
+.light-theme td {
+    background-color: var(--background-color-light-theme) !important;
+    border-bottom: #666666 1px solid;
 }
 
 pre {
@@ -115,6 +152,10 @@ div#games {
     background-color: var(--light-primary-color);
 }
 
+.light-theme .switch label {
+    color: #666666;
+}
+
 .switch-description {
     margin-left: 2em;
     margin-right: 4em;
@@ -123,6 +164,10 @@ div#games {
 /* label color */
 .input-field label {
     color: var(--text-color);
+}
+
+.light-theme .input-field label {
+    color: var(--text-color-light-theme);
 }
 
 /* label focus color */
@@ -138,11 +183,21 @@ div#games {
     font-family: "Ubuntu";
 }
 
+.light-theme .input-field input[type="search"] {
+    color: var(--text-color-light-theme);
+    border-bottom-color: #666666 !important;
+}
+
 .input-field input[type="search"]:focus {
     background-color: var(--background-color) !important;
     border-bottom: 1px solid var(--primary-color) !important;
     box-shadow: 0 0 0 0 !important;
     color: var(--text-color) !important;
+}
+
+.light-theme .input-field input[type="search"]:focus {
+    background-color: var(--background-color-light-theme) !important;
+    color: var(--text-color-light-theme) !important;
 }
 
 /* vertical alignment of prefix icon */
@@ -159,8 +214,16 @@ div#games {
     color: var(--text-color) !important;
 }
 
+.light-theme .input-field input[type="search"]:focus ~ .material-icons {
+    color: #666666 !important;
+}
+
 .tabs .tab a:focus.active {
     background-color: var(--background-color-variant);
+}
+
+.light-theme .tabs .tab a:focus.active {
+    background-color: var(--background-color-light-theme);
 }
 
 .card, .card-reveal {
@@ -255,6 +318,10 @@ div#games {
     color: var(--text-color);
 }
 
+.light-theme .tablesorter-default, .light-theme .tablesorter-default th {
+    color: var(--text-color-light-theme);
+}
+
 .tablesorter-default thead .tablesorter-headerDesc, .tablesorter-default thead .tablesorter-headerAsc {
     border-bottom: var(--primary-color) 2px solid;
 }
@@ -269,6 +336,18 @@ div#games {
 
 .tablesorter-headerDesc {
     background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7) !important;
+}
+
+.light-theme .tablesorter-headerUnSorted:not(.sorter-false) {
+    background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==) !important;
+}
+
+.light-theme .tablesorter-headerAsc {
+    background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7) !important;
+}
+
+.light-theme .tablesorter-headerDesc {
+    background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7) !important;
 }
 
 .sorter-false {
