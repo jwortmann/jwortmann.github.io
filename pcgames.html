@@ -63,6 +63,15 @@
                                 title += '<a href="' + pcgames[i]['patch'] + '"<div class="chip patch">Patch</div></a>';
                             }
                             var genre = pcgames[i]['genre'];
+                            var genre_html = '';
+                            if (Array.isArray(genre)) {
+                                for (var j = 0; j < genre.length-1; j++) {
+                                    genre_html += genre[j] + ', ';
+                                }
+                                genre_html += genre[genre.length-1];
+                            } else {
+                                genre_html = genre;
+                            }
                             var platform = '';
                             if (pcgames[i]['platform'] == "Windows") {
                                 platform = '<span class="fab fa-windows" title="Retail (Windows)"></span>';
@@ -89,7 +98,7 @@
                             if (pcgames[i].hasOwnProperty('rating')) {
                                 rating = pcgames[i]['rating'].toString();
                             }
-                            $('table#pcgames > tbody').append("<tr><td>" + release_html + "</td><td>" + title + "</td><td>" + genre + "</td><td>" + platform + "</td><td>" + rating + "</td></tr>");
+                            $('table#pcgames > tbody').append("<tr><td>" + release_html + "</td><td>" + title + "</td><td>" + genre_html + "</td><td>" + platform + "</td><td>" + rating + "</td></tr>");
                         }
 
                         // Tooltips initialisieren
@@ -338,7 +347,7 @@
         </script>
     </head>
 
-    <body class="light-theme">
+    <body>
         <nav class="nav-extended">
             <div class="nav-wrapper">
                 <span class="brand-logo">Computerspiele</span>
