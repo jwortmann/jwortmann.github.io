@@ -94,6 +94,10 @@ a {
     color: #2d4b7f;
 }
 
+table {
+    margin-top: 10px;
+}
+
 th, td {
     padding: 4px !important;
     background-color: var(--background-color) !important;
@@ -201,9 +205,9 @@ div#games {
 }
 
 /* vertical alignment of prefix icon */
-.input-field .prefix {
-    /*line-height: 54px;*/
-}
+/*.input-field .prefix {
+    line-height: 54px;
+}*/
 
 /* icon prefix focus color */
 .input-field .prefix.active {
