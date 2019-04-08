@@ -85,6 +85,8 @@
                                 platform = '<span class="game-platforms origin" title="Origin"></span>';
                             } else if (pcgames[i]['platform'] == "Uplay") {
                                 platform = '<span class="game-platforms uplay" title="Uplay"></span>';
+                            } else if (pcgames[i]['platform'] == "Epic Games") {
+                                platform = '<span class="fab fa-windows" title="Epic Games"></span>';
                             } else if (pcgames[i]['platform'] == "Battle.net") {
                                 platform = '<span class="game-platforms battle-net" title="Battle.net"></span>';
                             } else if (pcgames[i]['platform'] == "PlayStation") {
@@ -103,7 +105,7 @@
 
                         // Tooltips initialisieren
                         tippy("[title]", { placement : "top-start", arrow : true, arrowType : "round", animation : "scale", theme : "translucent" });
-                        
+
                         // Tablesorter initialisieren
                         $('table').tablesorter({ theme : "default", widthFixed : true, headerTemplate : "{content}{icon}", widgets : ["uitheme"], sortList : [[0,1]] });
 
@@ -181,7 +183,6 @@
                         var chart1_data1 = [];
                         var chart1_data2 = [];
                         var chart2_data = [0, 0];
-                        // var chart3_data = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
                         var year_min = Number.MAX_SAFE_INTEGER;
                         var year_max = Number.MIN_SAFE_INTEGER;
@@ -207,7 +208,6 @@
                             } else {
                                 chart1_data1[year]++;
                                 chart2_data[0]++;
-                                // chart3_data[10 - 2*parseFloat(rating)]++;
                             }
                         });
 
@@ -280,40 +280,6 @@
                                 }
                             }
                         );
-
-                        // var chart3 = new Chart(
-                        //     document.getElementById("chart3").getContext("2d"),
-                        //     {
-                        //         type: 'horizontalBar',
-                        //         data: {
-                        //             labels: ["\ue838\ue838\ue838\ue838\ue838", "\ue838\ue838\ue838\ue838\ue839", "\ue838\ue838\ue838\ue838\ue83a", "\ue838\ue838\ue838\ue839\ue83a", "\ue838\ue838\ue838\ue83a\ue83a", "\ue838\ue838\ue839\ue83a\ue83a", "\ue838\ue838\ue83a\ue83a\ue83a", "\ue838\ue839\ue83a\ue83a\ue83a", "\ue838\ue83a\ue83a\ue83a\ue83a"],
-                        //             datasets: [{
-                        //                 backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-primary-color').trim(),
-                        //                 borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
-                        //                 borderWidth: 1,
-                        //                 data: chart3_data
-                        //             }]
-                        //         },
-                        //         options: {
-                        //             scales: {
-                        //                 yAxes: [{
-                        //                     ticks: {
-                        //                         fontFamily: 'Material Icons',
-                        //                         fontSize: 20
-                        //                     }
-                        //                 }]
-                        //             },
-                        //             legend: {
-                        //                 display: false
-                        //             },
-                        //             tooltips: {
-                        //                 titleFontFamily: 'Material Icons',
-                        //                 titleFontSize: 16,
-                        //                 titleFontStyle: 'lighter'
-                        //             }
-                        //         }
-                        //     }
-                        // );
                     }
                 }
 

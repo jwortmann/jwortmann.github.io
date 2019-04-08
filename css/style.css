@@ -44,13 +44,15 @@ body {
     margin: 0;
     margin-bottom: 3rem;
     padding: 0;
-    background-color: var(--background-color);
+    /*background-color: var(--background-color);*/
+    background-image: url("../img/background_dark.png");
     font-family: "Ubuntu", sans-serif;
     color: var(--text-color);
 }
 
 .light-theme {
-    background-color: var(--background-color-light-theme);
+    /*background-color: var(--background-color-light-theme);*/
+    background-image: url("../img/background_light.png");
     color: var(--text-color-light-theme);
 }
 
@@ -96,11 +98,12 @@ a {
 
 table {
     margin-top: 10px;
+    background-color: transparent !important;
 }
 
 th, td {
     padding: 4px !important;
-    background-color: var(--background-color) !important;
+    background-color: transparent !important;
     border-radius: 0;
 }
 
@@ -114,12 +117,10 @@ td {
 }
 
 .light-theme th {
-    background-color: var(--background-color-light-theme) !important;
     border-bottom: #666666 2px solid;
 }
 
 .light-theme td {
-    background-color: var(--background-color-light-theme) !important;
     border-bottom: #666666 1px solid;
 }
 
@@ -193,14 +194,13 @@ div#games {
 }
 
 .input-field input[type="search"]:focus {
-    background-color: var(--background-color) !important;
+    background-color: transparent !important;
     border-bottom: 1px solid var(--primary-color) !important;
     box-shadow: 0 0 0 0 !important;
     color: var(--text-color) !important;
 }
 
 .light-theme .input-field input[type="search"]:focus {
-    background-color: var(--background-color-light-theme) !important;
     color: var(--text-color-light-theme) !important;
 }
 
