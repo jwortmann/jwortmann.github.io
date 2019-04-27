@@ -1,3 +1,4 @@
+css/jquery.treetable.css
 fonts/game-platforms/GamePlatforms-Regular.svg
 fonts/ubuntu/Ubuntu-Bold.ttf
 fonts/ubuntu/Ubuntu-BoldItalic.ttf
@@ -6,9 +7,11 @@ fonts/ubuntu/Ubuntu-Light.ttf
 fonts/ubuntu/Ubuntu-LightItalic.ttf
 fonts/ubuntu/Ubuntu-Medium.ttf
 fonts/ubuntu/Ubuntu-MediumItalic.ttf
+js/jquery.treetable.js
 audioencoding.html
 hardware.html
 movies.html
 programming.html
+scope_names.html
 software.html
 windows.html

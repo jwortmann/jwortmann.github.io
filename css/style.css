@@ -135,6 +135,14 @@ pre {
     border-radius: 3px;
 }
 
+.btn, .btn:enabled {
+    background-color: var(--primary-color);
+}
+
+.btn:hover {
+    background-color: var(--light-primary-color);
+}
+
 div#games {
     margin-top: 2.37333rem;
 }
@@ -314,6 +322,8 @@ div#games {
     border-bottom: 1px dotted #777;
 }
 
+/* jQuery tablesorter plugin */
+
 .tablesorter-header {
     cursor: pointer;
 }
@@ -330,7 +340,7 @@ div#games {
     border-bottom: var(--primary-color) 2px solid;
 }
 
-.tablesorter-headerUnSorted {
+.tablesorter-headerUnSorted:not(.sorter-false) {
     background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAAP///////yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==) !important;
 }
 
@@ -357,6 +367,22 @@ div#games {
 .sorter-false {
     background-image: none !important;
 }
+
+/* jQuery tabletree plugin */
+
+table.treetable span.indenter {
+    padding-right: 4px;
+}
+
+table.treetable tr.collapsed span.indenter a {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAAASAAAAEgARslrPgAAAE5JREFUSMdjYBgFo4Au4P///w3////voJXh2v/////9HwIaaGVJCJIlNPPJCLWEiQw7GJHY36nt+lAk19ePGg4znC4ZrY5mho+CUUAQAADad5OVFX7jCgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxOS0wNC0yM1QwMjowNDowNCswMDowMF12BfoAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTktMDQtMjNUMDI6MDQ6MDQrMDA6MDAsK71GAAAAKHRFWHRzdmc6YmFzZS11cmkAZmlsZTovLy90bXAvbWFnaWNrLWxhdklZaUNpFXFUcwAAAABJRU5ErkJggg==) !important;
+}
+
+table.treetable tr.expanded span.indenter a {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAAASAAAAEgARslrPgAAAHRJREFUSMftj7ENwkAQBEeGdlyOM/og9LsTR5RIYktDYIJH4j4wn3ET783eQpIkTdSxRyY6XNRdvTUyk7qpJcoMjY4ncAHWbyXqBDyAK+DZFXcPPpZUn6vOp+RRSVd5VVLewq2Sl5/FwZJ+nwdL+n6eJH/AC2fFjaeFV0LKAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE5LTA0LTIzVDAyOjAzOjQ2KzAwOjAwrH8BUAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOS0wNC0yM1QwMjowMzo0NiswMDowMN0iuewAAAAodEVYdHN2ZzpiYXNlLXVyaQBmaWxlOi8vL3RtcC9tYWdpY2stM1dUTzJWM3OGrSbPAAAAAElFTkSuQmCC) !important;
+}
+
+/* IMDB plugin */
 
 .imdbRatingPlugin {
     color: var(--text-color) !important;
@@ -397,6 +423,8 @@ div#games {
     /* Support for IE. */
     font-feature-settings: 'liga';
 }
+
+/* game-platforms font */
 
 .game-platforms:before {
   font-family: "Game Platforms";
