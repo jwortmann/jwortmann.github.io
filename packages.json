@@ -22,6 +22,17 @@
                     "tags": true
                 }
             ]
+        },
+        {
+            "name": "Radioss",
+            "details": "https://github.com/jwortmann/radioss-syntax",
+            "labels": ["language syntax"],
+            "releases": [
+                {
+                    "sublime_text": ">=3103",
+                    "tags": true
+                }
+            ]
         }
     ]
 }
