@@ -8,9 +8,11 @@ fonts/ubuntu/Ubuntu-LightItalic.ttf
 fonts/ubuntu/Ubuntu-Medium.ttf
 fonts/ubuntu/Ubuntu-MediumItalic.ttf
 js/jquery.treetable.js
+js/rating.min.js
 audioencoding.html
 hardware.html
 movies.html
+movies.json
 programming.html
 scope_names.html
 software.html

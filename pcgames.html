@@ -36,9 +36,8 @@
                 request.send(null);
                 request.onload = function() {
                     if (request.readyState == 4 && request.status == 200) {
-                        var json_obj = JSON.parse(request.responseText);
-                        var pcgames = json_obj['pcgames'];
-                        for (var i = 0; i < pcgames.length; i++) {
+                        var pcgames = JSON.parse(request.responseText);
+                        for (let i = 0; i < pcgames.length; i++) {
                             var release = pcgames[i]['release'];
                             var release_html = '';
                             if (Array.isArray(release)) {
