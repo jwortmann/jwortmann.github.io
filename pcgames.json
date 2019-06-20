@@ -305,7 +305,7 @@
     { "release": "2001-07-23", "title": "Max Payne", "link": "https://pcgamingwiki.com/wiki/Max_Payne", "genre": "Third-person shooter", "platform": "Steam", "rating": 3.5, "patch": "https://steamcommunity.com/sharedfiles/filedetails/?id=1633394421" },
     { "release": "2001-07-20", "title": "Gran Turismo 3: A-Spec", "genre": "Racing", "platform": "PlayStation 2", "rating": 4.5 },
     { "release": "2001-04-16", "title": "Evil Islands: Curse of the Lost Soul", "link": "https://pcgamingwiki.com/wiki/Evil_Islands:_Curse_of_the_Lost_Soul", "genre": "RPG", "platform": "Windows", "rating": 2.5 },
-    { "release": "2000-11-17", "title": "Tomb Raider V: Chronicles", "link": "https://pcgamingwiki.com/wiki/Tomb_Raider_Chronicles", "genre": "Action-Adventure", "platform": "Steam" },
+    { "release": "2000-11-17", "title": "Tomb Raider V: Chronicles", "link": "https://pcgamingwiki.com/wiki/Tomb_Raider_Chronicles", "genre": "Action-Adventure", "platform": "Steam", "rating": 3.5 },
     { "release": "2000-11-17", "title": "Tony Hawk's Pro Skater 2", "link": "https://pcgamingwiki.com/wiki/Tony_Hawk%27s_Pro_Skater_2", "genre": "Sport", "platform": "Windows", "rating": 3.5 },
     { "release": "2000-11-13", "title": "Driver 2: Back on the Streets", "genre": "Action-Rennspiel", "platform": "PlayStation", "rating": 4 },
     { "release": "2000-11-03", "title": "Frontschweine", "link": "https://pcgamingwiki.com/wiki/Hogs_of_War", "genre": "Rundenstrategie", "platform": "Steam", "rating": 4 },
