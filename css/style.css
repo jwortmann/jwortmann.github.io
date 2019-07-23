@@ -434,9 +434,9 @@ table.treetable tr.expanded span.indenter a {
     font-feature-settings: 'liga';
 }
 
-/* game-platforms font */
+/* game-platforms icons */
 
-.game-platforms:before {
+.uplay:before {
     font-family: "Game Platforms";
     font-weight: normal;
     font-style: normal;
@@ -446,16 +446,19 @@ table.treetable tr.expanded span.indenter a {
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-.uplay:before {
     content: "\61";
 }
 .origin:before {
+    font-family: "Game Platforms";
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    vertical-align: middle;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     content: "\62";
-}
-.battle-net:before {
-    content: "\63";
 }
 
 .epic-games:before {

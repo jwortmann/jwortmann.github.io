@@ -73,33 +73,33 @@
                             }
                             var platform = '';
                             if (pcgames[i]['platform'] == "Windows") {
-                                platform = '<span class="fab fa-windows" title="Retail (Windows)"></span>';
+                                platform = '<span class="hide">7</span><span class="fab fa-windows" title="Retail (Windows)"></span>';
                             } else if (pcgames[i]['platform'] == "Mac OS") {
-                                platform = '<span class="fab fa-apple" title="Retail (Mac OS)"></span>';
+                                platform = '<span class="hide">8</span><span class="fab fa-apple" title="Retail (Mac OS)"></span>';
                             } else if (pcgames[i]['platform'] == "Steam") {
-                                platform = '<span class="fab fa-steam" title="Steam"></span>';
+                                platform = '<span class="hide">1</span><span class="fab fa-steam" title="Steam"></span>';
                             } else if (pcgames[i]['platform'] == "GOG") {
-                                platform = '<span class="fab fa-windows" title="GOG"></span>';
+                                platform = '<span class="hide">5</span><span class="fab fa-windows" title="GOG"></span>';
                             } else if (pcgames[i]['platform'] == "Origin") {
-                                platform = '<span class="game-platforms origin" title="Origin"></span>';
+                                platform = '<span class="hide">4</span><span class="origin" title="Origin"></span>';
                             } else if (pcgames[i]['platform'] == "Uplay") {
-                                platform = '<span class="game-platforms uplay" title="Uplay"></span>';
+                                platform = '<span class="hide">3</span><span class="uplay" title="Uplay"></span>';
                             } else if (pcgames[i]['platform'] == "Epic Games") {
-                                platform = '<span class="epic-games" title="Epic Games"></span>';
+                                platform = '<span class="hide">2</span><span class="epic-games" title="Epic Games"></span>';
                             } else if (pcgames[i]['platform'] == "Battle.net") {
-                                platform = '<span class="game-platforms battle-net" title="Battle.net"></span>';
+                                platform = '<span class="hide">6</span><span class="fab fa-battle-net" title="Battle.net"></span>';
                             } else if (pcgames[i]['platform'] == "PlayStation") {
-                                platform = '<span class="fab fa-playstation" title="PlayStation"></span>';
+                                platform = '<span class="hide">9</span><span class="fab fa-playstation" title="PlayStation"></span>';
                             } else if (pcgames[i]['platform'] == "PlayStation 2") {
-                                platform = '<span class="fab fa-playstation" title="PlayStation 2"></span>';
+                                platform = '<span class="hide">10</span><span class="fab fa-playstation" title="PlayStation 2"></span>';
                             } else if (pcgames[i]['platform'] == "Xbox") {
-                                platform = '<span class="fab fa-xbox" title="Xbox"></span>';
+                                platform = '<span class="hide">11</span><span class="fab fa-xbox" title="Xbox"></span>';
                             }
                             var rating = "noch nicht gespielt";
                             if (pcgames[i].hasOwnProperty('rating')) {
                                 rating = pcgames[i]['rating'].toString();
                             }
-                            $('table#pcgames > tbody').append("<tr><td>" + release_html + "</td><td>" + title + "</td><td>" + genre_html + "</td><td>" + platform + "</td><td>" + rating + "</td></tr>");
+                            $('table#pcgames > tbody').append('<tr><td>' + release_html + '</td><td>' + title + '</td><td>' + genre_html + '</td><td>' + platform + '</td><td><span class="truncate">' + rating + '</span></td></tr>');
                         }
 
                         // Tooltips initialisieren
@@ -357,7 +357,7 @@
                                 <th class="sorter-sugar">Release</th>
                                 <th>Titel</th>
                                 <th>Genre</th>
-                                <th class="sorter-false">Plattform</th>
+                                <th>Plattform</th>
                                 <th class="sorter-digit string-bottom">Bewertung</th>
                             </tr>
                         </thead>
