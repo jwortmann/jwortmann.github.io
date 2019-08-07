@@ -22,20 +22,11 @@
 
 @font-face {
     font-family: 'Game Platforms';
-    font-weight: normal;
     font-style: normal;
-    src: url(../fonts/game-platforms/GamePlatforms-Regular.woff) format('woff'),
-        url(../fonts/game-platforms/GamePlatforms-Regular.ttf) format('truetype');
-
-}
-
-@font-face {
-    font-family: 'Humble Bundle Icons';
     font-weight: normal;
-    font-style: normal;
-    src: url(../fonts/hb-icons/hb-icons.woff) format('woff'),
-        url(../fonts/hb-icons/hb-icons.woff2) format('woff2'),
-        url(../fonts/hb-icons/hb-icons.ttf) format('truetype');
+    src: url('../fonts/game-platforms/GamePlatforms.woff2?684560') format('woff2'),
+        url('../fonts/game-platforms/GamePlatforms.woff?684560') format('woff'),
+        url('../fonts/game-platforms/GamePlatforms.ttf?684560') format('truetype');
 }
 
 :root {
@@ -54,14 +45,12 @@ body {
     margin: 0;
     margin-bottom: 3rem;
     padding: 0;
-    /*background-color: var(--background-color);*/
     background-image: url("../img/background_dark.png");
     font-family: "Ubuntu", sans-serif;
     color: var(--text-color);
 }
 
 .light-theme {
-    /*background-color: var(--background-color-light-theme);*/
     background-image: url("../img/background_light.png");
     color: var(--text-color-light-theme);
 }
@@ -409,6 +398,8 @@ table.treetable tr.expanded span.indenter a {
     color: rgba(255,255,255,0.7) !important;
 }
 
+/* Material Icons */
+
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -434,42 +425,28 @@ table.treetable tr.expanded span.indenter a {
     font-feature-settings: 'liga';
 }
 
-/* game-platforms icons */
+/* Game Platforms Icons */
 
-.uplay:before {
-    font-family: "Game Platforms";
-    font-weight: normal;
+.game-platforms:before {
+    font-family: 'Game Platforms';
     font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    vertical-align: middle;
+    font-weight: normal;
+    display: inline-block;
     line-height: 1;
+    text-transform: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    content: "\61";
-}
-.origin:before {
-    font-family: "Game Platforms";
-    font-weight: normal;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    vertical-align: middle;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    content: "\62";
 }
 
-.epic-games:before {
-    font-family: "Humble Bundle Icons";
-    font-weight: normal;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    vertical-align: middle;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    content: "\f0ed";
-}
+.steam:before { content: '\e800'; }
+.epic-games:before { content: '\e801'; }
+.uplay:before { content: '\e802'; }
+.origin:before { content: '\e803'; }
+.gog:before { content: '\e804'; }
+.battle-net:before { content: '\e805'; }
+.playstation:before { content: '\e806'; }
+.playstation3:before { content: '\e807'; }
+.playstation4:before { content: '\e808'; }
+.xbox:before { content: '\e809'; }
+.nintendogamecube:before { content: '\e80a'; }
+.cd:before { content: '\e80b'; }

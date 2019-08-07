@@ -1,5 +1,4 @@
 css/jquery.treetable.css
-fonts/game-platforms/GamePlatforms-Regular.svg
 fonts/ubuntu/Ubuntu-Bold.ttf
 fonts/ubuntu/Ubuntu-BoldItalic.ttf
 fonts/ubuntu/Ubuntu-Italic.ttf
@@ -10,6 +9,7 @@ fonts/ubuntu/Ubuntu-MediumItalic.ttf
 img/imdb_31x14.png
 js/jquery.treetable.js
 js/rating.min.js
+svg
 audioencoding.html
 hardware.html
 movies.html

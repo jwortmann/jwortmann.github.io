@@ -6,8 +6,6 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
         <link rel="stylesheet" type="text/css" href="css/theme.default.min.css">
-        <link rel="stylesheet" type="text/css" href="css/brands.min.css">
-        <link rel="stylesheet" type="text/css" href="css/fontawesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/tippy.themes.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -72,28 +70,26 @@
                                 genre_html = genre;
                             }
                             var platform = '';
-                            if (pcgames[i]['platform'] == "Windows") {
-                                platform = '<span class="hide">7 Retail (Windows)</span><span class="fab fa-windows" title="Retail (Windows)"></span>';
-                            } else if (pcgames[i]['platform'] == "Mac OS") {
-                                platform = '<span class="hide">8 Retail (Mac OS)</span><span class="fab fa-apple" title="Retail (Mac OS)"></span>';
-                            } else if (pcgames[i]['platform'] == "Steam") {
-                                platform = '<span class="hide">1 Steam</span><span class="fab fa-steam" title="Steam"></span>';
-                            } else if (pcgames[i]['platform'] == "GOG") {
-                                platform = '<span class="hide">5 GOG</span><span class="fab fa-windows" title="GOG"></span>';
-                            } else if (pcgames[i]['platform'] == "Origin") {
-                                platform = '<span class="hide">4 Origin</span><span class="origin" title="Origin"></span>';
-                            } else if (pcgames[i]['platform'] == "Uplay") {
-                                platform = '<span class="hide">3 Uplay</span><span class="uplay" title="Uplay"></span>';
+                            if (pcgames[i]['platform'] == "Steam") {
+                                platform = '<span class="hide">1</span><span class="game-platforms steam" title="Steam"></span>';
                             } else if (pcgames[i]['platform'] == "Epic Games") {
-                                platform = '<span class="hide">2 Epic Games</span><span class="epic-games" title="Epic Games"></span>';
+                                platform = '<span class="hide">2</span><span class="game-platforms epic-games" title="Epic Games"></span>';
+                            } else if (pcgames[i]['platform'] == "Uplay") {
+                                platform = '<span class="hide">3</span><span class="game-platforms uplay" title="Uplay"></span>';
+                            } else if (pcgames[i]['platform'] == "Origin") {
+                                platform = '<span class="hide">4</span><span class="game-platforms origin" title="Origin"></span>';
+                            } else if (pcgames[i]['platform'] == "GOG.com") {
+                                platform = '<span class="hide">5</span><span class="game-platforms gog" title="GOG.com"></span>';
                             } else if (pcgames[i]['platform'] == "Battle.net") {
-                                platform = '<span class="hide">6 Battle.net</span><span class="fab fa-battle-net" title="Battle.net"></span>';
+                                platform = '<span class="hide">6</span><span class="game-platforms battle-net" title="Battle.net"></span>';
+                            } else if (pcgames[i]['platform'] == "Windows") {
+                                platform = '<span class="hide">7</span><span class="game-platforms cd" title="Retail (Windows)"></span>';
+                            } else if (pcgames[i]['platform'] == "Mac OS") {
+                                platform = '<span class="hide">8</span><span class="game-platforms cd" title="Retail (Mac OS)"></span>';
                             } else if (pcgames[i]['platform'] == "PlayStation") {
-                                platform = '<span class="hide">9 PlayStation</span><span class="fab fa-playstation" title="PlayStation"></span>';
+                                platform = '<span class="hide">9</span><span class="game-platforms playstation" title="PlayStation"></span>';
                             } else if (pcgames[i]['platform'] == "PlayStation 2") {
-                                platform = '<span class="hide">10 PlayStation 2</span><span class="fab fa-playstation" title="PlayStation 2"></span>';
-                            } else if (pcgames[i]['platform'] == "Xbox") {
-                                platform = '<span class="hide">11 Xbox</span><span class="fab fa-xbox" title="Xbox"></span>';
+                                platform = '<span class="hide">10</span><span class="game-platforms playstation3" title="PlayStation 2"></span>';
                             }
                             var rating = "noch nicht gespielt";
                             if (pcgames[i].hasOwnProperty('rating')) {
