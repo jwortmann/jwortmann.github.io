@@ -2,17 +2,6 @@
     "schema_version": "3.0.0",
     "packages": [
         {
-            "name": "Darcula Color Scheme",
-            "details": "https://github.com/jwortmann/darcula-color-scheme",
-            "labels": ["color scheme"],
-            "releases": [
-                {
-                    "sublime_text": ">=3170",
-                    "tags": true
-                }
-            ]
-        },
-        {
             "name": "Exapunks",
             "details": "https://github.com/jwortmann/exapunks-syntax",
             "labels": ["language syntax"],
