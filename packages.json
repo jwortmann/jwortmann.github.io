@@ -13,6 +13,17 @@
             ]
         },
         {
+            "name": "INI Syntax",
+            "details": "https://github.com/jwortmann/ini-syntax",
+            "labels": ["language syntax"],
+            "releases": [
+                {
+                    "sublime_text": ">=3092",
+                    "tags": true
+                }
+            ]
+        },
+        {
             "name": "Radioss",
             "details": "https://github.com/jwortmann/radioss-syntax",
             "labels": ["language syntax"],
