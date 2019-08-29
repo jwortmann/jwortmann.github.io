@@ -8,22 +8,23 @@
         <link rel="stylesheet" type="text/css" href="css/theme.default.min.css">
         <link rel="stylesheet" type="text/css" href="css/tippy.themes.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="js/tippy.all.min.js"></script>
         <script type="text/javascript" src="js/Chart.min.js"></script>
+        <script type="text/javascript" src="js/rough.min.js"></script>
+        <script type="text/javascript" src="js/chartjs-plugin-rough.min.js"></script>
         <script type="text/javascript" src="js/sugar.min.js"></script>
         <script type="text/javascript" src="js/parser-date.min.js"></script>
-        <script type="text/javascript">$(document).ready(function(){$('.tabs').tabs();});</script>
+        <script type="text/javascript" src="js/scroll-button.js"></script>
         <script type="text/javascript">
             function parseDate(date) {
                 return Sugar.Date(Sugar.Date.create(date.toString())).short('de');
                 // return Sugar.Date(Sugar.Date.create(date.toString())).medium('de');
                 // return Sugar.Date(Sugar.Date.create(date.toString())).format('{d}. {Mon}. {yyyy}');
             }
-        </script>
-        <script type="text/javascript">
+
             $(document).ready(function() {
                 // Formatierung der Datumsangabe für Tablesorter
                 Sugar.Date.setLocale('de');
@@ -101,6 +102,9 @@
                         // Tooltips initialisieren
                         tippy("[title]", { placement : "top-start", arrow : true, arrowType : "round", animation : "scale", theme : "translucent" });
 
+                        // Tabs initialisieren
+                        $('.tabs').tabs();
+
                         // Tablesorter initialisieren
                         $('table').tablesorter({ theme : "default", widthFixed : true, headerTemplate : "{content}{icon}", widgets : ["uitheme"], sortList : [[0,1]] });
 
@@ -147,33 +151,29 @@
                                 var rating = $(this).children(':last-child').text();
                                 $(this).children(':last-child').empty();
                                 $(this).children(':last-child').append('<span class="hide">' + rating + '</span>');
-                                if (rating == "1") {
+                                if (rating == '1') {
                                     $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                                } else if (rating == "1.5") {
+                                } else if (rating == '1.5') {
                                     $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                                } else if (rating == "2") {
+                                } else if (rating == '2') {
                                     $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                                } else if (rating == "2.5") {
+                                } else if (rating == '2.5') {
                                     $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                                } else if (rating == "3") {
+                                } else if (rating == '3') {
                                     $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i>');
-                                } else if (rating == "3.5") {
+                                } else if (rating == '3.5') {
                                     $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i>');
-                                } else if (rating == "4") {
+                                } else if (rating == '4') {
                                     $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i>');
-                                } else if (rating == "4.5") {
+                                } else if (rating == '4.5') {
                                     $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i>');
-                                } else if (rating == "5") {
+                                } else if (rating == '5') {
                                     $(this).children(':last-child').append('<i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i>');
                                 }
                             }
                         });
 
-                        // Statistiken berechnen und darstellen
-                        Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
-                        Chart.defaults.global.defaultFontFamily = "Ubuntu";
-                        Chart.defaults.global.defaultFontSize = 13;
-
+                        // Statistiken berechnen
                         var chart1_labels = [];
                         var chart1_data1 = [];
                         var chart1_data2 = [];
@@ -197,7 +197,7 @@
                         $('tbody').children().each(function() {
                             var year = $(this).children(':nth-child(1)').text().slice(-4) - year_min;
                             var rating = $(this).children(':last-child').text();
-                            if (rating == "noch nicht gespielt") {
+                            if (rating == 'noch nicht gespielt') {
                                 chart1_data2[year]++;
                                 chart2_data[1]++;
                             } else {
@@ -206,8 +206,15 @@
                             }
                         });
 
+                        // Globale Einstellungen für Chart.js
+                        Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
+                        Chart.defaults.global.defaultFontFamily = 'Ubuntu';
+                        Chart.defaults.global.defaultFontSize = 13;
+                        Chart.defaults.global.plugins.rough.roughness = 0;
+                        Chart.defaults.global.plugins.rough.bowing = 0;
+
                         var chart1 = new Chart(
-                            document.getElementById("chart1").getContext("2d"),
+                            document.getElementById('chart1').getContext('2d'),
                             {
                                 type: 'bar',
                                 data: {
@@ -230,10 +237,6 @@
                                     legend: {
                                         position: 'top'
                                     },
-                                    tooltips: {
-                                        mode: 'index',
-                                        intersect: false
-                                    },
                                     scales: {
                                         xAxes: [{
                                             stacked: true
@@ -242,12 +245,13 @@
                                             stacked: true
                                         }]
                                     }
-                                }
+                                },
+                                plugins: [ChartRough]
                             }
                         );
 
                         var chart2 = new Chart(
-                            document.getElementById("chart2").getContext("2d"),
+                            document.getElementById('chart2').getContext('2d'),
                             {
                                 type: 'doughnut',
                                 data: {
@@ -270,31 +274,16 @@
                                 },
                                 options: {
                                     legend: {
-                                        position: 'top'
+                                        position: 'top',
+                                        reverse: true,
+                                        onClick: null
                                     }
-                                }
+                                },
+                                plugins: [ChartRough]
                             }
                         );
                     }
                 }
-
-                // Scroll-Button
-                $('#scroll-top').hide();
-                $(function() {
-                    $(window).scroll(function() {
-                        if ($(this).scrollTop() > 100) {
-                            $('#scroll-top').fadeIn();
-                        } else {
-                            $('#scroll-top').fadeOut();
-                        }
-                    });
-                    $('#scroll-top').click(function() {
-                        $('body,html').animate({
-                            scrollTop: 0
-                        }, 800);
-                        return false;
-                    });
-                });
 
                 // Dark/Light Theme
                 $('#switch-theme').click(function() {
@@ -378,11 +367,5 @@
                 </div>
             </div>
         </div>
-
-        <a href="#top" id="scroll-top">
-            <span class="btn-floating">
-                <i class="material-icons">keyboard_arrow_up</i>
-            </span>
-        </a>
     </body>
 </html>

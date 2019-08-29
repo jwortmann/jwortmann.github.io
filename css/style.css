@@ -55,6 +55,10 @@ body {
     color: var(--text-color-light-theme);
 }
 
+.light-theme nav {
+    background-color: var(--background-color-light-theme);
+}
+
 .light-theme nav .brand-logo {
     color: var(--text-color-light-theme);
 }
@@ -81,10 +85,6 @@ body {
 
 nav {
     background-color: var(--background-color-variant);
-}
-
-.light-theme nav {
-    background-color: var(--background-color-light-theme);
 }
 
 a {
