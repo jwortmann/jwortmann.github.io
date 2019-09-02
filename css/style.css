@@ -312,11 +312,6 @@ div#games {
     background-color: var(--light-primary-color);
 }
 
-.chip.mod, .chip.mod:focus {
-    color: rgba(0, 0, 0, 0.6);
-    background-color: var(--light-secondary-color);
-}
-
 .tooltip {
     border-bottom: 1px dotted #777;
 }
