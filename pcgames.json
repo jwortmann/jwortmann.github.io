@@ -14,6 +14,7 @@
     { "release": "2017-08-31", "title": "Last Day of June", "link": "https://pcgamingwiki.com/wiki/Last_Day_of_June", "genre": "Adventure", "platform": "Epic Games" },
     { "release": [{ "Episode 1": "2017-08-31" }, { "Episode 2": "2017-10-19" }, { "Episode 3": "2017-12-19" }], "title": "Life is Strange: Before the Storm", "link": "https://pcgamingwiki.com/wiki/Life_Is_Strange:_Before_the_Storm", "genre": "Adventure", "platform": "Steam" },
     { "release": "2017-08-23", "title": "Quake Champions", "link": "https://pcgamingwiki.com/wiki/Quake_Champions", "genre": ["First-person shooter", "Multiplayer"], "platform": "Steam", "rating": 3 },
+    { "release": [{ "Episode 1": "2017-08-08" }, { "Episode 2": "2017-10-03" }, { "Episode 3": "2017-11-21" }, { "Episode 4": "2018-01-23" }, { "Episode 5": "2018-03-27" }], "title": "Batman: The Enemy Within - The Telltale Series", "link": "https://pcgamingwiki.com/wiki/Batman:_The_Enemy_Within_-_The_Telltale_Series", "genre": "Adventure", "platform": "Steam" },
     { "release": "2017-08-01", "title": "The Long Dark", "link": "https://pcgamingwiki.com/wiki/The_Long_Dark", "genre": "Survival", "platform": "Steam" },
     { "release": "2017-05-26", "title": "RiME", "link": "https://pcgamingwiki.com/wiki/Rime", "genre": ["Adventure", "Puzzle"], "platform": "Epic Games" },
     { "release": "2017-05-23", "title": "Impact Winter", "link": "https://pcgamingwiki.com/wiki/Impact_Winter", "genre": "Survival", "platform": "Steam" },
