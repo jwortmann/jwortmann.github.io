@@ -18,6 +18,7 @@
         <script type="text/javascript" src="js/sugar.min.js"></script>
         <script type="text/javascript" src="js/parser-date.min.js"></script>
         <script type="text/javascript" src="js/scroll-button.js"></script>
+        <script type="text/javascript">$.fn.extend({toggleText: function(a,b){return this.text(this.text() == b ? a : b);}});</script>
         <script type="text/javascript">
             function parseDate(date) {
                 return Sugar.Date(Sugar.Date.create(date.toString())).short('de');
@@ -221,13 +222,13 @@
                                     labels: chart1_labels,
                                     datasets: [{
                                         label: 'Bereits gespielt',
-                                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-primary-color').trim(),
+                                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--primary-color-variant').trim(),
                                         borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
                                         borderWidth: 1,
                                         data: chart1_data1
                                     }, {
                                         label: 'Noch nicht gespielt',
-                                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--light-secondary-color').trim(),
+                                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--secondary-color-variant').trim(),
                                         borderColor: getComputedStyle(document.body).getPropertyValue('--secondary-color').trim(),
                                         borderWidth: 1,
                                         data: chart1_data2
@@ -264,8 +265,8 @@
                                     ],
                                     datasets: [{
                                         backgroundColor: [
-                                            getComputedStyle(document.body).getPropertyValue('--light-primary-color').trim(),
-                                            getComputedStyle(document.body).getPropertyValue('--light-secondary-color').trim()
+                                            getComputedStyle(document.body).getPropertyValue('--primary-color-variant').trim(),
+                                            getComputedStyle(document.body).getPropertyValue('--secondary-color-variant').trim()
                                         ],
                                         borderColor: [
                                             getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
@@ -289,12 +290,9 @@
                 }
 
                 // Dark/Light Theme
-                $('#switch-theme').click(function() {
-                    if ($('body').hasClass('light-theme')) {
-                        $('body').removeClass('light-theme');
-                    } else {
-                        $('body').addClass('light-theme');
-                    }
+                $('#toggle-theme').click(function() {
+                    document.documentElement.toggleAttribute('light-theme');
+                    $('#theme-icon').toggleText('wb_sunny', 'brightness_2');
                 });
             });
         </script>
@@ -305,7 +303,7 @@
             <div class="nav-wrapper">
                 <span class="brand-logo">Computerspiele</span>
                 <ul class="right">
-                    <li><a href="#" id="switch-theme"><i class="material-icons">palette</i></a></li>
+                    <li><a href="#" id="toggle-theme"><i class="material-icons" id="theme-icon">wb_sunny</i></a></li>
                 </ul>
             </div>
             <div class="nav-content">

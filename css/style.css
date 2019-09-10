@@ -31,68 +31,51 @@
 
 :root {
     --text-color: #dddddd;
-    --background-color: #1c1c1c;
-    --background-color-variant: #161616;
+    --link-color: #8db2e5;
+    --border-color: #cccccc;
+    --background-color: #161616;
+    --background-image: url('../img/background_dark.png');
     --primary-color: #ff5252;
-    --light-primary-color: #ffbfba;
+    --primary-color-variant: #ffbfba;
     --secondary-color: #ff9933;
-    --light-secondary-color: #ffcc99;
-    --text-color-light-theme: #333333;
-    --background-color-light-theme: #f6f6f6;
+    --secondary-color-variant: #ffcc99;
+}
+
+[light-theme] {
+    --text-color: #333333;
+    --link-color: #2d4b7f;
+    --border-color: #666666;
+    --background-color: #f6f6f6;
+    --background-image: url('../img/background_light.png');
 }
 
 body {
     margin: 0;
     margin-bottom: 3rem;
     padding: 0;
-    background-image: url('../img/background_dark.png');
+    background-image: var(--background-image);
     font-family: 'Ubuntu', sans-serif;
     color: var(--text-color);
 }
 
-.light-theme {
-    background-image: url('../img/background_light.png');
-    color: var(--text-color-light-theme);
-}
-
-.light-theme nav {
-    background-color: var(--background-color-light-theme);
-}
-
-.light-theme nav .brand-logo {
-    color: var(--text-color-light-theme);
-}
-
-.light-theme nav ul a {
-    color: var(--text-color-light-theme);
-}
-
-.light-theme .tabs.tabs-transparent .tab a {
-    color: #666666;
-}
-
-.light-theme .tabs.tabs-transparent .tab a.active {
-    color: var(--text-color-light-theme);
-}
-
-.light-theme .tabs.tabs-transparent .tab a:hover {
-    color: var(--text-color-light-theme);
-}
-
-.light-theme .tabs.tabs-transparent .indicator {
-    background-color: var(--text-color-light-theme);
-}
-
 nav {
-    background-color: var(--background-color-variant);
+    background-color: var(--background-color);
+}
+
+nav .brand-logo, nav ul a {
+    color: var(--text-color);
+}
+
+.tabs.tabs-transparent .tab a, .tabs.tabs-transparent .tab a.active, .tabs.tabs-transparent .tab a:hover {
+    color: var(--text-color);
+}
+
+.tabs.tabs-transparent .indicator {
+    background-color: var(--text-color);
 }
 
 a {
-    color: #8db2e5;
-}
-
-.light-theme a {
-    color: #2d4b7f;
+    color: var(--link-color);
 }
 
 table {
@@ -103,24 +86,17 @@ table {
 th, td {
     padding: 4px !important;
     background-color: transparent !important;
+    border-color: var(--border-color);
     border-radius: 0;
 }
 
-th {
-    border-bottom: #cccccc 2px solid;
+.tablesorter-default th {
+    border-bottom: 2px solid var(--border-color);
     text-align: center;
 }
 
-td {
-    border-bottom: #cccccc 1px solid;
-}
-
-.light-theme th {
-    border-bottom: #666666 2px solid;
-}
-
-.light-theme td {
-    border-bottom: #666666 1px solid;
+.tablesorter-default td {
+    border-bottom: 1px solid var(--border-color);
 }
 
 pre {
@@ -139,7 +115,7 @@ pre {
 }
 
 .btn:hover {
-    background-color: var(--light-primary-color);
+    background-color: var(--primary-color-variant);
 }
 
 div#games {
@@ -154,6 +130,11 @@ div#games {
     line-height: 28px;
 }
 
+.switch label {
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
 /* switch checked main color */
 .switch label input[type="checkbox"]:checked + .lever:after {
     background-color: var(--primary-color);
@@ -161,11 +142,7 @@ div#games {
 
 /* switch checked lighten color */
 .switch label input[type="checkbox"]:checked + .lever {
-    background-color: var(--light-primary-color);
-}
-
-.light-theme .switch label {
-    color: #666666;
+    background-color: var(--primary-color-variant);
 }
 
 .switch-description {
@@ -178,10 +155,6 @@ div#games {
     color: var(--text-color);
 }
 
-.light-theme .input-field label {
-    color: var(--text-color-light-theme);
-}
-
 /* label focus color */
 .input-field input[type="search"]:focus + label {
     color: var(--primary-color) !important;
@@ -191,13 +164,8 @@ div#games {
     color: var(--text-color);
     border-bottom: 1px solid var(--text-color) !important;
     padding-left: 0 !important;
+    font-family: 'Ubuntu';
     font-size: 15px;
-    font-family: "Ubuntu";
-}
-
-.light-theme .input-field input[type="search"] {
-    color: var(--text-color-light-theme);
-    border-bottom-color: #666666 !important;
 }
 
 .input-field input[type="search"]:focus {
@@ -206,15 +174,6 @@ div#games {
     box-shadow: 0 0 0 0 !important;
     color: var(--text-color) !important;
 }
-
-.light-theme .input-field input[type="search"]:focus {
-    color: var(--text-color-light-theme) !important;
-}
-
-/* vertical alignment of prefix icon */
-/*.input-field .prefix {
-    line-height: 54px;
-}*/
 
 /* icon prefix focus color */
 .input-field .prefix.active {
@@ -225,20 +184,12 @@ div#games {
     color: var(--text-color) !important;
 }
 
-.light-theme .input-field input[type="search"]:focus ~ .material-icons {
-    color: #666666 !important;
-}
-
 .tabs .tab a:focus.active {
-    background-color: var(--background-color-variant);
-}
-
-.light-theme .tabs .tab a:focus.active {
-    background-color: var(--background-color-light-theme);
+    background-color: var(--background-color);
 }
 
 .card, .card-reveal {
-    background-color: var(--background-color-variant) !important;
+    background-color: var(--background-color) !important;
 }
 
 .card-image {
@@ -309,11 +260,11 @@ div#games {
 
 .chip.patch, .chip.patch:focus {
     color: rgba(0, 0, 0, 0.6);
-    background-color: var(--light-primary-color);
+    background-color: var(--primary-color-variant);
 }
 
 .tooltip {
-    border-bottom: 1px dotted #777;
+    border-bottom: 1px dotted var(--text-color);
 }
 
 /* jQuery tablesorter plugin */
@@ -326,12 +277,8 @@ div#games {
     color: var(--text-color);
 }
 
-.light-theme .tablesorter-default, .light-theme .tablesorter-default th {
-    color: var(--text-color-light-theme);
-}
-
 .tablesorter-default thead .tablesorter-headerDesc, .tablesorter-default thead .tablesorter-headerAsc {
-    border-bottom: var(--primary-color) 2px solid;
+    border-bottom: 2px solid var(--primary-color);
 }
 
 .tablesorter-headerUnSorted:not(.sorter-false) {
@@ -346,15 +293,15 @@ div#games {
     background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7) !important;
 }
 
-.light-theme .tablesorter-headerUnSorted:not(.sorter-false) {
+[light-theme] .tablesorter-headerUnSorted:not(.sorter-false) {
     background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==) !important;
 }
 
-.light-theme .tablesorter-headerAsc {
+[light-theme] .tablesorter-headerAsc {
     background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7) !important;
 }
 
-.light-theme .tablesorter-headerDesc {
+[light-theme] .tablesorter-headerDesc {
     background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7) !important;
 }
 
