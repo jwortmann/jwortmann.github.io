@@ -30,6 +30,8 @@
                 // Formatierung der Datumsangabe für Tablesorter
                 Sugar.Date.setLocale('de');
 
+                var chart;
+
                 var request = new XMLHttpRequest();
                 request.open('GET', 'pcgames.json', true);
                 request.responseType = 'text';
@@ -49,6 +51,7 @@
                             } else {
                                 release_html = parseDate(release);
                             }
+
                             var title = '';
                             if (pcgames[i].hasOwnProperty('link')) {
                                 title = '<a href="' + pcgames[i]['link'] + '">' + pcgames[i]['title'] + '</a>'
@@ -61,6 +64,7 @@
                             if (pcgames[i].hasOwnProperty('patch')) {
                                 title += '<a href="' + pcgames[i]['patch'] + '"<div class="chip patch">Patch</div></a>';
                             }
+
                             var genre = pcgames[i]['genre'];
                             var genre_html = '';
                             if (Array.isArray(genre)) {
@@ -71,43 +75,50 @@
                             } else {
                                 genre_html = genre;
                             }
-                            var platform = '';
-                            if (pcgames[i]['platform'] == "Steam") {
-                                platform = '<span class="hide">1</span><span class="game-platforms steam" title="Steam"></span>';
-                            } else if (pcgames[i]['platform'] == "Epic Games") {
-                                platform = '<span class="hide">2</span><span class="game-platforms epic-games" title="Epic Games"></span>';
-                            } else if (pcgames[i]['platform'] == "Uplay") {
-                                platform = '<span class="hide">3</span><span class="game-platforms uplay" title="Uplay"></span>';
-                            } else if (pcgames[i]['platform'] == "Origin") {
-                                platform = '<span class="hide">4</span><span class="game-platforms origin" title="Origin"></span>';
-                            } else if (pcgames[i]['platform'] == "GOG.com") {
-                                platform = '<span class="hide">5</span><span class="game-platforms gog" title="GOG.com"></span>';
-                            } else if (pcgames[i]['platform'] == "Battle.net") {
-                                platform = '<span class="hide">6</span><span class="game-platforms battle-net" title="Battle.net"></span>';
-                            } else if (pcgames[i]['platform'] == "Windows") {
-                                platform = '<span class="hide">7</span><span class="game-platforms cd" title="Retail (Windows)"></span>';
-                            } else if (pcgames[i]['platform'] == "Mac OS") {
-                                platform = '<span class="hide">8</span><span class="game-platforms cd" title="Retail (Mac OS)"></span>';
-                            } else if (pcgames[i]['platform'] == "PlayStation") {
-                                platform = '<span class="hide">9</span><span class="game-platforms playstation" title="PlayStation"></span>';
-                            } else if (pcgames[i]['platform'] == "PlayStation 2") {
-                                platform = '<span class="hide">10</span><span class="game-platforms playstation3" title="PlayStation 2"></span>';
+
+                            var platform = pcgames[i]['platform'];
+                            var platform_html = '';
+                            if (!Array.isArray(platform)) {
+                                platform = [platform];
                             }
+
+                            for (var j = 0; j < platform.length; j++) {
+                                if (platform[j] == "Steam") {
+                                    platform_html += '<span class="hide">1</span><span class="game-platforms steam" title="Steam"></span>';
+                                } else if (platform[j] == "Epic Games") {
+                                    platform_html += '<span class="hide">2</span><span class="game-platforms epic-games" title="Epic Games"></span>';
+                                } else if (platform[j] == "Uplay") {
+                                    platform_html += '<span class="hide">3</span><span class="game-platforms uplay" title="Uplay"></span>';
+                                } else if (platform[j] == "Origin") {
+                                    platform_html += '<span class="hide">4</span><span class="game-platforms origin" title="Origin"></span>';
+                                } else if (platform[j] == "GOG.com") {
+                                    platform_html += '<span class="hide">5</span><span class="game-platforms gog" title="GOG.com"></span>';
+                                } else if (platform[j] == "Battle.net") {
+                                    platform_html += '<span class="hide">6</span><span class="game-platforms battle-net" title="Battle.net"></span>';
+                                } else if (platform[j] == "Windows") {
+                                    platform_html += '<span class="hide">7</span><span class="game-platforms cd" title="Retail (Windows)"></span>';
+                                } else if (platform[j] == "Mac OS") {
+                                    platform_html += '<span class="hide">8</span><span class="game-platforms cd" title="Retail (Mac OS)"></span>';
+                                } else if (platform[j] == "PlayStation") {
+                                    platform_html += '<span class="hide">9</span><span class="game-platforms playstation" title="PlayStation"></span>';
+                                } else if (platform[j] == "PlayStation 2") {
+                                    platform_html += '<span class="hide">10</span><span class="game-platforms playstation3" title="PlayStation 2"></span>';
+                                }
+                            }
+
                             var rating = "noch nicht gespielt";
                             if (pcgames[i].hasOwnProperty('rating')) {
                                 rating = pcgames[i]['rating'].toString();
                             }
-                            $('table#pcgames > tbody').append('<tr><td>' + release_html + '</td><td>' + title + '</td><td>' + genre_html + '</td><td>' + platform + '</td><td><span class="truncate">' + rating + '</span></td></tr>');
+
+                            $('#table > tbody').append('<tr><td>' + release_html + '</td><td>' + title + '</td><td>' + genre_html + '</td><td>' + platform_html + '</td><td><span class="truncate">' + rating + '</span></td></tr>');
                         }
 
                         // Tooltips initialisieren
                         tippy("[title]", { placement : "top-start", arrow : true, arrowType : "round", animation : "scale", theme : "translucent" });
 
-                        // Tabs initialisieren
-                        $('.tabs').tabs();
-
                         // Tablesorter initialisieren
-                        $('table').tablesorter({ theme : "default", widthFixed : true, headerTemplate : "{content}{icon}", widgets : ["uitheme"], sortList : [[0,1]] });
+                        $('#table').tablesorter({ theme : "default", widthFixed : true, headerTemplate : "{content}{icon}", widgets : ["uitheme"], sortList : [[0,1]] });
 
                         // Switches und Suchfeld initialisieren
                         $('#switch1').change(function() {
@@ -128,9 +139,9 @@
                         document.getElementById('search').value = "";
 
                         function searchfilter() {
-                            $('tbody').children().hide();
+                            $('#table > tbody').children().hide();
                             var filter_string = $('#search').val().toLowerCase();
-                            $('tbody').children().each(function() {
+                            $('#table > tbody').children().each(function() {
                                 if ($(this).children(':last-child').text() != "noch nicht gespielt") {
                                     if ($('#switch1').is(':checked') && $(this).children().text().toLowerCase().indexOf(filter_string) >= 0) {
                                         $(this).show();
@@ -144,10 +155,10 @@
                         }
 
                         // Bewertung durch Sterne ersetzen
-                        $('tbody').children().children(':first-child').addClass('center');
-                        $('tbody').children().children(':nth-child(4)').addClass('center');
-                        $('tbody').children().children(':last-child').addClass('center');
-                        $('tbody').children().each(function() {
+                        $('#table > tbody').children().children(':first-child').addClass('center');
+                        $('#table > tbody').children().children(':nth-child(4)').addClass('center');
+                        $('#table > tbody').children().children(':last-child').addClass('center');
+                        $('#table > tbody').children().each(function() {
                             if ($(this).children(':last-child').text() != "noch nicht gespielt") {
                                 var rating = $(this).children(':last-child').text();
                                 $(this).children(':last-child').empty();
@@ -175,35 +186,32 @@
                         });
 
                         // Statistiken berechnen
-                        var chart1_labels = [];
-                        var chart1_data1 = [];
-                        var chart1_data2 = [];
-                        var chart2_data = [0, 0];
+                        var chart_labels = [];
+                        var chart_data1 = [];
+                        var chart_data2 = [];
 
                         var year_min = Number.MAX_SAFE_INTEGER;
                         var year_max = Number.MIN_SAFE_INTEGER;
 
-                        $('tbody').children().each(function() {
+                        $('#table > tbody').children().each(function() {
                             var year = parseInt($(this).children(':nth-child(1)').text().slice(-4));
                             if (year < year_min) year_min = year;
                             if (year > year_max) year_max = year;
                         });
 
                         for (i = year_min; i <= year_max; i++) {
-                            chart1_labels.push(i.toString());
-                            chart1_data1.push(0);
-                            chart1_data2.push(0);
+                            chart_labels.push(i.toString());
+                            chart_data1.push(0);
+                            chart_data2.push(0);
                         }
 
-                        $('tbody').children().each(function() {
+                        $('#table > tbody').children().each(function() {
                             var year = $(this).children(':nth-child(1)').text().slice(-4) - year_min;
                             var rating = $(this).children(':last-child').text();
                             if (rating == 'noch nicht gespielt') {
-                                chart1_data2[year]++;
-                                chart2_data[1]++;
+                                chart_data2[year]++;
                             } else {
-                                chart1_data1[year]++;
-                                chart2_data[0]++;
+                                chart_data1[year]++;
                             }
                         });
 
@@ -214,24 +222,24 @@
                         Chart.defaults.global.plugins.rough.roughness = 0;
                         Chart.defaults.global.plugins.rough.bowing = 0;
 
-                        var chart1 = new Chart(
-                            document.getElementById('chart1').getContext('2d'),
+                        chart = new Chart(
+                            document.getElementById('chart').getContext('2d'),
                             {
                                 type: 'bar',
                                 data: {
-                                    labels: chart1_labels,
+                                    labels: chart_labels,
                                     datasets: [{
                                         label: 'Bereits gespielt',
                                         backgroundColor: getComputedStyle(document.body).getPropertyValue('--primary-color-variant').trim(),
                                         borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
                                         borderWidth: 1,
-                                        data: chart1_data1
+                                        data: chart_data1
                                     }, {
                                         label: 'Noch nicht gespielt',
                                         backgroundColor: getComputedStyle(document.body).getPropertyValue('--secondary-color-variant').trim(),
                                         borderColor: getComputedStyle(document.body).getPropertyValue('--secondary-color').trim(),
                                         borderWidth: 1,
-                                        data: chart1_data2
+                                        data: chart_data2
                                     }],
                                 },
                                 options: {
@@ -253,46 +261,15 @@
                                 plugins: [ChartRough]
                             }
                         );
-
-                        var chart2 = new Chart(
-                            document.getElementById('chart2').getContext('2d'),
-                            {
-                                type: 'doughnut',
-                                data: {
-                                    labels: [
-                                        'Bereits gespielt',
-                                        'Noch nicht gespielt'
-                                    ],
-                                    datasets: [{
-                                        backgroundColor: [
-                                            getComputedStyle(document.body).getPropertyValue('--primary-color-variant').trim(),
-                                            getComputedStyle(document.body).getPropertyValue('--secondary-color-variant').trim()
-                                        ],
-                                        borderColor: [
-                                            getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
-                                            getComputedStyle(document.body).getPropertyValue('--secondary-color').trim()
-                                        ],
-                                        borderWidth: [1, 1],
-                                        data: chart2_data
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        position: 'top',
-                                        reverse: true,
-                                        onClick: null
-                                    }
-                                },
-                                plugins: [ChartRough]
-                            }
-                        );
                     }
                 }
 
-                // Dark/Light Theme
+                // Dark/Light Theme toggle
                 $('#toggle-theme').click(function() {
                     document.documentElement.toggleAttribute('light-theme');
                     $('#theme-icon').toggleText('wb_sunny', 'brightness_2');
+                    Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
+                    chart.update();
                 });
             });
         </script>
@@ -306,15 +283,9 @@
                     <li><a href="#" id="toggle-theme"><i class="material-icons" id="theme-icon">wb_sunny</i></a></li>
                 </ul>
             </div>
-            <div class="nav-content">
-                <ul class="tabs tabs-transparent">
-                    <li class="tab col s12"><a href="#games">Spiele</a></li>
-                    <li class="tab col s12"><a href="#stats">Statistiken</a></li>
-                </ul>
-            </div>
         </nav>
 
-        <div id="games" class="container">
+        <div class="container">
             <div class="row">
                 <div class="col s12 m12 l8 xl7">
                     <div class="switch">
@@ -337,7 +308,7 @@
             </div>
             <div class="row">
                 <div class="col s12">
-                    <table class="bordered tablesorter" id="pcgames">
+                    <table class="bordered tablesorter" id="table">
                         <thead>
                             <tr>
                                 <th class="sorter-sugar">Release</th>
@@ -352,19 +323,9 @@
                     </table>
                 </div>
             </div>
-        </div>
-
-        <div id="stats" class="container">
             <div class="row">
                 <div class="col s12">
-                    <h2>Spiele nach Jahr</h2>
-                    <canvas id="chart1"></canvas>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <h2>Anteil bereits gespielter Spiele</h2>
-                    <canvas id="chart2"></canvas>
+                    <canvas id="chart"></canvas>
                 </div>
             </div>
         </div>
