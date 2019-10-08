@@ -52,36 +52,20 @@
                                 release_html = parseDate(release);
                             }
 
-                            var title = '';
-                            if (pcgames[i].hasOwnProperty('link')) {
-                                title = '<a href="' + pcgames[i]['link'] + '">' + pcgames[i]['title'] + '</a>'
-                            } else {
-                                title = pcgames[i]['title'];
-                            }
+                            var title = pcgames[i].hasOwnProperty('link') ? '<a href="' + pcgames[i]['link'] + '">' + pcgames[i]['title'] + '</a>' : pcgames[i]['title'];
+                            
                             if (pcgames[i].hasOwnProperty('mod')) {
                                 title += ' (' + pcgames[i]['mod'] + ' Mod)';
                             }
+                            
                             if (pcgames[i].hasOwnProperty('patch')) {
                                 title += '<a href="' + pcgames[i]['patch'] + '"<div class="chip patch">Patch</div></a>';
                             }
 
-                            var genre = pcgames[i]['genre'];
-                            var genre_html = '';
-                            if (Array.isArray(genre)) {
-                                for (var j = 0; j < genre.length-1; j++) {
-                                    genre_html += genre[j] + ', ';
-                                }
-                                genre_html += genre[genre.length-1];
-                            } else {
-                                genre_html = genre;
-                            }
+                            var genre = Array.isArray(pcgames[i]['genre']) ? pcgames[i]['genre'].join(', ') : pcgames[i]['genre'];
 
-                            var platform = pcgames[i]['platform'];
+                            var platform = Array.isArray(pcgames[i]['platform']) ? pcgames[i]['platform'] : [pcgames[i]['platform']];
                             var platform_html = '';
-                            if (!Array.isArray(platform)) {
-                                platform = [platform];
-                            }
-
                             for (var j = 0; j < platform.length; j++) {
                                 if (platform[j] == "Steam") {
                                     platform_html += '<span class="hide">1</span><span class="game-platforms steam" title="Steam"></span>';
@@ -106,12 +90,9 @@
                                 }
                             }
 
-                            var rating = "noch nicht gespielt";
-                            if (pcgames[i].hasOwnProperty('rating')) {
-                                rating = pcgames[i]['rating'].toString();
-                            }
+                            var rating = pcgames[i].hasOwnProperty('rating') ? pcgames[i]['rating'].toString() : "noch nicht gespielt";
 
-                            $('#table > tbody').append('<tr><td>' + release_html + '</td><td>' + title + '</td><td>' + genre_html + '</td><td>' + platform_html + '</td><td><span class="truncate">' + rating + '</span></td></tr>');
+                            $('#table > tbody').append('<tr><td>' + release_html + '</td><td>' + title + '</td><td>' + genre + '</td><td>' + platform_html + '</td><td><span class="truncate">' + rating + '</span></td></tr>');
                         }
 
                         // Tooltips initialisieren

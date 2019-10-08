@@ -10,12 +10,32 @@
 }
 
 @font-face {
+    font-family: 'Ubuntu';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Ubuntu Italic'),
+         local('Ubuntu-Italic'),
+         url('../fonts/ubuntu/Ubuntu-Italic.ttf') format('truetype');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Ubuntu Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Ubuntu Mono Regular'),
+         local('UbuntuMono-Regular'),
+         url('../fonts/ubuntu/UbuntuMono-Regular.ttf') format('truetype');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;        
+}
+
+@font-face {
     font-family: 'Fira Mono';
     font-style: normal;
     font-weight: 400;
     src: local('Fira Mono Regular'),
          local('FiraMono-Regular'),
-         url('https://fonts.gstatic.com/s/firamono/v8/N0bX2SlFPv1weGeLZDtgJv7S.woff2') format('woff2');
+         url('../fonts/fira/FiraMono-Regular.ttf') format('truetype');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -115,7 +135,7 @@ td, .tablesorter-default td {
     border-bottom: 1px solid var(--border-color);
 }
 
-pre, tt {
+code, pre, tt {
     font-family: 'Fira Mono';
 }
 
