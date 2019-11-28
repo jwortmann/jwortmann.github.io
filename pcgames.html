@@ -13,8 +13,14 @@
         <script type="text/javascript" src="js/Chart.min.js"></script>
         <script type="text/javascript" src="js/rough.min.js"></script>
         <script type="text/javascript" src="js/chartjs-plugin-rough.min.js"></script>
+        <script type="text/javascript" src="js/sugar.min.js"></script>
         <script type="text/javascript" src="js/scroll-button.js"></script>
         <script type="text/javascript">$.fn.extend({toggleText: function(a,b){return this.text(this.text() == b ? a : b);}});</script>
+        <script type="text/javascript">
+            function parseDate(date) {
+                return Sugar.Date(Sugar.Date.create(date.toString())).short('de');
+            }
+        </script>
         <script type="text/javascript">
             $(document).ready(function() {
                 var request = new XMLHttpRequest();
@@ -41,6 +47,16 @@
                                 tooltip_html += ' (' + pcgames[i]['mod'] + ' Mod)';
                             }
 
+                            tooltip_html += '<br>';
+                            if (Array.isArray(pcgames[i]['release'])) {
+                                for (var j = 0; j < pcgames[i]['release'].length-1; j++) {
+                                    tooltip_html += Object.keys(pcgames[i]['release'][j]) + ': ' + parseDate(Object.values(pcgames[i]['release'][j])) + '<br>';
+                                }
+                                tooltip_html += Object.keys(pcgames[i]['release'][pcgames[i]['release'].length-1]) + ': ' + parseDate(Object.values(pcgames[i]['release'][pcgames[i]['release'].length-1]));
+                            } else {
+                                tooltip_html += parseDate(pcgames[i]['release']);
+                            }
+
                             if (played) {
                                 tooltip_html += '<br>';
                                 for (let j = 0; j < Math.floor(pcgames[i]['rating']); j++) {
@@ -53,6 +69,12 @@
                                     tooltip_html += '<i class=\'material-icons\'>star_border</i>';
                                 }
                             }
+
+                            var genre_html = '';
+                            for (var j = 0; j < pcgames[i]['genre'].length-1; j++) {
+                                genre_html += pcgames[i]['genre'][j] + ', ';
+                            }
+                            genre_html += pcgames[i]['genre'][pcgames[i]['genre'].length-1];
 
                             years.push(parseInt(release.slice(0, 4)));
                             if (played) {
@@ -86,7 +108,7 @@
                                 } else if (platform[j] == "PlayStation") {
                                     icons_html += '<span class="game-platforms playstation" title="PlayStation"></span>';
                                 } else if (platform[j] == "PlayStation 2") {
-                                    icons_html += '<span class="game-platforms playstation3" title="PlayStation 2"></span>';
+                                    icons_html += '<span class="game-platforms playstation" title="PlayStation 2"></span>';
                                 }
                             }
                             icons_html += '</div>';
@@ -94,33 +116,11 @@
                                 icons_html += '<a href="' + pcgames[i]['patch'] + '"><i class="material-icons icon patch-icon" title="Patch">healing</i></a>';
                             }
 
-                            var html_str = '<div class="col s6 m3 xl2 scale-transition" game-title="' + title + '" release="' + release + '" played="' + played.toString() + '"><div class="img-container">' + img_html + icons_html + '</div></div>';
+                            var html_str = '<div class="col s6 m3 xl2 scale-transition" game-title="' + title + '" release="' + release + '" played="' + played.toString() + '" genre="' + genre_html + '"><div class="img-container">' + img_html + icons_html + '</div></div>';
 
                             pcgames_html.push(html_str);
                             titles.push(title);
                             ratings.push(pcgames[i].hasOwnProperty('rating') ? pcgames[i]['rating'] : 0);
-
-                            // var release = pcgames[i]['release'];
-                            // var release_html = '';
-                            // if (Array.isArray(release)) {
-                            //     release_html = '<span class="tooltip" title="';
-                            //     for (var j = 0; j < release.length-1; j++) {
-                            //         release_html += Object.keys(release[j]) + ': ' + parseDate(Object.values(release[j])) + '<br>';
-                            //     }
-                            //     release_html += Object.keys(release[release.length-1]) + ': ' + parseDate(Object.values(release[release.length-1])) + '">' + parseDate(Object.values(release[0])) + '</span>';
-                            // } else {
-                            //     release_html = parseDate(release);
-                            // }
-                            // var genre = pcgames[i]['genre'];
-                            // var genre_html = '';
-                            // if (Array.isArray(genre)) {
-                            //     for (var j = 0; j < genre.length-1; j++) {
-                            //         genre_html += genre[j] + ', ';
-                            //     }
-                            //     genre_html += genre[genre.length-1];
-                            // } else {
-                            //     genre_html = genre;
-                            // }
                         }
 
                         // Sort by titles and ratings
@@ -149,30 +149,8 @@
                         });
 
                         // Checkboxes
-                        $('#checkbox1').prop('checked', true);
-                        $('#checkbox2').prop('checked', true);
-                        $('#checkbox3').prop('checked', true);
-                        $('#checkbox4').prop('checked', true);
-                        $('#checkbox5').prop('checked', true);
-                        $('#checkbox6').prop('checked', true);
-                        $('#checkbox1').change(function() {
-                            searchfilter();
-                        });
-                        $('#checkbox2').change(function() {
-                            searchfilter();
-                        });
-                        $('#checkbox3').change(function() {
-                            searchfilter();
-                        });
-                        $('#checkbox4').change(function() {
-                            searchfilter();
-                        });
-                        $('#checkbox5').change(function() {
-                            searchfilter();
-                        });
-                        $('#checkbox6').change(function() {
-                            searchfilter();
-                        });
+                        $('input[type="checkbox"]').prop('checked', true);
+                        $('input[type="checkbox"]').change(function() { searchfilter(); });
 
                         $('#sort_release').click(function() {
                             $('div#grid').children().remove();
@@ -268,13 +246,26 @@
                     var filter_string = $('#searchfilter').val().toLowerCase();
                     $('div#grid').children().each(function() {
                         var title_filter = $(this).attr('game-title').toLowerCase().indexOf(filter_string) >= 0;
-                        var played_filter =    ($('#checkbox1').prop('checked') && $(this).attr('played') == 'true')
-                                            || ($('#checkbox2').prop('checked') && $(this).attr('played') == 'false');
-                        var platform_filter =    ($('#checkbox3').prop('checked') && $(this).find('span.steam').length > 0)
-                                              || ($('#checkbox4').prop('checked') && $(this).find('span.epic-games').length > 0)
-                                              || ($('#checkbox5').prop('checked') && $(this).find('span.uplay').length > 0)
-                                              || ($('#checkbox6').prop('checked') && $(this).find('span.origin, span.gog, span.battle-net, span.cd, span.playstation, span.playstation3').length > 0);
-                        if (title_filter && played_filter && platform_filter) {
+                        var played_filter = ($('#checkbox1').prop('checked') && $(this).attr('played') == 'true')
+                            || ($('#checkbox2').prop('checked') && $(this).attr('played') == 'false');
+                        var platform_filter = ($('#checkbox3').prop('checked') && $(this).find('span.steam').length > 0)
+                            || ($('#checkbox4').prop('checked') && $(this).find('span.epic-games').length > 0)
+                            || ($('#checkbox5').prop('checked') && $(this).find('span.uplay').length > 0)
+                            || ($('#checkbox6').prop('checked') && $(this).find('span.origin, span.gog, span.battle-net, span.cd, span.playstation, span.playstation3').length > 0);
+                        var genre_filter = ($('#checkbox7').prop('checked') && $(this).attr('genre').indexOf('Action') >= 0)
+                            || ($('#checkbox8').prop('checked') && $(this).attr('genre').indexOf('Adventure') >= 0)
+                            || ($('#checkbox9').prop('checked') && $(this).attr('genre').indexOf('Casual') >= 0)
+                            || ($('#checkbox10').prop('checked') && $(this).attr('genre').indexOf('Multiplayer') >= 0)
+                            || ($('#checkbox11').prop('checked') && $(this).attr('genre').indexOf('Point & Click') >= 0)
+                            || ($('#checkbox12').prop('checked') && $(this).attr('genre').indexOf('Puzzle') >= 0)
+                            || ($('#checkbox13').prop('checked') && $(this).attr('genre').indexOf('Racing') >= 0)
+                            || ($('#checkbox14').prop('checked') && $(this).attr('genre').indexOf('RPG') >= 0)
+                            || ($('#checkbox15').prop('checked') && $(this).attr('genre').indexOf('Sandbox') >= 0)
+                            || ($('#checkbox16').prop('checked') && $(this).attr('genre').indexOf('Shooter') >= 0)
+                            || ($('#checkbox17').prop('checked') && $(this).attr('genre').indexOf('Sport') >= 0)
+                            || ($('#checkbox18').prop('checked') && $(this).attr('genre').indexOf('Strategie') >= 0)
+                            || ($('#checkbox19').prop('checked') && $(this).attr('genre').indexOf('Visual Novel') >= 0);
+                        if (title_filter && played_filter && platform_filter && genre_filter) {
                             // $(this).removeClass('scale-out').show();
                             // $(this).removeClass('scale-out');
                             $(this).fadeIn(300);
@@ -315,13 +306,28 @@
                             <p class="form-section">Spielstatus</p>
                             <p><label><input id="checkbox1" type="checkbox" class="filled-in" checked="checked" /><span>gespielt</span></label></p>
                             <p><label><input id="checkbox2" type="checkbox" class="filled-in" checked="checked" /><span>ungespielt</span></label></p>
-                        </div>
-                        <div class="col s6">
                             <p class="form-section">Plattform</p>
                             <p><label><input id="checkbox3" type="checkbox" class="filled-in" checked="checked" /><span>Steam</span></label></p>
                             <p><label><input id="checkbox4" type="checkbox" class="filled-in" checked="checked" /><span>Epic Games</span></label></p>
                             <p><label><input id="checkbox5" type="checkbox" class="filled-in" checked="checked" /><span>Uplay</span></label></p>
                             <p><label><input id="checkbox6" type="checkbox" class="filled-in" checked="checked" /><span>sonstige</span></label></p>
+                        </div>
+                        <div class="col s6">
+                            <p class="form-section">Genre</p>
+                            <!-- Steam: Action | Abenteuer | Gelegenheitsspiele | Indie | MMO | Rennspiele | RPG | Simulation | Sport | Strategie -->
+                            <p><label><input id="checkbox7" type="checkbox" class="filled-in" checked="checked" /><span>Action</span></label></p>
+                            <p><label><input id="checkbox8" type="checkbox" class="filled-in" checked="checked" /><span>Adventure</span></label></p>
+                            <p><label><input id="checkbox9" type="checkbox" class="filled-in" checked="checked" /><span>Casual</span></label></p>
+                            <p><label><input id="checkbox10" type="checkbox" class="filled-in" checked="checked" /><span>Multiplayer</span></label></p>
+                            <p><label><input id="checkbox11" type="checkbox" class="filled-in" checked="checked" /><span>Point & Click</span></label></p>
+                            <p><label><input id="checkbox12" type="checkbox" class="filled-in" checked="checked" /><span>Puzzle</span></label></p>
+                            <p><label><input id="checkbox13" type="checkbox" class="filled-in" checked="checked" /><span>Racing</span></label></p>
+                            <p><label><input id="checkbox14" type="checkbox" class="filled-in" checked="checked" /><span>RPG</span></label></p>
+                            <p><label><input id="checkbox15" type="checkbox" class="filled-in" checked="checked" /><span>Sandbox</span></label></p>
+                            <p><label><input id="checkbox16" type="checkbox" class="filled-in" checked="checked" /><span>Shooter</span></label></p>
+                            <p><label><input id="checkbox17" type="checkbox" class="filled-in" checked="checked" /><span>Sport</span></label></p>
+                            <p><label><input id="checkbox18" type="checkbox" class="filled-in" checked="checked" /><span>Strategie</span></label></p>
+                            <p><label><input id="checkbox19" type="checkbox" class="filled-in" checked="checked" /><span>Visual Novel</span></label></p>
                         </div>
                     </div>
                     <a id="btn2" class="dropdown-trigger btn" title="Sortierung" data-target="dropdown-sort"><i class="material-icons">sort</i></a>
