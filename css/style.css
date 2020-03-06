@@ -48,15 +48,6 @@
          url('../fonts/material-icons/MaterialIcons-Regular.ttf') format('truetype');
 }
 
-@font-face {
-    font-family: 'Game Platforms';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../fonts/game-platforms/GamePlatforms.woff2?684560') format('woff2'),
-         url('../fonts/game-platforms/GamePlatforms.woff?684560') format('woff'),
-         url('../fonts/game-platforms/GamePlatforms.ttf?684560') format('truetype');
-}
-
 :root {
     --text-color: #dddddd;
     --link-color: #8db2e5;
@@ -421,31 +412,6 @@ table.treetable tr.expanded span.indenter a {
     direction: ltr;
 }
 
-/* Game Platforms Icons */
-
-.game-platforms:before {
-    font-family: 'Game Platforms';
-    font-style: normal;
-    font-weight: normal;
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    padding: 2px;
-}
-
-.steam:before { content: '\e800'; }
-.epic-games:before { content: '\e801'; }
-.uplay:before { content: '\e802'; }
-.origin:before { content: '\e803'; }
-.gog:before { content: '\e804'; }
-.battle-net:before { content: '\e805'; }
-.playstation:before { content: '\e806'; }
-.playstation3:before { content: '\e807'; }
-.playstation4:before { content: '\e808'; }
-.xbox:before { content: '\e809'; }
-.nintendogamecube:before { content: '\e80a'; }
-.cd:before { content: '\e80b'; }
-
 .icon {
     position: absolute;
     color: #dddddd;
@@ -455,7 +421,6 @@ table.treetable tr.expanded span.indenter a {
 .platform-icon {
     bottom: 8px;
     left: 8px;
-    font-size: 20px;
 }
 
 .patch-icon {
@@ -612,4 +577,9 @@ div.rating > i.material-icons {
 
 .form-section {
     text-transform: uppercase;
+}
+
+.platform-icon > svg > path {
+    fill: #dddddd;
+    filter: drop-shadow(0 0 1px black);
 }

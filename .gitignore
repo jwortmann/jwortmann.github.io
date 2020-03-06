@@ -1,16 +1,11 @@
 css/jquery.treetable.css
 fonts/ubuntu/Ubuntu-Bold.ttf
 fonts/ubuntu/Ubuntu-BoldItalic.ttf
-fonts/ubuntu/Ubuntu-Light.ttf
-fonts/ubuntu/Ubuntu-LightItalic.ttf
-fonts/ubuntu/Ubuntu-Medium.ttf
-fonts/ubuntu/Ubuntu-MediumItalic.ttf
-img/imdb_31x14.png
+js/jquery.tablesorter.min.js
 js/jquery.treetable.js
 js/rating.min.js
 svg
 audioencoding.html
-hardware.html
 movies.html
 movies.json
 programming.html
