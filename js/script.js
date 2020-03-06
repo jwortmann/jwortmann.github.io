@@ -283,6 +283,8 @@ $(document).ready(function() {
             $('#toggle-theme').click(function() {
                 document.documentElement.toggleAttribute('light-theme');
                 $('#theme-icon').toggleText('wb_sunny', 'brightness_2');
+                Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
+                chart.update();
             });
         }
     }
