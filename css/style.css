@@ -48,7 +48,7 @@
          url('../fonts/material-icons/MaterialIcons-Regular.ttf') format('truetype');
 }
 
-:root {
+body {
     --text-color: #dddddd;
     --link-color: #8db2e5;
     --border-color: #cccccc;
@@ -61,7 +61,7 @@
     --secondary-color-variant: #ffcc99;
 }
 
-[light-theme]:root {
+body[theme="light"] {
     --text-color: #333333;
     --link-color: #2d4b7f;
     --border-color: #666666;
@@ -451,7 +451,7 @@ input[type="search"].search-field, input[type="search"].search-field:active {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2) !important;
 }
 
-[light-theme] input[type="search"]::placeholder {
+body[theme="light"] input[type="search"]::placeholder {
     color: #3b3b3b;
 }
 

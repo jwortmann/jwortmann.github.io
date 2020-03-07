@@ -1,9 +1,3 @@
-$.fn.extend({
-    toggleText: function(a, b) {
-        return this.text(this.text() == b ? a : b);
-    }
-});
-
 function parseDate(date) {
     return Sugar.Date(Sugar.Date.create(date.toString())).short('de');
 }
@@ -279,13 +273,27 @@ $(document).ready(function() {
                 }
             );
 
-            // Dark/Light Theme
+            // Toggle theme
             $('#toggle-theme').click(function() {
-                document.documentElement.toggleAttribute('light-theme');
-                $('#theme-icon').toggleText('wb_sunny', 'brightness_2');
+                if (document.body.getAttribute('theme') == 'light') {
+                    document.body.setAttribute('theme', 'dark');
+                    $('#theme-icon').text('wb_sunny');
+                } else {
+                    document.body.setAttribute('theme', 'light');
+                    $('#theme-icon').text('brightness_2');
+                }
                 Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
                 chart.update();
             });
+
+            // Set initial theme
+            if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                document.body.setAttribute('theme', 'light');
+                $('#theme-icon').text('brightness_2');
+            } else {
+                document.body.setAttribute('theme', 'dark');
+                $('#theme-icon').text('wb_sunny');
+            }
         }
     }
 });
