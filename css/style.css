@@ -221,8 +221,14 @@ div#games {
     color: var(--text-color) !important;
 }
 
-input[type="checkbox"].filled-in:checked + span:not(.lever)::after {
+input[type="checkbox"].filled-in:checked + span:not(.lever)::after,
+input[type="radio"].with-gap:checked + span::before,
+input[type="radio"].with-gap:checked + span::after {
     border-color: var(--primary-color);
+}
+
+input[type="checkbox"].filled-in:checked + span:not(.lever)::after,
+input[type="radio"].with-gap:checked + span::after {
     background-color: var(--primary-color);
 }
 

@@ -7,8 +7,9 @@ function searchfilter() {
     $('div#grid').children().each(function() {
         var title_filter = $(this).attr('game-title').toLowerCase().indexOf(filter_string) >= 0;
         var played_filter = 
-            ($('#checkbox1').prop('checked') && $(this).attr('played') == 'true') ||
-            ($('#checkbox2').prop('checked') && $(this).attr('played') == 'false');
+            $('#radiobutton1').prop('checked') ||
+            ($('#radiobutton2').prop('checked') && $(this).attr('played') == 'true') ||
+            ($('#radiobutton3').prop('checked') && $(this).attr('played') == 'false');
         var platform_filter = 
             ($('#checkbox3').prop('checked') && $(this).find('.steam').length > 0) ||
             ($('#checkbox4').prop('checked') && $(this).find('.epic-games').length > 0) ||
@@ -48,7 +49,7 @@ function searchfilter() {
         } else {
             // $(this).addClass('scale-out').delay(300).hide();
             // $(this).addClass('scale-out');
-            $(this).fadeOut(200, function() { $(this).hide(); });
+            $(this).fadeOut(250, function() { $(this).hide(); });
         }
     });
 }
@@ -171,18 +172,22 @@ $(document).ready(function() {
 
             // Searchfields
             document.getElementById('searchfilter').value = "";
-            $('#searchfilter').keyup(function() {
-                searchfilter();
-            });
             $('#clear').click(function() {
                 document.getElementById('searchfilter').value = "";
                 searchfilter();
             });
 
+            // Radiobuttons
+            $('#radiobutton1').prop('checked', true);
+            $('#radiobutton2').prop('checked', false);
+            $('#radiobutton3').prop('checked', false);
+
             // Checkboxes
             $('input[type="checkbox"]').prop('checked', false);
             $('#checkbox1, #checkbox2, #checkbox3, #checkbox4, #checkbox5, #checkbox6').prop('checked', true);
 
+            $('#searchfilter').keyup(function() { searchfilter(); });
+            $('input[type="radio"]').change(function() { searchfilter(); });
             $('input[type="checkbox"]').change(function() { searchfilter(); });
 
             $('#sort_release').click(function() {
