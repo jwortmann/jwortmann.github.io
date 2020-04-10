@@ -109,7 +109,7 @@ $(document).ready(function() {
                     years_unplayed.push(parseInt(release.slice(0, 4)));
                 }
 
-                var img_html = '<img class="responsive-img" src="img/' + img + '" alt="' + title + '" title="' + tooltip_html + '">';
+                var img_html = '<img class="responsive-img" loading="lazy" src="img/' + img + '" alt="' + title + '" title="' + tooltip_html + '">';
                 if (pcgames[i].hasOwnProperty('link')) {
                     img_html = '<a href="' + pcgames[i]['link'] + '">' + img_html + '</a>';
                 }
