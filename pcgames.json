@@ -14,6 +14,8 @@
     { "release": "2019-02-28", "title": "APE OUT", "link": "https://www.pcgamingwiki.com/wiki/Ape_Out", "genre": ["Action", "Rogue-like"], "platform": "Epic Games", "app_id": 447150, "rating": 2 },
     { "release": "2019-02-28", "title": "Space Engineers", "link": "https://www.pcgamingwiki.com/wiki/Space_Engineers", "genre": ["Sandbox", "Multiplayer"], "platform": "Steam", "app_id": 244850 },
     { "release": "2019-02-07", "title": "Evoland Legendary Edition", "link": "https://www.pcgamingwiki.com/wiki/Evoland_Legendary_Edition", "genre": ["RPG"], "platform": "Steam", "app_id": 1020470 },
+    { "release": "2018-12-04", "title": "Just Cause 4", "link": "https://www.pcgamingwiki.com/wiki/Just_Cause_4", "genre": ["Action", "Adventure", "Open World"], "platform": "Epic Games", "app_id": 517630 },
+    { "release": "2018-11-30", "title": "The Subject", "link": "https://www.pcgamingwiki.com/wiki/The_Subject", "genre": ["Adventure", "Horror", "Puzzle", "First-person"], "platform": "Steam", "app_id": 855190 },
     { "release": "2018-11-20", "title": "Farming Simulator 19", "link": "https://www.pcgamingwiki.com/wiki/Farming_Simulator_19", "genre": ["Sandbox", "Simulation"], "platform": "Epic Games", "app_id": 787860 },
     { "release": "2018-10-22", "title": "EXAPUNKS", "link": "https://www.pcgamingwiki.com/wiki/Exapunks", "genre": ["Puzzle"], "platform": "Steam", "app_id": 716490, "rating": 3.5 },
     { "release": "2018-10-16", "title": "Bad North", "link": "https://www.pcgamingwiki.com/wiki/Bad_North", "genre": ["Casual", "Rogue-like"], "platform": "Epic Games", "app_id": 688420, "rating": 2 },
