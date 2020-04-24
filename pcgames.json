@@ -27,6 +27,7 @@
     { "release": "2018-05-29", "title": "Kabounce", "link": "https://www.pcgamingwiki.com/wiki/Kabounce", "genre": ["Casual", "Multiplayer"], "platform": "Steam", "app_id": 431930, "rating": 1 },
     { "release": "2018-05-29", "title": "Moonlighter", "link": "https://www.pcgamingwiki.com/wiki/Moonlighter", "genre": ["RPG", "Rogue-like", "Pixelart"], "platform": "Epic Games", "app_id": 606150 },
     { "release": "2018-05-04", "title": "City of Brass", "link": "https://www.pcgamingwiki.com/wiki/City_of_Brass", "genre": ["Action", "Shooter", "First-person"], "platform": "Epic Games", "app_id": 301840 },
+    { "release": "2018-04-19", "title": "For the King", "link": "https://www.pcgamingwiki.com/wiki/For_the_King", "genre": ["Strategy", "Turn-based"], "platform": "Epic Games", "app_id": 527230 },
     { "release": "2018-04-03", "title": "Minit", "link": "https://www.pcgamingwiki.com/wiki/Minit", "genre": ["Casual", "Pixelart"], "platform": "Epic Games", "app_id": 609490, "rating": 1.5 },
     { "release": "2018-03-15", "title": "Surviving Mars", "link": "https://www.pcgamingwiki.com/wiki/Surviving_Mars", "genre": ["Strategy", "Aufbau"], "platform": "Epic Games", "app_id": 464920 },
     { "release": "2018-03-13", "title": "Q.U.B.E. 2", "link": "https://www.pcgamingwiki.com/wiki/Q.U.B.E._2", "genre": ["Puzzle", "First-person"], "platform": "Epic Games", "app_id": 359100, "rating": 4 },
