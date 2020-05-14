@@ -61,43 +61,44 @@ $(document).ready(function() {
     request.send(null);
     request.onload = function() {
         if (request.readyState == 4 && request.status == 200) {
-            var pcgames = JSON.parse(request.responseText);
-            var pcgames_html = [];
+            var json = JSON.parse(request.responseText);
+            var games = json['games'];
+            var games_html = [];
             var titles = [];
             var ratings = [];
             var years = [];
             var years_played = [];
             var years_unplayed = [];
-            for (let i = 0; i < pcgames.length; i++) {
-                var title = pcgames[i]['title'];
-                var release = Array.isArray(pcgames[i]['release']) ? Object.values(pcgames[i]['release'][0]) : pcgames[i]['release'];
-                var img = pcgames[i].hasOwnProperty('app_id') ? pcgames[i]['app_id'] + 'p.webp' : pcgames[i]['img'];
-                var played = pcgames[i].hasOwnProperty('rating');
+            for (let i = 0; i < games.length; i++) {
+                var title = games[i]['title'];
+                var release = Array.isArray(games[i]['release']) ? Object.values(games[i]['release'][0]) : games[i]['release'];
+                var img = games[i].hasOwnProperty('app_id') ? games[i]['app_id'] + 'p.webp' : games[i]['img'];
+                var played = games[i]['rating'] !== null;
                 var tooltip_html = title;
 
-                if (pcgames[i].hasOwnProperty('mod')) {
-                    tooltip_html += ' (' + pcgames[i]['mod'] + ' Mod)';
+                if (games[i].hasOwnProperty('mod')) {
+                    tooltip_html += ' (' + games[i]['mod'] + ' Mod)';
                 }
 
                 tooltip_html += '<br>';
-                if (Array.isArray(pcgames[i]['release'])) {
-                    for (var j = 0; j < pcgames[i]['release'].length-1; j++) {
-                        tooltip_html += Object.keys(pcgames[i]['release'][j]) + ': ' + parseDate(Object.values(pcgames[i]['release'][j])) + '<br>';
+                if (Array.isArray(games[i]['release'])) {
+                    for (var j = 0; j < games[i]['release'].length-1; j++) {
+                        tooltip_html += Object.keys(games[i]['release'][j]) + ': ' + parseDate(Object.values(games[i]['release'][j])) + '<br>';
                     }
-                    tooltip_html += Object.keys(pcgames[i]['release'][pcgames[i]['release'].length-1]) + ': ' + parseDate(Object.values(pcgames[i]['release'][pcgames[i]['release'].length-1]));
+                    tooltip_html += Object.keys(games[i]['release'][games[i]['release'].length-1]) + ': ' + parseDate(Object.values(games[i]['release'][games[i]['release'].length-1]));
                 } else {
-                    tooltip_html += parseDate(pcgames[i]['release']);
+                    tooltip_html += parseDate(games[i]['release']);
                 }
 
                 if (played) {
                     tooltip_html += '<br>';
-                    for (let j = 0; j < Math.floor(pcgames[i]['rating']); j++) {
+                    for (let j = 0; j < Math.floor(games[i]['rating']); j++) {
                         tooltip_html += '<i class=\'material-icons\'>star</i>';
                     }
-                    if (!Number.isInteger(pcgames[i]['rating'])) {
+                    if (!Number.isInteger(games[i]['rating'])) {
                         tooltip_html += '<i class=\'material-icons\'>star_half</i>';
                     }
-                    for (let j = Math.ceil(pcgames[i]['rating']); j < 5; j++) {
+                    for (let j = Math.ceil(games[i]['rating']); j < 5; j++) {
                         tooltip_html += '<i class=\'material-icons\'>star_border</i>';
                     }
                 }
@@ -110,11 +111,11 @@ $(document).ready(function() {
                 }
 
                 var img_html = '<img class="responsive-img" loading="lazy" src="img/' + img + '" alt="' + title + '" title="' + tooltip_html + '">';
-                if (pcgames[i].hasOwnProperty('link')) {
-                    img_html = '<a href="' + pcgames[i]['link'] + '">' + img_html + '</a>';
+                if (games[i]['link'] !== null) {
+                    img_html = '<a href="' + games[i]['link'] + '">' + img_html + '</a>';
                 }
 
-                var platform = Array.isArray(pcgames[i]['platform']) ? pcgames[i]['platform'] : [pcgames[i]['platform']];
+                var platform = Array.isArray(games[i]['platform']) ? games[i]['platform'] : [games[i]['platform']];
                 var icons_html = '<div class="icon platform-icon">';
                 for (var j = 0; j < platform.length; j++) {
                     if (platform[j] == "Steam") {
@@ -138,22 +139,22 @@ $(document).ready(function() {
                     }
                 }
                 icons_html += '</div>';
-                if (pcgames[i].hasOwnProperty('patch')) {
-                    icons_html += '<a href="' + pcgames[i]['patch'] + '"><i class="material-icons icon patch-icon" title="Patch">healing</i></a>';
+                if (games[i].hasOwnProperty('patch')) {
+                    icons_html += '<a href="' + games[i]['patch'] + '"><i class="material-icons icon patch-icon" title="Patch">healing</i></a>';
                 }
 
-                var html_str = '<div class="col s6 m3 xl2 scale-transition" game-title="' + title + '" release="' + release + '" played="' + played.toString() + '" genre="' + pcgames[i]['genre'].join(', ') + '"><div class="img-container">' + img_html + icons_html + '<div class="shine-effect"></div></div></div>';
+                var html_str = '<div class="col s6 m3 xl2 scale-transition" game-title="' + title + '" release="' + release + '" played="' + played.toString() + '" genre="' + games[i]['genre'].join(', ') + '"><div class="img-container">' + img_html + icons_html + '<div class="shine-effect"></div></div></div>';
 
-                pcgames_html.push(html_str);
+                games_html.push(html_str);
                 titles.push(title);
-                ratings.push(pcgames[i].hasOwnProperty('rating') ? pcgames[i]['rating'] : 0);
+                ratings.push(games[i].hasOwnProperty('rating') ? games[i]['rating'] : 0);
             }
 
             // Sort by titles and ratings
             var title_idx = Array.from(Array(titles.length).keys()).sort((a, b) => titles[a] < titles[b] ? -1 : (titles[b] < titles[a]) | 0);
             var rating_idx = Array.from(Array(ratings.length).keys()).sort((a, b) => ratings[a] > ratings[b] ? -1 : (ratings[b] > ratings[a]) | 0);
 
-            for (let i of pcgames_html) {
+            for (let i of games_html) {
                 $('div#grid').append(i);
             }
 
@@ -192,7 +193,7 @@ $(document).ready(function() {
 
             $('#sort_release').click(function() {
                 $('div#grid').children().remove();
-                for (let i of pcgames_html) {
+                for (let i of games_html) {
                     $('div#grid').append(i);
                 }
                 tippy('[title]', { placement: "top", arrow: true, arrowType: "round", animation: "scale", theme: "translucent" });
@@ -202,7 +203,7 @@ $(document).ready(function() {
             $('#sort_title').click(function() {
                 $('div#grid').children().remove();
                 for (let i of title_idx) {
-                    $('div#grid').append(pcgames_html[i]);
+                    $('div#grid').append(games_html[i]);
                 }
                 tippy('[title]', { placement: "top", arrow: true, arrowType: "round", animation: "scale", theme: "translucent" });
                 searchfilter();
@@ -211,7 +212,7 @@ $(document).ready(function() {
             $('#sort_rating').click(function() {
                 $('div#grid').children().remove();
                 for (let i of rating_idx) {
-                    $('div#grid').append(pcgames_html[i]);
+                    $('div#grid').append(games_html[i]);
                 }
                 tippy('[title]', { placement: "top", arrow: true, arrowType: "round", animation: "scale", theme: "translucent" });
                 searchfilter();
