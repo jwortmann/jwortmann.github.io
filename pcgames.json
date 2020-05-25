@@ -1,6 +1,7 @@
 {
     "$schema": "./schema.json",
     "games": [
+        { "release": "2020-05-19", "title": "Mafia II: Definitive Edition", "link": "https://www.pcgamingwiki.com/wiki/Mafia_II:_Definitive_Edition", "genre": ["Action", "Open World"], "platform": "Steam", "app_id": 1030830, "rating": null },
         { "release": "2019-11-19", "title": "MOLEK-SYNTEZ", "link": "https://www.pcgamingwiki.com/wiki/Molek-Syntez", "genre": ["Puzzle"], "platform": "Steam", "app_id": 1168880, "rating": 3 },
         { "release": "2019-11-07", "title": "Headsnatchers", "link": "https://www.pcgamingwiki.com/wiki/Headsnatchers", "genre": ["Casual", "Multiplayer"], "platform": "Steam", "app_id": 797410, "rating": null },
         { "release": "2019-10-08", "title": "Yooka-Laylee and the Impossible Lair", "link": "https://www.pcgamingwiki.com/wiki/Yooka-Laylee_and_the_Impossible_Lair", "genre": ["Adventure", "3D-Platformer"], "platform": "Epic Games", "app_id": 846870, "rating": null },
@@ -77,6 +78,7 @@
         { "release": "2016-11-10", "title": "Ashes of the Singularity: Escalation", "link": "https://www.pcgamingwiki.com/wiki/Ashes_of_the_Singularity:_Escalation", "genre": ["Strategy", "Real-time"], "platform": "Steam", "app_id": 507490, "rating": null },
         { "release": "2016-11-09", "title": "Beholder", "link": "https://www.pcgamingwiki.com/wiki/Beholder", "genre": ["Casual"], "platform": "Steam", "app_id": 475550, "rating": 2 },
         { "release": "2016-10-27", "title": "Orwell", "link": "https://www.pcgamingwiki.com/wiki/Orwell", "genre": ["Casual"], "platform": "Steam", "app_id": 491950, "rating": null },
+        { "release": "2016-10-21", "title": "Civilization VI", "link": "https://www.pcgamingwiki.com/wiki/Civilization_VI", "genre": ["Strategy", "Turn-based"], "platform": "Epic Games", "app_id": 289070, "rating": null },
         { "release": "2016-10-12", "title": "GoNNER", "link": "https://www.pcgamingwiki.com/wiki/Gonner", "genre": ["Casual", "2D-Platformer", "Rogue-like"], "platform": "Epic Games", "app_id": 437570, "rating": null },
         { "release": "2016-10-07", "title": "Five Nights at Freddy's: Sister Location", "link": "https://www.pcgamingwiki.com/wiki/Five_Nights_at_Freddy%27s:_Sister_Location", "genre": ["Casual", "Horror"], "platform": "Steam", "app_id": 506610, "rating": 1 },
         { "release": "2016-10-05", "title": "Sakura Nova", "link": "https://www.pcgamingwiki.com/wiki/Sakura_Nova", "genre": ["Visual Novel"], "platform": "Steam", "app_id": 539670, "rating": null },
@@ -129,7 +131,7 @@
         { "release": [{ "Episode 1": "2015-10-13" }, { "Episode 2": "2015-10-27" }, { "Episode 3": "2015-11-24" }, { "Episode 4": "2015-12-22" }, { "Episode 5": "2016-03-29" }, { "Episode 6": "2016-06-07" }, { "Episode 7": "2016-07-26" }, { "Episode 8": "2016-09-13" }], "title": "Minecraft: Story Mode", "link": "https://www.pcgamingwiki.com/wiki/Minecraft:_Story_Mode_-_A_Telltale_Games_Series", "genre": ["Adventure"], "platform": "Steam", "app_id": 376870, "rating": 2 },
         { "release": "2015-10-08", "title": "Keep Talking and Nobody Explodes", "link": "https://www.pcgamingwiki.com/wiki/Keep_Talking_and_Nobody_Explodes", "genre": ["Puzzle", "Multiplayer"], "platform": "Steam", "app_id": 341800, "rating": null },
         { "release": "2015-10-06", "title": "Prison Architect", "link": "https://www.pcgamingwiki.com/wiki/Prison_Architect", "genre": ["Strategy", "Building"], "platform": "Steam", "app_id": 233450, "rating": 2 },
-        { "release": "2015-09-29", "title": "80 Days", "link": "https://www.pcgamingwiki.com/wiki/80_Days_(2015)", "genre": ["Casual"], "platform": "Steam", "app_id": 381780, "rating": null },
+        { "release": "2015-09-29", "title": "80 Days", "link": "https://www.pcgamingwiki.com/wiki/80_Days_(2015)", "genre": ["Casual"], "platform": "Steam", "app_id": 381780, "rating": 1.5 },
         { "release": "2015-09-29", "title": "Jotun: Valhalla Edition", "link": "https://www.pcgamingwiki.com/wiki/Jotun", "genre": ["Adventure"], "platform": "Epic Games", "app_id": 323580, "rating": null },
         { "release": "2015-09-29", "title": "NBA 2K16", "link": "https://www.pcgamingwiki.com/wiki/NBA_2K16", "genre": ["Sports"], "platform": "Steam", "app_id": 370240, "rating": null },
         { "release": "2015-09-25", "title": "A Kiss for the Petals - Remembering How We Met", "link": "https://www.pcgamingwiki.com/wiki/A_Kiss_for_the_Petals_-_Remembering_How_We_Met", "genre": ["Visual Novel"], "platform": "Steam", "app_id": 397270, "rating": null },
@@ -379,7 +381,7 @@
         { "release": "2007-11-13", "title": "Kane & Lynch: Dead Man", "link": "https://www.pcgamingwiki.com/wiki/Kane_%26_Lynch:_Dead_Men", "genre": ["Shooter", "Third-person"], "platform": "Steam", "app_id": 8080, "rating": 3.5 },
         { "release": "2007-11-13", "title": "Need For Speed: ProStreet", "link": "https://www.pcgamingwiki.com/wiki/Need_for_Speed:_ProStreet", "genre": ["Racing"],"platform": "Retail", "img": "need_for_speed_prostreet.webp", "rating": 2 },
         { "release": [{ "Episode 1": "2007-11-08" }, { "Episode 2": "2008-01-10" }, { "Episode 3": "2008-02-12" }, { "Episode 4": "2008-03-13" }, { "Episode 5": "2008-04-10" }], "title": "Sam & Max: Season Two", "link": "https://www.pcgamingwiki.com/wiki/Sam_%26_Max_Beyond_Time_and_Space", "genre": ["Adventure", "Point & Click"], "platform": "Steam", "app_id": 8260, "rating": null },
-        { "release": "2007-10-30", "title": "TimeShift", "link": "https://www.pcgamingwiki.com/wiki/TimeShift", "genre": ["Shooter", "First-person"], "platform": "Steam", "app_id": 10130, "rating": null, "patch": "https://steamcommunity.com/sharedfiles/filedetails/?id=326627023" },
+        { "release": "2007-10-30", "title": "TimeShift", "link": "https://www.pcgamingwiki.com/wiki/TimeShift", "genre": ["Shooter", "First-person"], "platform": "Steam", "app_id": 10130, "rating": 3.5, "patch": "https://steamcommunity.com/sharedfiles/filedetails/?id=326627023" },
         { "release": "2007-10-26", "title": "The Witcher", "link": "https://www.pcgamingwiki.com/wiki/The_Witcher", "genre": ["RPG"], "platform": "Steam", "app_id": 20900, "rating": 2 },
         { "release": "2007-10-09", "title": "Portal", "link": "https://www.pcgamingwiki.com/wiki/Portal", "genre": ["Puzzle", "First-person"], "platform": "Steam", "app_id": 400, "rating": 3.5 },
         { "release": "2007-08-21", "title": "BioShock", "link": "https://www.pcgamingwiki.com/wiki/BioShock", "genre": ["Shooter", "First-person"], "platform": "Retail", "app_id": 7670, "rating": 4.5 },
