@@ -212,7 +212,9 @@ $(document).ready(function() {
             $('#sort_rating').click(function() {
                 $('div#grid').children().remove();
                 for (let i of rating_idx) {
-                    $('div#grid').append(games_html[i]);
+                    if (games[i]['rating'] !== null) {
+                        $('div#grid').append(games_html[i]);
+                    }
                 }
                 tippy('[title]', { placement: "top", arrow: true, arrowType: "round", animation: "scale", theme: "translucent" });
                 searchfilter();
