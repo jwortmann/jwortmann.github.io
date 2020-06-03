@@ -16,8 +16,22 @@
           "release": {
             "description": "Realease date in format YYYY-MM-DD or array if multiple episodes or DLCs",
             "anyOf": [
-              { "type": "string" },
-              { "type": "array", "items": { "type": "object", "patternProperties": { "^.+$": { "description": "Realease date for episode or DLC", "type": "string" }}}, "minItems": 1 }
+              {
+                "type": "string"
+              },
+              { 
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "patternProperties": {
+                    ".+": {
+                      "description": "Realease date for episode or DLC",
+                      "type": "string"
+                    }
+                  }
+                },
+                "minItems": 1
+              }
             ]
           },
           "title": {
@@ -25,7 +39,7 @@
             "type": "string"
           },
           "link": {
-            "description": "Hyperlink to PCGamingWiki page",
+            "description": "Link to PCGamingWiki page",
             "type": ["string", "null"]
           },
           "genre": {
@@ -40,8 +54,18 @@
           "platform": {
             "description": "Distribution platform or console",
             "anyOf": [
-              { "type": "string" },
-              { "type": "array", "items": { "type": "string", "enum": ["Steam", "Epic Games", "Uplay", "Origin", "GOG.com", "Retail", "PlayStation", "PlayStation 2"] }, "minItems": 1, "uniqueItems": true }
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["Steam", "Epic Games", "Uplay", "Origin", "GOG.com", "Retail", "PlayStation", "PlayStation 2"]
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
             ]
           },
           "app_id": {
@@ -50,14 +74,15 @@
           },
           "rating": {
             "description": "Personal rating for the game",
-            "type": ["number", "null"]
+            "type": ["number", "null"],
+            "default": null
           },
           "mod": {
             "description": "Name of the base game",
             "type": "string"
           },
           "patch": {
-            "description": "Hyperlink to a patch required or recommended for the game",
+            "description": "Link to a patch required or recommended for the game",
             "type": "string"
           },
           "img": {

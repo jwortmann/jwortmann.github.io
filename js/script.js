@@ -147,7 +147,7 @@ $(document).ready(function() {
 
                 games_html.push(html_str);
                 titles.push(title);
-                ratings.push(games[i].hasOwnProperty('rating') ? games[i]['rating'] : 0);
+                ratings.push(played ? games[i]['rating'] : 0);
             }
 
             // Sort by titles and ratings
