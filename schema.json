@@ -19,7 +19,7 @@
               {
                 "type": "string"
               },
-              { 
+              {
                 "type": "array",
                 "items": {
                   "type": "object",
@@ -76,10 +76,6 @@
             "description": "Personal rating for the game",
             "type": ["number", "null"],
             "default": null
-          },
-          "mod": {
-            "description": "Name of the base game",
-            "type": "string"
           },
           "patch": {
             "description": "Link to a patch required or recommended for the game",

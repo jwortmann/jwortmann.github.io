@@ -6,16 +6,16 @@ function searchfilter() {
     var filter_string = $('#searchfilter').val().toLowerCase();
     $('div#grid').children().each(function() {
         var title_filter = $(this).attr('game-title').toLowerCase().indexOf(filter_string) >= 0;
-        var played_filter = 
+        var played_filter =
             $('#radiobutton1').prop('checked') ||
             ($('#radiobutton2').prop('checked') && $(this).attr('played') == 'true') ||
             ($('#radiobutton3').prop('checked') && $(this).attr('played') == 'false');
-        var platform_filter = 
+        var platform_filter =
             ($('#checkbox3').prop('checked') && $(this).find('.steam').length > 0) ||
             ($('#checkbox4').prop('checked') && $(this).find('.epic-games').length > 0) ||
             ($('#checkbox5').prop('checked') && $(this).find('.uplay').length > 0) ||
             ($('#checkbox6').prop('checked') && $(this).find('.origin, .gog, .battle-net, .retail, .playstation, .playstation-2').length > 0);
-        var genre_filter = 
+        var genre_filter =
             !($('#checkbox7').prop('checked') ||
               $('#checkbox8').prop('checked') ||
               $('#checkbox9').prop('checked') ||
@@ -74,13 +74,8 @@ $(document).ready(function() {
                 var release = Array.isArray(games[i]['release']) ? Object.values(games[i]['release'][0]) : games[i]['release'];
                 var img = games[i].hasOwnProperty('app_id') ? games[i]['app_id'] + 'p.webp' : games[i]['img'];
                 var played = games[i]['rating'] !== null;
-                var tooltip_html = title;
+                var tooltip_html = title + '<br>';
 
-                if (games[i].hasOwnProperty('mod')) {
-                    tooltip_html += ' (' + games[i]['mod'] + ' Mod)';
-                }
-
-                tooltip_html += '<br>';
                 if (Array.isArray(games[i]['release'])) {
                     for (var j = 0; j < games[i]['release'].length-1; j++) {
                         tooltip_html += Object.keys(games[i]['release'][j]) + ': ' + parseDate(Object.values(games[i]['release'][j])) + '<br>';
