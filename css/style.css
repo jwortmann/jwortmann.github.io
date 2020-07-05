@@ -593,3 +593,12 @@ div.rating > i.material-icons {
     fill: #dddddd;
     filter: drop-shadow(0 0 1px black);
 }
+
+#searchfilter-icon {
+    position: relative;
+    width: 0;
+    right: 2.6rem;
+    line-height: 44px;
+    font-size: 2rem;
+    cursor: pointer;
+}

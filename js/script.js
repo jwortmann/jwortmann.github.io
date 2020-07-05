@@ -4,6 +4,11 @@ function parseDate(date) {
 
 function searchfilter() {
     var filter_string = $('#searchfilter').val().toLowerCase();
+    if (filter_string == "") {
+        $('#searchfilter-icon').addClass('hide');
+    } else {
+        $('#searchfilter-icon').removeClass('hide');
+    }
     $('div#grid').children().each(function() {
         var title_filter = $(this).attr('game-title').toLowerCase().indexOf(filter_string) >= 0;
         var played_filter =
@@ -166,9 +171,9 @@ $(document).ready(function() {
             $('.dropdown-trigger#btn1').dropdown({ 'constrainWidth': false, 'closeOnClick': false });
             $('.dropdown-trigger#btn2').dropdown({ 'constrainWidth': false });
 
-            // Searchfields
+            // Searchfield
             document.getElementById('searchfilter').value = "";
-            $('#clear').click(function() {
+            $('#searchfilter-icon').click(function() {
                 document.getElementById('searchfilter').value = "";
                 searchfilter();
             });
