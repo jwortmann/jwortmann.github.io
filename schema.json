@@ -53,20 +53,13 @@
           },
           "platform": {
             "description": "Distribution platform or console",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": ["Steam", "Epic Games", "Uplay", "Origin", "GOG.com", "Retail", "PlayStation", "PlayStation 2"]
-                },
-                "minItems": 1,
-                "uniqueItems": true
-              }
-            ]
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["Steam", "Epic Games", "Uplay", "Origin", "GOG.com", "Battle.net", "Retail", "PlayStation", "PlayStation 2"]
+            },
+            "minItems": 1,
+            "uniqueItems": true
           },
           "app_id": {
             "description": "Steam App ID",
