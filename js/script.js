@@ -77,37 +77,40 @@ $(document).ready(function() {
             for (let i = 0; i < games.length; i++) {
                 var title = games[i]['title'];
                 var release = Array.isArray(games[i]['release']) ? Object.values(games[i]['release'][0]) : games[i]['release'];
+                var platform = games[i]['platform'];
                 var img = games[i].hasOwnProperty('app_id') ? games[i]['app_id'] + 'p.webp' : games[i]['img'];
-                var played = games[i]['rating'] !== null;
+                var rating = games[i]['rating'];
+                var played = rating !== null;
+
                 var tooltip_html = title + '<br>';
 
                 if (Array.isArray(games[i]['release'])) {
-                    for (var j = 0; j < games[i]['release'].length-1; j++) {
-                        tooltip_html += Object.keys(games[i]['release'][j]) + ': ' + parseDate(Object.values(games[i]['release'][j])) + '<br>';
-                    }
-                    tooltip_html += Object.keys(games[i]['release'][games[i]['release'].length-1]) + ': ' + parseDate(Object.values(games[i]['release'][games[i]['release'].length-1]));
+                    var labels = [];
+                    games[i]['release'].forEach(obj => labels.push(Object.keys(obj)[0] + ': ' + parseDate(Object.values(obj)[0])));
+                    tooltip_html += labels.join('<br>');
                 } else {
-                    tooltip_html += parseDate(games[i]['release']);
+                    tooltip_html += parseDate(release);
                 }
 
                 if (played) {
                     tooltip_html += '<br>';
-                    for (let j = 0; j < Math.floor(games[i]['rating']); j++) {
+                    for (let j = 0; j < Math.floor(rating); j++) {
                         tooltip_html += '<i class=\'material-icons\'>star</i>';
                     }
-                    if (!Number.isInteger(games[i]['rating'])) {
+                    if (!Number.isInteger(rating)) {
                         tooltip_html += '<i class=\'material-icons\'>star_half</i>';
                     }
-                    for (let j = Math.ceil(games[i]['rating']); j < 5; j++) {
+                    for (let j = Math.ceil(rating); j < 5; j++) {
                         tooltip_html += '<i class=\'material-icons\'>star_border</i>';
                     }
                 }
 
-                years.push(parseInt(release.slice(0, 4)));
+                var year = parseInt(release.slice(0, 4));
+                years.push(year);
                 if (played) {
-                    years_played.push(parseInt(release.slice(0, 4)));
+                    years_played.push(year);
                 } else {
-                    years_unplayed.push(parseInt(release.slice(0, 4)));
+                    years_unplayed.push(year);
                 }
 
                 var img_html = '<img class="responsive-img" loading="lazy" src="img/' + img + '" alt="' + title + '" title="' + tooltip_html + '">';
@@ -115,7 +118,6 @@ $(document).ready(function() {
                     img_html = '<a href="' + games[i]['link'] + '">' + img_html + '</a>';
                 }
 
-                var platform = games[i]['platform'];
                 var icons_html = '<div class="icon platform-icon">';
                 for (var j = 0; j < platform.length; j++) {
                     if (platform[j] == "Steam") {
@@ -147,7 +149,7 @@ $(document).ready(function() {
 
                 games_html.push(html_str);
                 titles.push(title);
-                ratings.push(played ? games[i]['rating'] : 0);
+                ratings.push(played ? rating : 0);
             }
 
             // Sort by titles and ratings
@@ -226,13 +228,13 @@ $(document).ready(function() {
             for (i = year_min; i <= year_max; i++) {
                 chart_labels.push(i.toString());
             }
-            var chart_data1 = new Array(chart_labels.length).fill(0);
-            var chart_data2 = new Array(chart_labels.length).fill(0);
+            var chart_played = new Array(chart_labels.length).fill(0);
+            var chart_unplayed = new Array(chart_labels.length).fill(0);
             for (let i of years_played) {
-                chart_data1[i - year_min]++;
+                chart_played[i - year_min]++;
             }
             for (let i of years_unplayed) {
-                chart_data2[i - year_min]++;
+                chart_unplayed[i - year_min]++;
             }
 
             Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
@@ -241,45 +243,42 @@ $(document).ready(function() {
             Chart.defaults.global.plugins.rough.roughness = 0;
             Chart.defaults.global.plugins.rough.bowing = 0;
 
-            chart = new Chart(
-                document.getElementById('canvas').getContext('2d'),
-                {
-                    type: 'bar',
-                    data: {
-                        labels: chart_labels,
-                        datasets: [{
-                            label: 'Bereits gespielt',
-                            backgroundColor: getComputedStyle(document.body).getPropertyValue('--primary-color-variant').trim(),
-                            borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
-                            borderWidth: 1,
-                            data: chart_data1
-                        }, {
-                            label: 'Noch nicht gespielt',
-                            backgroundColor: getComputedStyle(document.body).getPropertyValue('--secondary-color-variant').trim(),
-                            borderColor: getComputedStyle(document.body).getPropertyValue('--secondary-color').trim(),
-                            borderWidth: 1,
-                            data: chart_data2
+            chart = new Chart(document.getElementById('canvas').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: chart_labels,
+                    datasets: [{
+                        label: 'Bereits gespielt',
+                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--primary-color-variant').trim(),
+                        borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
+                        borderWidth: 1,
+                        data: chart_played
+                    }, {
+                        label: 'Noch nicht gespielt',
+                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--secondary-color-variant').trim(),
+                        borderColor: getComputedStyle(document.body).getPropertyValue('--secondary-color').trim(),
+                        borderWidth: 1,
+                        data: chart_unplayed
+                    }],
+                },
+                options: {
+                    legend: {
+                        position: 'top'
+                    },
+                    scales: {
+                        xAxes: [{
+                            stacked: true
                         }],
+                        yAxes: [{
+                            stacked: true
+                        }]
                     },
-                    options: {
-                        legend: {
-                            position: 'top'
-                        },
-                        scales: {
-                            xAxes: [{
-                                stacked: true
-                            }],
-                            yAxes: [{
-                                stacked: true
-                            }]
-                        },
-                        tooltips: {
-                            mode: 'index'
-                        }
-                    },
-                    plugins: [ChartRough]
-                }
-            );
+                    tooltips: {
+                        mode: 'index'
+                    }
+                },
+                plugins: [ChartRough]
+            });
 
             // Toggle theme
             $('#toggle-theme').click(function() {
