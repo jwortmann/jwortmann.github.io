@@ -115,7 +115,7 @@ $(document).ready(function() {
                     img_html = '<a href="' + games[i]['link'] + '">' + img_html + '</a>';
                 }
 
-                var platform = Array.isArray(games[i]['platform']) ? games[i]['platform'] : [games[i]['platform']];
+                var platform = games[i]['platform'];
                 var icons_html = '<div class="icon platform-icon">';
                 for (var j = 0; j < platform.length; j++) {
                     if (platform[j] == "Steam") {
