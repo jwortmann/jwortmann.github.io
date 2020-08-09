@@ -26,6 +26,7 @@
         { "release": "2018-10-16", "title": "Bad North", "link": "https://www.pcgamingwiki.com/wiki/Bad_North", "genre": ["Casual", "Rogue-like"], "platform": ["Epic Games"], "app_id": 688420, "rating": 2 },
         { "release": "2018-09-25", "title": "V-Rally 4", "link": "https://www.pcgamingwiki.com/wiki/V-Rally_4", "genre": ["Racing"], "platform": ["Steam"], "app_id": 658700, "rating": null },
         { "release": "2018-08-30", "title": "The Messenger", "link": "https://www.pcgamingwiki.com/wiki/The_Messenger", "genre": ["Adventure", "2D-Platformer", "Pixelart"], "platform": ["Epic Games"], "app_id": 764790, "rating": null },
+        { "release": "2018-08-24", "title": "F1 2018", "link": "https://www.pcgamingwiki.com/wiki/F1_2018", "genre": ["Racing"], "platform": ["Steam"], "app_id": 737800, "rating": null },
         { "release": [{"Episode 1": "2018-08-14"}, {"Episode 2": "2018-09-25"}, {"Episode 3": "2019-01-15"}, {"Episode 4": "2019-03-26"}], "title": "The Walking Dead: The Final Season", "link": "https://www.pcgamingwiki.com/wiki/The_Walking_Dead:_The_Final_Season", "genre": ["Adventure"], "platform": ["Steam"], "app_id": 866800, "rating": 5 },
         { "release": "2018-08-09", "title": "Deiland", "link": "https://www.pcgamingwiki.com/wiki/Deiland", "genre": ["Casual"], "platform": ["Steam"], "app_id": 760620, "rating": null },
         { "release": "2018-07-17", "title": "GNOG", "link": "https://www.pcgamingwiki.com/wiki/GNOG", "genre": ["Casual", "Puzzle"], "platform": ["Epic Games"], "app_id": 290510, "rating": 1.5 },
