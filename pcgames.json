@@ -1,11 +1,13 @@
 {
     "$schema": "./schema.json",
     "games": [
+        { "release": "2020-08-13", "title": "A Total War Saga: Troy", "link": "https://www.pcgamingwiki.com/wiki/A_Total_War_Saga:_Troy", "genre": ["Strategy"], "platform": ["Epic Games"], "app_id": 1099410, "rating": null },
         { "release": "2020-05-19", "title": "Mafia II: Definitive Edition", "link": "https://www.pcgamingwiki.com/wiki/Mafia_II:_Definitive_Edition", "genre": ["Action", "Open World"], "platform": ["Steam"], "app_id": 1030830, "rating": null },
         { "release": "2019-11-19", "title": "MOLEK-SYNTEZ", "link": "https://www.pcgamingwiki.com/wiki/Molek-Syntez", "genre": ["Puzzle"], "platform": ["Steam"], "app_id": 1168880, "rating": 3 },
         { "release": "2019-11-07", "title": "Headsnatchers", "link": "https://www.pcgamingwiki.com/wiki/Headsnatchers", "genre": ["Casual", "Multiplayer"], "platform": ["Steam"], "app_id": 797410, "rating": null },
         { "release": "2019-10-08", "title": "Yooka-Laylee and the Impossible Lair", "link": "https://www.pcgamingwiki.com/wiki/Yooka-Laylee_and_the_Impossible_Lair", "genre": ["Adventure", "3D-Platformer"], "platform": ["Epic Games"], "app_id": 846870, "rating": null },
         { "release": "2019-09-19", "title": "Mutazione", "link": "https://www.pcgamingwiki.com/wiki/Mutazione", "genre": ["Adventure", "Casual"], "platform": ["Epic Games"], "app_id": 1080750, "rating": null },
+        { "release": "2019-08-20", "title": "Remnant: From the Ashes", "link": "https://www.pcgamingwiki.com/wiki/Remnant:_From_the_Ashes", "genre": ["Action", "RPG"], "platform": ["Epic Games"], "app_id": 617290, "rating": null },
         { "release": "2019-07-18", "title": "Horace", "link": "https://www.pcgamingwiki.com/wiki/Horace", "genre": ["Adventure", "2D-Platformer", "Pixelart"], "platform": ["Epic Games"], "app_id": 629090, "rating": null },
         { "release": "2019-07-10", "title": "GOAT OF DUTY", "link": "https://www.pcgamingwiki.com/wiki/Goat_of_Duty", "genre": ["Shooter", "First-person", "Multiplayer"], "platform": ["Steam"], "app_id": 555000, "rating": null },
         { "release": "2019-07-04", "title": "Stranger Things 3: The Game", "link": "https://www.pcgamingwiki.com/wiki/Stranger_Things_3:_The_Game", "genre": ["Adventure", "Pixelart"], "platform": ["Epic Games"], "app_id": 1097800, "rating": null },
