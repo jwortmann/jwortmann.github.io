@@ -162,16 +162,16 @@ $(document).ready(function() {
 
             // Tooltips
             tippy('[title]', {
-                placement: "top",
-                arrow: true,
-                arrowType: "round",
-                animation: "scale",
-                theme: "translucent"
+                "placement": "top",
+                "arrow": true,
+                "arrowType": "round",
+                "animation": "scale",
+                "theme": "translucent"
             });
 
             // Dropdown
-            $('.dropdown-trigger#btn1').dropdown({ 'constrainWidth': false, 'closeOnClick': false });
-            $('.dropdown-trigger#btn2').dropdown({ 'constrainWidth': false });
+            $('.dropdown-trigger#btn1').dropdown({ "constrainWidth": false, "closeOnClick": false });
+            $('.dropdown-trigger#btn2').dropdown({ "constrainWidth": false });
 
             // Searchfield
             document.getElementById('searchfilter').value = "";
@@ -198,7 +198,7 @@ $(document).ready(function() {
                 for (let i of games_html) {
                     $('div#grid').append(i);
                 }
-                tippy('[title]', { placement: "top", arrow: true, arrowType: "round", animation: "scale", theme: "translucent" });
+                tippy('[title]', { "placement": "top", "arrow": true, "arrowType": "round", "animation": "scale", "theme": "translucent" });
                 searchfilter();
             });
 
@@ -207,7 +207,7 @@ $(document).ready(function() {
                 for (let i of title_idx) {
                     $('div#grid').append(games_html[i]);
                 }
-                tippy('[title]', { placement: "top", arrow: true, arrowType: "round", animation: "scale", theme: "translucent" });
+                tippy('[title]', { "placement": "top", "arrow": true, "arrowType": "round", "animation": "scale", "theme": "translucent" });
                 searchfilter();
             });
 
@@ -218,7 +218,7 @@ $(document).ready(function() {
                         $('div#grid').append(games_html[i]);
                     }
                 }
-                tippy('[title]', { placement: "top", arrow: true, arrowType: "round", animation: "scale", theme: "translucent" });
+                tippy('[title]', { "placement": "top", "arrow": true, "arrowType": "round", "animation": "scale", "theme": "translucent" });
                 searchfilter();
             });
 
