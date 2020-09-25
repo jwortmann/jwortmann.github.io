@@ -1,73 +1,65 @@
 function parseDate(date) {
-    return Sugar.Date(Sugar.Date.create(date.toString())).short('de');
+    return Sugar.Date(Sugar.Date.create(date.toString())).short("de");
 }
 
 function searchfilter() {
-    var filter_string = $('#searchfilter').val().toLowerCase();
+    var filter_string = $("#searchfilter").val().toLowerCase();
     if (filter_string == "") {
-        $('#searchfilter-icon').addClass('hide');
+        $("#searchfilter-icon").addClass("hide");
     } else {
-        $('#searchfilter-icon').removeClass('hide');
+        $("#searchfilter-icon").removeClass("hide");
     }
-    $('div#grid').children().each(function() {
-        var title_filter = $(this).attr('game-title').toLowerCase().indexOf(filter_string) >= 0;
-        var played_filter =
-            $('#radiobutton1').prop('checked') ||
-            ($('#radiobutton2').prop('checked') && $(this).attr('played') == 'true') ||
-            ($('#radiobutton3').prop('checked') && $(this).attr('played') == 'false');
-        var platform_filter =
-            ($('#checkbox3').prop('checked') && $(this).find('.steam').length > 0) ||
-            ($('#checkbox4').prop('checked') && $(this).find('.epic-games').length > 0) ||
-            ($('#checkbox5').prop('checked') && $(this).find('.uplay').length > 0) ||
-            ($('#checkbox6').prop('checked') && $(this).find('.origin, .gog, .battle-net, .retail, .playstation, .playstation-2').length > 0);
-        var genre_filter =
-            !($('#checkbox7').prop('checked') ||
-              $('#checkbox8').prop('checked') ||
-              $('#checkbox9').prop('checked') ||
-              $('#checkbox10').prop('checked') ||
-              $('#checkbox11').prop('checked') ||
-              $('#checkbox12').prop('checked') ||
-              $('#checkbox13').prop('checked') ||
-              $('#checkbox14').prop('checked') ||
-              $('#checkbox15').prop('checked') ||
-              $('#checkbox16').prop('checked') ||
-              $('#checkbox17').prop('checked') ||
-              $('#checkbox18').prop('checked') ||
-              $('#checkbox19').prop('checked')) ||
-            ($('#checkbox7').prop('checked') && $(this).attr('genre').indexOf('Action') >= 0) ||
-            ($('#checkbox8').prop('checked') && $(this).attr('genre').indexOf('Adventure') >= 0) ||
-            ($('#checkbox9').prop('checked') && $(this).attr('genre').indexOf('Casual') >= 0) ||
-            ($('#checkbox10').prop('checked') && $(this).attr('genre').indexOf('Multiplayer') >= 0) ||
-            ($('#checkbox11').prop('checked') && $(this).attr('genre').indexOf('Point & Click') >= 0) ||
-            ($('#checkbox12').prop('checked') && $(this).attr('genre').indexOf('Puzzle') >= 0) ||
-            ($('#checkbox13').prop('checked') && $(this).attr('genre').indexOf('Racing') >= 0) ||
-            ($('#checkbox14').prop('checked') && $(this).attr('genre').indexOf('RPG') >= 0) ||
-            ($('#checkbox15').prop('checked') && $(this).attr('genre').indexOf('Sandbox') >= 0) ||
-            ($('#checkbox16').prop('checked') && $(this).attr('genre').indexOf('Shooter') >= 0) ||
-            ($('#checkbox17').prop('checked') && $(this).attr('genre').indexOf('Sports') >= 0) ||
-            ($('#checkbox18').prop('checked') && $(this).attr('genre').indexOf('Strategy') >= 0) ||
-            ($('#checkbox19').prop('checked') && $(this).attr('genre').indexOf('Visual Novel') >= 0);
+    var status_arbitrary = $("#radiobutton1").prop("checked");
+    var status_played = $("#radiobutton2").prop("checked");
+    var status_unplayed = $("#radiobutton3").prop("checked");
+    var platform_steam = $("#checkbox3").prop("checked");
+    var platform_epic = $("#checkbox4").prop("checked");
+    var platform_uplay = $("#checkbox5").prop("checked");
+    var platform_other = $("#checkbox6").prop("checked");
+    var all_unchecked = true;
+    $(".genre-checkbox").each(function(checkbox_idx, checkbox) {
+        if ($(checkbox).prop("checked")) {
+            all_unchecked = false;
+            return false;
+        }
+    });
+    $("div#grid").children().each(function(grid_idx, grid_item) {
+        var title_filter = $(grid_item).attr("game-title").toLowerCase().indexOf(filter_string) >= 0;
+        var played_filter = title_filter &&
+            (status_arbitrary ||
+            (status_played && $(grid_item).attr("played") == "true") ||
+            (status_unplayed && $(grid_item).attr("played") == "false"));
+        var platform_filter = played_filter &&
+            ((platform_steam && $(grid_item).find(".steam").length > 0) ||
+            (platform_epic && $(grid_item).find(".epic-games").length > 0) ||
+            (platform_uplay && $(grid_item).find(".uplay").length > 0) ||
+            (platform_other && $(grid_item).find(".origin, .gog, .battle-net, .retail, .playstation, .playstation-2").length > 0));
+        var genre_filter = all_unchecked; // JavaScript variables are copied by value
+        if (platform_filter && !genre_filter) {
+            $(".genre-checkbox").each(function(checkbox_idx, checkbox) {
+                if ($(checkbox).prop("checked") && $(grid_item).attr("genre").indexOf($(checkbox).siblings("span").text()) >= 0) {
+                    genre_filter = true;
+                    return false;
+                }
+            });
+        }
         if (title_filter && played_filter && platform_filter && genre_filter) {
-            // $(this).removeClass('scale-out').show();
-            // $(this).removeClass('scale-out');
-            $(this).fadeIn(250);
+            $(this).fadeIn(200);
         } else {
-            // $(this).addClass('scale-out').delay(300).hide();
-            // $(this).addClass('scale-out');
-            $(this).fadeOut(250, function() { $(this).hide(); });
+            $(this).fadeOut(150, function() { $(this).hide(); });
         }
     });
 }
 
 $(document).ready(function() {
     var request = new XMLHttpRequest();
-    request.open('GET', 'pcgames.json', true);
-    request.responseType = 'text';
+    request.open("GET", "pcgames.json", true);
+    request.responseType = "text";
     request.send(null);
     request.onload = function() {
         if (request.readyState == 4 && request.status == 200) {
             var json = JSON.parse(request.responseText);
-            var games = json['games'];
+            var games = json["games"];
             var games_html = [];
             var titles = [];
             var ratings = [];
@@ -75,25 +67,25 @@ $(document).ready(function() {
             var years_played = [];
             var years_unplayed = [];
             for (let i = 0; i < games.length; i++) {
-                var title = games[i]['title'];
-                var release = Array.isArray(games[i]['release']) ? Object.values(games[i]['release'][0]) : games[i]['release'];
-                var platform = games[i]['platform'];
-                var img = games[i].hasOwnProperty('app_id') ? games[i]['app_id'] + 'p.webp' : games[i]['img'];
-                var rating = games[i]['rating'];
+                var title = games[i]["title"];
+                var release = Array.isArray(games[i]["release"]) ? Object.values(games[i]["release"][0]) : games[i]["release"];
+                var platform = games[i]["platform"];
+                var img = games[i].hasOwnProperty("app_id") ? games[i]["app_id"] + "p.webp" : games[i]["img"];
+                var rating = games[i]["rating"];
                 var played = rating !== null;
 
-                var tooltip_html = title + '<br>';
+                var tooltip_html = title + "<br>";
 
-                if (Array.isArray(games[i]['release'])) {
+                if (Array.isArray(games[i]["release"])) {
                     var labels = [];
-                    games[i]['release'].forEach(obj => labels.push(Object.keys(obj)[0] + ': ' + parseDate(Object.values(obj)[0])));
-                    tooltip_html += labels.join('<br>');
+                    games[i]["release"].forEach(obj => labels.push(Object.keys(obj)[0] + ': ' + parseDate(Object.values(obj)[0])));
+                    tooltip_html += labels.join("<br>");
                 } else {
                     tooltip_html += parseDate(release);
                 }
 
                 if (played) {
-                    tooltip_html += '<br>';
+                    tooltip_html += "<br>";
                     for (let j = 0; j < Math.floor(rating); j++) {
                         tooltip_html += '<i class=\'material-icons\'>star</i>';
                     }
@@ -113,12 +105,13 @@ $(document).ready(function() {
                     years_unplayed.push(year);
                 }
 
+                // Single quotes for the html string are required here to handle ' in game titles correctly
                 var img_html = '<img class="responsive-img" loading="lazy" src="img/' + img + '" alt="' + title + '" title="' + tooltip_html + '">';
-                if (games[i]['link'] !== null) {
-                    img_html = '<a href="' + games[i]['link'] + '">' + img_html + '</a>';
+                if (games[i]["link"] !== null) {
+                    img_html = "<a href='" + games[i]["link"] + "'>" + img_html + "</a>";
                 }
 
-                var icons_html = '<div class="icon platform-icon">';
+                var icons_html = "<div class='icon platform-icon'>";
                 for (var j = 0; j < platform.length; j++) {
                     if (platform[j] == "Steam") {
                         icons_html += '<svg class="steam" width="24" height="24" viewBox="-2 -2 28 28" title="Steam"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/></svg>';
@@ -140,12 +133,12 @@ $(document).ready(function() {
                         icons_html += '<svg class="playstation-2" width="24" height="24" viewBox="-2 -2 28 28" title="PlayStation 2"><path d="M7.46 13.779v.292h4.142v-3.85h3.796V9.93h-4.115v3.85zm16.248-3.558v1.62h-7.195v2.23H24v-.292h-7.168v-1.646H24V9.929h-7.487v.292zm-16.513 0v1.62H0v2.23h.292v-1.938H7.46V9.929H0v.292Z"/></svg>';
                     }
                 }
-                icons_html += '</div>';
-                if (games[i].hasOwnProperty('patch')) {
-                    icons_html += '<a href="' + games[i]['patch'] + '"><i class="material-icons icon patch-icon" title="Patch">healing</i></a>';
+                icons_html += "</div>";
+                if (games[i].hasOwnProperty("patch")) {
+                    icons_html += "<a href='" + games[i]["patch"] + "'><i class='material-icons icon patch-icon' title='Patch'>healing</i></a>";
                 }
 
-                var html_str = '<div class="col s6 m3 xl2 scale-transition" game-title="' + title + '" release="' + release + '" played="' + played.toString() + '" genre="' + games[i]['genre'].join(', ') + '"><div class="img-container">' + img_html + icons_html + '<div class="shine-effect"></div></div></div>';
+                var html_str = "<div class='col s6 m3 xl2 scale-transition' game-title='" + title + "' release='" + release + "' played='" + played.toString() + "' genre='" + games[i]["genre"].join(", ") + "'><div class='img-container'>" + img_html + icons_html + "<div class='shine-effect'></div></div></div>";
 
                 games_html.push(html_str);
                 titles.push(title);
@@ -157,68 +150,70 @@ $(document).ready(function() {
             var rating_idx = Array.from(Array(ratings.length).keys()).sort((a, b) => ratings[a] > ratings[b] ? -1 : (ratings[b] > ratings[a]) | 0);
 
             for (let i of games_html) {
-                $('div#grid').append(i);
+                $("div#grid").append(i);
             }
 
             // Tooltips
-            tippy('[title]', {
+            var TOOLTIP_OPTIONS = {
                 "placement": "top",
                 "arrow": true,
                 "arrowType": "round",
                 "animation": "scale",
                 "theme": "translucent"
-            });
+            }
+
+            tippy("[title]", TOOLTIP_OPTIONS);
 
             // Dropdown
-            $('.dropdown-trigger#btn1').dropdown({ "constrainWidth": false, "closeOnClick": false });
-            $('.dropdown-trigger#btn2').dropdown({ "constrainWidth": false });
+            $(".dropdown-trigger#btn1").dropdown({ "constrainWidth": false, "closeOnClick": false });
+            $(".dropdown-trigger#btn2").dropdown({ "constrainWidth": false });
 
             // Searchfield
-            document.getElementById('searchfilter').value = "";
-            $('#searchfilter-icon').click(function() {
-                document.getElementById('searchfilter').value = "";
+            document.getElementById("searchfilter").value = "";
+            $("#searchfilter-icon").click(function() {
+                document.getElementById("searchfilter").value = "";
                 searchfilter();
             });
 
             // Radiobuttons
-            $('#radiobutton1').prop('checked', true);
-            $('#radiobutton2').prop('checked', false);
-            $('#radiobutton3').prop('checked', false);
+            $("#radiobutton1").prop("checked", true);
+            $("#radiobutton2").prop("checked", false);
+            $("#radiobutton3").prop("checked", false);
 
             // Checkboxes
-            $('input[type="checkbox"]').prop('checked', false);
-            $('#checkbox1, #checkbox2, #checkbox3, #checkbox4, #checkbox5, #checkbox6').prop('checked', true);
+            $(".genre-checkbox").prop("checked", false);
+            $("#checkbox1, #checkbox2, #checkbox3, #checkbox4, #checkbox5, #checkbox6").prop("checked", true);
 
-            $('#searchfilter').keyup(function() { searchfilter(); });
-            $('input[type="radio"]').change(function() { searchfilter(); });
-            $('input[type="checkbox"]').change(function() { searchfilter(); });
+            $("#searchfilter").keyup(function() {searchfilter();});
+            $("input[type='radio']").change(function() {searchfilter();});
+            $("input[type='checkbox']").change(function() {searchfilter();});
 
-            $('#sort_release').click(function() {
-                $('div#grid').children().remove();
+            $("#sort_release").click(function() {
+                $("div#grid").children().remove();
                 for (let i of games_html) {
-                    $('div#grid').append(i);
+                    $("div#grid").append(i);
                 }
-                tippy('[title]', { "placement": "top", "arrow": true, "arrowType": "round", "animation": "scale", "theme": "translucent" });
+                tippy("[title]", TOOLTIP_OPTIONS);
                 searchfilter();
             });
 
-            $('#sort_title').click(function() {
-                $('div#grid').children().remove();
+            $("#sort_title").click(function() {
+                $("div#grid").children().remove();
                 for (let i of title_idx) {
-                    $('div#grid').append(games_html[i]);
+                    $("div#grid").append(games_html[i]);
                 }
-                tippy('[title]', { "placement": "top", "arrow": true, "arrowType": "round", "animation": "scale", "theme": "translucent" });
+                tippy("[title]", TOOLTIP_OPTIONS);
                 searchfilter();
             });
 
-            $('#sort_rating').click(function() {
-                $('div#grid').children().remove();
+            $("#sort_rating").click(function() {
+                $("div#grid").children().remove();
                 for (let i of rating_idx) {
-                    if (games[i]['rating'] !== null) {
-                        $('div#grid').append(games_html[i]);
+                    if (games[i]["rating"] !== null) {
+                        $("div#grid").append(games_html[i]);
                     }
                 }
-                tippy('[title]', { "placement": "top", "arrow": true, "arrowType": "round", "animation": "scale", "theme": "translucent" });
+                tippy("[title]", TOOLTIP_OPTIONS);
                 searchfilter();
             });
 
@@ -237,69 +232,69 @@ $(document).ready(function() {
                 chart_unplayed[i - year_min]++;
             }
 
-            Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
-            Chart.defaults.global.defaultFontFamily = 'Ubuntu';
+            Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue("--text-color").trim();
+            Chart.defaults.global.defaultFontFamily = "Ubuntu";
             Chart.defaults.global.defaultFontSize = 13;
             Chart.defaults.global.plugins.rough.roughness = 0;
             Chart.defaults.global.plugins.rough.bowing = 0;
 
-            chart = new Chart(document.getElementById('canvas').getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: chart_labels,
-                    datasets: [{
-                        label: 'Bereits gespielt',
-                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--primary-color-variant').trim(),
-                        borderColor: getComputedStyle(document.body).getPropertyValue('--primary-color').trim(),
-                        borderWidth: 1,
-                        data: chart_played
+            chart = new Chart(document.getElementById("canvas").getContext("2d"), {
+                "type": "bar",
+                "data": {
+                    "labels": chart_labels,
+                    "datasets": [{
+                        "label": "Bereits gespielt",
+                        "backgroundColor": getComputedStyle(document.body).getPropertyValue("--primary-color-variant").trim(),
+                        "borderColor": getComputedStyle(document.body).getPropertyValue("--primary-color").trim(),
+                        "borderWidth": 1,
+                        "data": chart_played
                     }, {
-                        label: 'Noch nicht gespielt',
-                        backgroundColor: getComputedStyle(document.body).getPropertyValue('--secondary-color-variant').trim(),
-                        borderColor: getComputedStyle(document.body).getPropertyValue('--secondary-color').trim(),
-                        borderWidth: 1,
-                        data: chart_unplayed
+                        "label": "Noch nicht gespielt",
+                        "backgroundColor": getComputedStyle(document.body).getPropertyValue("--secondary-color-variant").trim(),
+                        "borderColor": getComputedStyle(document.body).getPropertyValue("--secondary-color").trim(),
+                        "borderWidth": 1,
+                        "data": chart_unplayed
                     }],
                 },
-                options: {
-                    legend: {
-                        position: 'top'
+                "options": {
+                    "legend": {
+                        "position": "top"
                     },
-                    scales: {
-                        xAxes: [{
-                            stacked: true
+                    "scales": {
+                        "xAxes": [{
+                            "stacked": true
                         }],
-                        yAxes: [{
-                            stacked: true
+                        "yAxes": [{
+                            "stacked": true
                         }]
                     },
-                    tooltips: {
-                        mode: 'index'
+                    "tooltips": {
+                        "mode": "index"
                     }
                 },
-                plugins: [ChartRough]
+                "plugins": [ChartRough]
             });
 
             // Toggle theme
-            $('#toggle-theme').click(function() {
-                if (document.body.getAttribute('theme') == 'light') {
-                    document.body.setAttribute('theme', 'dark');
-                    $('#theme-icon').text('wb_sunny');
+            $("#toggle-theme").click(function() {
+                if (document.body.getAttribute("theme") == "light") {
+                    document.body.setAttribute("theme", "dark");
+                    $("#theme-icon").text("wb_sunny");
                 } else {
-                    document.body.setAttribute('theme', 'light');
-                    $('#theme-icon').text('brightness_2');
+                    document.body.setAttribute("theme", "light");
+                    $("#theme-icon").text("brightness_2");
                 }
-                Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
+                Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue("--text-color").trim();
                 chart.update();
             });
 
             // Set initial theme
-            if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-                document.body.setAttribute('theme', 'light');
-                $('#theme-icon').text('brightness_2');
+            if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+                document.body.setAttribute("theme", "light");
+                $("#theme-icon").text("brightness_2");
             } else {
-                document.body.setAttribute('theme', 'dark');
-                $('#theme-icon').text('wb_sunny');
+                document.body.setAttribute("theme", "dark");
+                $("#theme-icon").text("wb_sunny");
             }
         }
     }
