@@ -68,19 +68,22 @@ $(document).ready(function() {
             var years_unplayed = [];
             for (let i = 0; i < games.length; i++) {
                 var title = games[i]["title"];
-                var release = Array.isArray(games[i]["release"]) ? Object.values(games[i]["release"][0]) : games[i]["release"];
+                var release = null;
                 var platform = games[i]["platform"];
                 var img = games[i].hasOwnProperty("app_id") ? games[i]["app_id"] + "p.webp" : games[i]["img"];
                 var rating = games[i]["rating"];
                 var played = rating !== null;
-
                 var tooltip_html = title + "<br>";
 
-                if (Array.isArray(games[i]["release"])) {
+                if (typeof games[i]["release"] === "object") {
                     var labels = [];
-                    games[i]["release"].forEach(obj => labels.push(Object.keys(obj)[0] + ': ' + parseDate(Object.values(obj)[0])));
+                    for (const [key, value] of Object.entries(games[i]["release"])) {
+                        labels.push(key + ": " + parseDate(value));
+                    }
                     tooltip_html += labels.join("<br>");
+                    release = Object.values(games[i]["release"])[0];
                 } else {
+                    release = games[i]["release"];
                     tooltip_html += parseDate(release);
                 }
 
@@ -147,7 +150,7 @@ $(document).ready(function() {
 
             // Sort by titles and ratings
             var title_idx = Array.from(Array(titles.length).keys()).sort((a, b) => titles[a] < titles[b] ? -1 : (titles[b] < titles[a]) | 0);
-            var rating_idx = Array.from(Array(ratings.length).keys()).sort((a, b) => ratings[a] > ratings[b] ? -1 : (ratings[b] > ratings[a]) | 0);
+            var rating_idx = Array.from(Array(ratings.length).keys()).sort((a, b) => ratings[b] - ratings[a]);
 
             for (let i of games_html) {
                 $("div#grid").append(i);
