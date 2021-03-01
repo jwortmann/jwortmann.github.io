@@ -236,7 +236,7 @@ $(document).ready(function() {
             }
 
             Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue("--text-color").trim();
-            Chart.defaults.global.defaultFontFamily = "Ubuntu";
+            Chart.defaults.global.defaultFontFamily = "Recursive Sans Casual";
             Chart.defaults.global.defaultFontSize = 13;
             Chart.defaults.global.plugins.rough.roughness = 0;
             Chart.defaults.global.plugins.rough.bowing = 0;

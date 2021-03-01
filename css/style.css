@@ -1,43 +1,67 @@
 @font-face {
-    font-family: 'Ubuntu';
+    font-family: 'Recursive Sans Casual';
     font-style: normal;
-    font-weight: 400;
-    src: local('Ubuntu Regular'),
-         local('Ubuntu-Regular'),
-         url('../fonts/ubuntu/Ubuntu-Regular.woff2') format('woff2'),
-         url('../fonts/ubuntu/Ubuntu-Regular.ttf') format('truetype');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    font-weight: normal;
+    font-display: swap;
+    src: url('../fonts/recursive/RecursiveSansCslSt-Regular.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Ubuntu';
+    font-family: 'Recursive Sans Casual';
     font-style: italic;
-    font-weight: 400;
-    src: local('Ubuntu Italic'),
-         local('Ubuntu-Italic'),
-         url('../fonts/ubuntu/Ubuntu-Italic.ttf') format('truetype');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    font-weight: normal;
+    font-display: swap;
+    src: url('../fonts/recursive/RecursiveSansCslSt-Italic.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Ubuntu Mono';
+    font-family: 'Recursive Sans Casual';
     font-style: normal;
-    font-weight: 400;
-    src: local('Ubuntu Mono Regular'),
-         local('UbuntuMono-Regular'),
-         url('../fonts/ubuntu/UbuntuMono-Regular.ttf') format('truetype');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    font-weight: bold;
+    font-display: swap;
+    src: url('../fonts/recursive/RecursiveSansCslSt-Bold.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Fira Mono';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Fira Mono Regular'),
-         local('FiraMono-Regular'),
-         url('../fonts/fira/FiraMono-Regular.ttf') format('truetype');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    font-family: 'Recursive Sans Casual';
+    font-style: italic;
+    font-weight: bold;
+    font-display: swap;
+    src: url('../fonts/recursive/RecursiveSansCslSt-BdItalic.woff2') format('woff2');
 }
+
+@font-face {
+    font-family: 'Recursive Mono Linear';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('../fonts/recursive/RecursiveMonoLnrSt-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Recursive Mono Linear';
+    font-style: italic;
+    font-weight: normal;
+    font-display: swap;
+    src: url('../fonts/recursive/RecursiveMonoLnrSt-Italic.woff2') format('woff2');
+}
+
+/*@font-face {
+    font-family: 'Recursive Mono Casual';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('../fonts/recursive/RecursiveMonoCslSt-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Recursive Mono Casual';
+    font-style: italic;
+    font-weight: normal;
+    font-display: swap;
+    src: url('../fonts/recursive/RecursiveMonoCslSt-Italic.woff2') format('woff2');
+}*/
+
 
 @font-face {
     font-family: 'Material Icons';
@@ -84,7 +108,7 @@ body {
     margin: 0 0 3rem 0;
     padding: 0;
     background-image: var(--background-image);
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Recursive Sans Casual', sans-serif;
     color: var(--text-color);
 }
 
@@ -129,7 +153,7 @@ td, .tablesorter-default td {
 }
 
 code, pre, tt {
-    font-family: 'Fira Mono';
+    font-family: 'Recursive Mono Linear', monospace;
 }
 
 pre {
@@ -197,8 +221,24 @@ div#games {
     color: var(--text-color);
     border-bottom: 1px solid var(--text-color) !important;
     padding-left: 0 !important;
-    font-family: 'Ubuntu';
+    font-family: 'Recursive Sans Casual', sans-serif;;
     font-size: 15px;
+}
+
+input[type="search"].search-field, input[type="search"].search-field:active {
+    height: 44px;
+    color: var(--text-color);
+    font-family: 'Recursive Sans Casual', sans-serif;
+    padding: 0 12px 0 12px;
+    background-color: var(--background-color);
+    border: 1px solid var(--text-color);
+    border-bottom-color: var(--text-color) !important;
+    border-collapse: collapse;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2) !important;
 }
 
 .input-field input[type="search"] ~ .material-icons {
@@ -399,8 +439,6 @@ table.treetable tr.expanded span.indenter a {
     color: rgba(255, 255, 255, 0.7) !important;
 }
 
-/* Material Icons */
-
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -439,22 +477,6 @@ div.search-bar {
     margin: 2rem;
     display: flex;
     flex-direction: row;
-}
-
-input[type="search"].search-field, input[type="search"].search-field:active {
-    height: 44px;
-    color: var(--text-color);
-    font-family: "Ubuntu";
-    padding: 0 12px 0 12px;
-    background-color: var(--background-color);
-    border: 1px solid var(--text-color);
-    border-bottom-color: var(--text-color) !important;
-    border-collapse: collapse;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 0;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2) !important;
 }
 
 body[theme="light"] input[type="search"]::placeholder {
