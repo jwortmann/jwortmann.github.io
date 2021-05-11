@@ -51,6 +51,19 @@ function searchfilter() {
     });
 }
 
+function createDiagonalPattern(color) {
+    let shape = document.createElement("canvas")
+    shape.width = 5
+    shape.height = 6
+    let c = shape.getContext("2d")
+    c.strokeStyle = color
+    c.beginPath()
+    c.moveTo(0, 6)
+    c.lineTo(5, 0)
+    c.stroke()
+    return c.createPattern(shape, "repeat")
+}
+
 $(document).ready(function() {
     var request = new XMLHttpRequest();
     request.open("GET", "pcgames.json", true);
@@ -235,11 +248,9 @@ $(document).ready(function() {
                 chart_unplayed[i - year_min]++;
             }
 
-            Chart.defaults.global.defaultFontColor = getComputedStyle(document.body).getPropertyValue("--text-color").trim();
-            Chart.defaults.global.defaultFontFamily = "Recursive Sans Casual";
-            Chart.defaults.global.defaultFontSize = 13;
-            Chart.defaults.global.plugins.rough.roughness = 0;
-            Chart.defaults.global.plugins.rough.bowing = 0;
+            Chart.defaults.color = getComputedStyle(document.body).getPropertyValue("--text-color").trim();
+            Chart.defaults.font.family = "Recursive Sans Casual";
+            Chart.defaults.font.size = 13;
 
             chart = new Chart(document.getElementById("canvas").getContext("2d"), {
                 "type": "bar",
@@ -247,35 +258,33 @@ $(document).ready(function() {
                     "labels": chart_labels,
                     "datasets": [{
                         "label": "Bereits gespielt",
-                        "backgroundColor": getComputedStyle(document.body).getPropertyValue("--primary-color-variant").trim(),
+                        "backgroundColor": createDiagonalPattern(getComputedStyle(document.body).getPropertyValue("--primary-color-variant").trim()),
                         "borderColor": getComputedStyle(document.body).getPropertyValue("--primary-color").trim(),
-                        "borderWidth": 1,
                         "data": chart_played
                     }, {
                         "label": "Noch nicht gespielt",
-                        "backgroundColor": getComputedStyle(document.body).getPropertyValue("--secondary-color-variant").trim(),
+                        "backgroundColor": createDiagonalPattern(getComputedStyle(document.body).getPropertyValue("--secondary-color-variant").trim()),
                         "borderColor": getComputedStyle(document.body).getPropertyValue("--secondary-color").trim(),
-                        "borderWidth": 1,
                         "data": chart_unplayed
                     }],
                 },
                 "options": {
+                    "borderWidth": 1,
                     "legend": {
                         "position": "top"
                     },
                     "scales": {
-                        "xAxes": [{
+                        "x": {
                             "stacked": true
-                        }],
-                        "yAxes": [{
+                        },
+                        "y": {
                             "stacked": true
-                        }]
+                        }
                     },
                     "tooltips": {
                         "mode": "index"
                     }
-                },
-                "plugins": [ChartRough]
+                }
             });
 
             // Toggle theme
