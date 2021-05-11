@@ -221,7 +221,7 @@ div#games {
     color: var(--text-color);
     border-bottom: 1px solid var(--text-color) !important;
     padding-left: 0 !important;
-    font-family: 'Recursive Sans Casual', sans-serif;;
+    font-family: 'Recursive Sans Casual', sans-serif;
     font-size: 15px;
 }
 
