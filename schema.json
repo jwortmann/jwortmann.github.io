@@ -14,20 +14,17 @@
         "type": "object",
         "properties": {
           "release": {
-            "description": "Realease date in format YYYY-MM-DD or array if multiple episodes or DLCs",
+            "description": "Realease date in format YYYY-MM-DD",
             "anyOf": [
               {
                 "type": "string"
               },
               {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "patternProperties": {
-                    ".+": {
-                      "description": "Realease date for episode or DLC",
-                      "type": "string"
-                    }
+                "type": "object",
+                "patternProperties": {
+                  ".+": {
+                    "description": "Realease date for episode or DLC",
+                    "type": "string"
                   }
                 },
                 "minItems": 1
