@@ -236,7 +236,7 @@ $(document).ready(function() {
             var chart_labels = [];
             var year_min = Math.min(...years);
             var year_max = Math.max(...years);
-            for (i = year_min; i <= year_max; i++) {
+            for (let i = year_min; i <= year_max; i++) {
                 chart_labels.push(i.toString());
             }
             var chart_played = new Array(chart_labels.length).fill(0);
