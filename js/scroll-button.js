@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('body').append('<a href="#top" id="scroll-top"><span class="btn-floating"><i class="material-icons">keyboard_arrow_up</i></span></a>');
+    $('body').append('<a href="#top" id="scroll-top"><span class="btn-floating"><i class="bx bx-chevrons-up"></i></span></a>');
     $('#scroll-top').hide();
     $(function() {
         $(window).scroll(function() {
