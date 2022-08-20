@@ -236,6 +236,10 @@ label {
     text-shadow: black 0px 0px 2px;
 }
 
+.icon a {
+    color: #dddddd;
+}
+
 .platform-icon {
     bottom: 8px;
     left: 8px;
@@ -247,9 +251,9 @@ label {
 }
 
 .patch-icon {
-    bottom: 6px;
-    right: 12px;
-    font-size: 22px;
+    bottom: 8px;
+    right: 10px;
+    font-size: 24px;
 }
 
 div.rating {

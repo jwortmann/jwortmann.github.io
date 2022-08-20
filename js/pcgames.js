@@ -130,7 +130,7 @@ $(function() {
             }
             icons_html += '</div>';
             if (game.hasOwnProperty('patch')) {
-                icons_html += `<a href="${game['patch']}"><i class="material-icons icon patch-icon" title="Patch">healing</i></a>`;
+                icons_html += `<div class="icon patch-icon"><a href="${game['patch']}"><i class="bx bxs-band-aid" title="Patch"></i></a></div>`;
             }
             let html = `<div class="img-container scale-transition" game-title="${title}" played="${played.toString()}" genre="${game['genre'].join(', ')}">${img_html}${icons_html}<div class="shine-effect"></div></div>`;
             games.push(html);
