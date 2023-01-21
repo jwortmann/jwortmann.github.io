@@ -30,7 +30,7 @@ function filterItems() {
             $(item).fadeOut(FADE_DURATION, $(item).hide);
             return true;
         }
-        if (filter_tags && !$(item).attr('genre').toLowerCase().includes(filter_text.substring(1))) {
+        if (filter_tags && !$(item).attr('tags').toLowerCase().includes(filter_text.substring(1))) {
             $(item).fadeOut(FADE_DURATION, $(item).hide);
             return true;
         }
@@ -53,19 +53,6 @@ function filterItems() {
         $('#filter-icon').addClass('bx-search-alt-2');
         $('#sidebar-title').text('Game Library');
     }
-}
-
-function createDiagonalPattern(color) {
-    let shape = document.createElement("canvas")
-    shape.width = 5
-    shape.height = 6
-    let c = shape.getContext("2d")
-    c.strokeStyle = color
-    c.beginPath()
-    c.moveTo(0, 6)
-    c.lineTo(5, 0)
-    c.stroke()
-    return c.createPattern(shape, "repeat")
 }
 
 const TOOLTIP_OPTIONS = {
@@ -142,7 +129,7 @@ $(function() {
             if (game.hasOwnProperty('patch')) {
                 icons_html += `<div class="icon patch-icon"><a href="${game['patch']}"><i class="bx bxs-band-aid" title="Patch"></i></a></div>`;
             }
-            let html = `<div class="img-container scale-transition" game-title="${title}" played="${played.toString()}" genre="${game['genre'].join(', ')}">${img_html}${icons_html}<div class="shine-effect"></div></div>`;
+            let html = `<div class="img-container scale-transition" game-title="${title}" played="${played.toString()}" tags="${game['tags'].join(', ')}">${img_html}${icons_html}<div class="shine-effect"></div></div>`;
             games.push(html);
             titles.push(title);
             ratings.push(played ? rating : 0);
@@ -185,6 +172,6 @@ $(function() {
         $('#filter').val('');
         filterItems();
     });
-    $("#filter").keyup(function() {filterItems();});
-    $("input[type='checkbox']").change(function() {filterItems();});
+    $("#filter").keyup(filterItems);
+    $("input[type='checkbox']").change(filterItems);
 });

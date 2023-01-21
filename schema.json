@@ -39,8 +39,8 @@
             "description": "Link to PCGamingWiki page",
             "type": ["string", "null"]
           },
-          "genre": {
-            "description": "Genre(s) or subgenre(s)",
+          "tags": {
+            "description": "Genre(s), subgenre(s), viewer perspective, etc.",
             "type": "array",
             "items": {
               "type": "string"
@@ -76,7 +76,7 @@
             "type": "string"
           }
         },
-        "required": ["release", "title", "link", "genre", "platform", "rating"]
+        "required": ["release", "title", "link", "tags", "platform", "rating"]
       }
     }
   },
