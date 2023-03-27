@@ -152,6 +152,7 @@ $(function() {
         for (const game of games) {
             $('#content').append(game);
         }
+        filterItems();
         tippy('[title]', TOOLTIP_OPTIONS);
     });
     $('#radio-title').click(function() {
@@ -159,6 +160,7 @@ $(function() {
         for (const i of title_idx) {
             $('#content').append(games[i]);
         }
+        filterItems();
         tippy('[title]', TOOLTIP_OPTIONS);
     });
     $('#radio-rating').click(function() {
@@ -166,6 +168,7 @@ $(function() {
         for (const i of rating_idx) {
             $('#content').append(games[i]);
         }
+        filterItems();
         tippy('[title]', TOOLTIP_OPTIONS);
     });
     $('#filter-icon').click(function() {
