@@ -4,17 +4,14 @@
 
   "properties": {
     "$schema": {
-      "description": "The schema file",
       "type": "string"
     },
     "games": {
-      "description": "List of games",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "release": {
-            "description": "Realease date in format YYYY-MM-DD",
             "anyOf": [
               {
                 "type": "string"
@@ -23,7 +20,6 @@
                 "type": "object",
                 "patternProperties": {
                   ".+": {
-                    "description": "Realease date for episode or DLC",
                     "type": "string"
                   }
                 },
@@ -32,15 +28,12 @@
             ]
           },
           "title": {
-            "description": "Game title",
             "type": "string"
           },
           "link": {
-            "description": "Link to PCGamingWiki page",
             "type": ["string", "null"]
           },
           "tags": {
-            "description": "Genre(s), subgenre(s), viewer perspective, etc.",
             "type": "array",
             "items": {
               "type": "string"
@@ -49,7 +42,6 @@
             "uniqueItems": true
           },
           "platform": {
-            "description": "Distribution platform or console",
             "type": "array",
             "items": {
               "type": "string",
@@ -63,16 +55,13 @@
             "type": "integer"
           },
           "rating": {
-            "description": "Personal rating for the game",
             "type": ["number", "null"],
             "default": null
           },
           "patch": {
-            "description": "Link to a patch required or recommended for the game",
             "type": "string"
           },
           "img": {
-            "description": "Filename of cover image if game has no app_id",
             "type": "string"
           }
         },
