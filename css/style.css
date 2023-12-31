@@ -241,7 +241,7 @@ img.inactive {
 }
 
 img.inactive:not(:hover) {
-    filter: grayscale(80%) brightness(50%);
+    filter: grayscale(90%) brightness(40%);
 }
 
 .shine-effect {

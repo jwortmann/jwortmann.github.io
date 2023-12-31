@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="css/boxicons.min.css">
+    <link rel="stylesheet" type="text/css" href="css/pretty-checkbox.min.css">
+    <link rel="stylesheet" type="text/css" href="css/tippy.themes.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script> <!-- https://jquery.com/ -->
+    <script type="text/javascript" src="js/tippy.all.min.js"></script> <!-- https://atomiks.github.io/tippyjs/ -->
+    <script type="text/javascript" src="js/fuzzysort.min.js"></script>
+    <script type="text/javascript" src="js/scroll-button.js"></script>
+    <script type="text/javascript">
+        let active_tab = 0;
+        function selectTab(index) {
+            active_tab = index;
+            $('.tab').hide();
+            $(`#tab${index}`).show();
+            $('.chat-item').removeClass('active');
+            $(`#chat-item${index}`).addClass('active');
+            filterItems();
+        }
+        function filterItems() {
+            const filter_text = $('#filter').val().toLowerCase();
+            const include_available = $('#checkbox1').prop('checked');
+            const include_unavailable = $('#checkbox2').prop('checked');
+            $(`#tab${active_tab} > .img-container`).each(function() {
+                const matches_checkboxes = include_available && $(this).children('img.available').length || include_unavailable && $(this).children('img.inactive').length;
+                if (!matches_checkboxes) {
+                    $(this).hide();
+                    return true;
+                }
+                if (filter_text) {
+                    const result = fuzzysort.single(filter_text, $(this).children('img').attr('alt').toLowerCase());
+                    if (!result || result.score < -1000) {
+                        $(this).hide();
+                        return true;
+                    }
+                }
+                $(this).show();
+            });
+        }
+        $(function() {
+            $('.side-bar input[type="checkbox"]').prop('checked', true);
+            $('.side-bar input[type="checkbox"]').change(filterItems);
+            $('#filter').keyup(filterItems);
+            $('#filter-icon').click(function() {
+                $('#filter').val('');
+                filterItems();
+            });
+            fetch('comics.json').then(response => response.json()).then(data => {
+                Object.entries(data).forEach(([section, items], index) => {
+                    if (section == '$schema') return;
+                    $('.container').append(`<div class="tab" id="tab${index}"></div>`);
+                    $('ul.chat-list').append(`<li class="chat-item" id="chat-item${index}" onclick="selectTab(${index})"><a class="chat-item-name">${section}</a></li>`);
+                    for (let item of items) {
+                        let available = item['available'] ? 'available' : 'inactive';
+                        $(`div#tab${index}`).append(`<div class="img-container scale-transition"><img loading="lazy" src="img2/${section}/${item['title']}.webp" alt="${item['title']}" title="${item['title']}<br>${item['year']}" class="${available}"><div class="shine-effect"></div></div>`);
+                    }
+                });
+                tippy('[title]', {
+                    'placement': 'top',
+                    'arrow': true,
+                    'arrowType': 'round',
+                    'animation': 'scale',
+                    'theme': 'translucent'
+                });
+                $('#filter').val('');
+                $('.tab').hide();
+                $('#tab0').show();
+                $('#chat-item0').addClass('active');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="side-bar">
+        <div class="logo-name-wrapper">
+            <div class="logo-name">
+                <span class="logo-name__name" id="sidebar-title">Comics</span>
+            </div>
+            <button class="logo-name__button">
+                <i class="bx bx-arrow-from-right logo-name__icon" id="logo-name__icon"></i>
+            </button>
+        </div>
+        <div class="input-wrapper">
+            <input id="filter" type="text" placeholder="Filter">
+            <i class="bx bx-search-alt-2" id="filter-icon"></i>
+        </div>
+        <hr class="divider">
+        <div class="checkbox-wrapper pretty p-default p-curve">
+            <input id="checkbox1" type="checkbox" checked="checked">
+            <div class="state">
+                <label for="checkbox1">available</label>
+            </div>
+        </div>
+        <div class="checkbox-wrapper pretty p-default p-curve">
+            <input id="checkbox2" type="checkbox" checked="checked">
+            <div class="state">
+                <label for="checkbox2">unavailable</label>
+            </div>
+        </div>
+        <hr class="divider">
+        <ul class="chat-list"></ul>
+    </div>
+    <div id="content" class="container"></div>
+    <script type="text/javascript" src="js/sidebar.js"></script>
+</body>
+</html>
