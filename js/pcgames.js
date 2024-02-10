@@ -51,7 +51,7 @@ function filterItems() {
     } else {
         $('#filter-icon').removeClass('bx-x');
         $('#filter-icon').addClass('bx-search-alt-2');
-        $('#sidebar-title').text('Game Library');
+        $('#sidebar-title').text('Games');
     }
 }
 
